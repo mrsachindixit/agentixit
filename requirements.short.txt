@@ -1,0 +1,32 @@
+# Core HTTP & utilities
+requests
+pydantic
+
+# LangChain ecosystem
+langchain
+langchain-anthropic
+langchain-community
+langchain-ollama
+langgraph
+
+# UI & APIs
+streamlit
+fastapi
+uvicorn
+fastmcp
+mcp[cli]
+mcp
+langchain-mcp-adapters
+
+# Data & numerics
+numpy
+pillow
+scikit-learn
+
+# Testing
+pytest
+python-dotenv
+
+# openai
+openai
+faiss-cpu

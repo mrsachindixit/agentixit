@@ -1,0 +1,8 @@
+requests
+python-dotenv
+tqdm
+langchain
+langchain-ollama
+pypdf
+chromadb
+typing-extensions

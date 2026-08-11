@@ -1,0 +1,11 @@
+# Normalise line endings so the repo is identical for everyone regardless of OS.
+* text=auto eol=lf
+
+# Windows-only helpers keep CRLF
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+
+# Binary — never touch
+*.png binary
+*.jpg binary
+*.db  binary

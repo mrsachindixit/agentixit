@@ -1,0 +1,9 @@
+Title: Example Methods for Low-Resource NER
+
+Abstract: This short document describes a few methods used in low-resource named-entity recognition tasks: transfer learning, data augmentation, and weak supervision. Experiments show that simple fine-tuning and augmentation can yield improved F1 scores.
+
+1. Transfer learning: pretrain on high-resource languages and fine-tune on low-resource languages.
+2. Data augmentation: synthetic examples using synonym replacement and back-translation.
+3. Weak supervision: labeling functions and distant supervision from noisy sources.
+
+Conclusion: Combining methods is effective for practical gains.

@@ -1,0 +1,36 @@
+# --- Python ---
+.venv/
+venv/
+**/__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# --- secrets ---
+.env
+*.key
+
+# --- editor / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- agent + assistant local state ---
+.claude/
+.aider*
+
+# --- generated at runtime by the samples ---
+**/index.json
+**/sample.db
+**/faiss_index/
+**/chroma_db/
+**/*.sqlite3
+
+# --- never publish: private drafting and research material ---
+_private/
+_private_notes/
+_book_analysis/
+**/examples-code/
+test_code/
+stoshniwal/

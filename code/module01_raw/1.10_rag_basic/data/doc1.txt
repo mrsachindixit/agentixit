@@ -1,0 +1,4 @@
+Agents combine planning, memory, tools, and reasoning to solve multi-step tasks.
+Tool use allows an agent to query external systems such as search, SQL databases, and APIs.
+Memory helps preserve context from earlier steps and improves continuity across turns.
+When tools and memory are used together, the agent can ground decisions in both current evidence and prior context.
