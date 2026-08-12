@@ -1,8 +1,8 @@
 # Notes on Agentic AI  
 
 This page is the text book style notes i have made on agentic ai .
-Addtionaly there is a full code repo  
-[`code/`](code/README.md) where we teach developers diffrent conecpts via inline ,try it your self manner.This repo recomneds hosting LLMs locally via ollma [`docs/setup.md`](docs/setup.md).  
+Additionally there is a full code repo  included. Check the readme for whats inside the code modules :
+[`code/`](code/README.md) Here we teach developers diffrent concepts via inline ,try it your self manner.This repo recommendes hosting LLMs locally via ollma .  
 
 The text is [CC BY-NC-SA 4.0](LICENSE); the code is [MIT](code/LICENSE). See [License](#license) at the end.
 
