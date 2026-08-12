@@ -1,0 +1,14 @@
+graph LR
+    REQ["📥 Request"] --> PC["♻️ Prefix cache\nreuse the unchanged\nprompt head"]
+    PC --> CB["📦 Continuous batching\nnew requests join the\nbatch mid-flight"]
+    CB --> SD["⏩ Speculative decoding\ndraft model guesses,\nbig model verifies"]
+    SD --> OUT["📤 Tokens stream out"]
+
+    PC -.->|cuts| TTFT["TTFT\ntime to first token"]
+    CB -.->|cuts| TAIL["p95/p99\ntail under load"]
+    SD -.->|cuts| TPT["per-token\nlatency"]
+
+    style PC fill:#3B82F6,stroke:#1E40AF,color:#fff
+    style CB fill:#F59E0B,stroke:#B45309,color:#fff
+    style SD fill:#10B981,stroke:#047857,color:#fff
+    linkStyle default stroke:#475569,stroke-width:2px

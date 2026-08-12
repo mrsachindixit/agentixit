@@ -1,0 +1,16 @@
+graph TD
+    U["👤 User"] --> C["🎛️ Controller"]
+    C --> L["🧠 LLM"]
+    L -->|"decide"| T{"🔀 Tool\nNeeded?"}
+    T -->|"Yes"| X["🔧 Tool"]
+    X --> L
+    T -->|"No"| A["✅ Answer"]
+
+    style U fill:#6366F1,stroke:#4338CA,color:#fff,stroke-width:3px
+    style C fill:#3B82F6,stroke:#1E40AF,color:#fff,stroke-width:3px
+    style L fill:#8B5CF6,stroke:#6D28D9,color:#fff,stroke-width:3px
+    style T fill:#F59E0B,stroke:#B45309,color:#fff,stroke-width:3px
+    style X fill:#10B981,stroke:#047857,color:#fff,stroke-width:3px
+    style A fill:#06B6D4,stroke:#0E7490,color:#fff,stroke-width:3px
+
+    linkStyle default stroke:#475569,stroke-width:2px

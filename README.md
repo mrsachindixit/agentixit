@@ -1,22 +1,17 @@
 # Notes on Agentic AI  
 
-*A text-first teaching module for practising engineers, with runnable code to match.
-By Sachin Dixit.*
-
-This page is the text — read it top to bottom. The code that goes with it is in
-[`code/`](code/README.md), and setup takes about five minutes:
-[`docs/setup.md`](docs/setup.md). Everything runs locally against Ollama, with no API
-key and no cloud account.
+This page is the text book style notes i have made on agentic ai .
+Addtionaly there is a full code repo  
+[`code/`](code/README.md) where we teach developers diffrent conecpts via inline ,try it your self manner.This repo recomneds hosting LLMs locally via ollma [`docs/setup.md`](docs/setup.md).  
 
 The text is [CC BY-NC-SA 4.0](LICENSE); the code is [MIT](code/LICENSE). See [License](#license) at the end.
 
 ## Overview
 I started teaching engineers about agentic AI. Over the period I realized that teaching practicing programmers about any new Framework has to be mindful of their prior learning. At times the wisdom gained so far feeds into the new framework and technology paradigm. At times the prior learnings hamper their ability to see nuances and retain curiosity about the new kid.
-So my teaching style evolved into using lots of code first to drive in the new point of view. And then supplement that with details on the new tech and also commentary on where it has continuation, breakup, evolution and new beginnings. Over period of time my notes and call transcripts were long enough to motivate me into writing this. This text is very opinionated hence, it also assumes the student has prior understanding of basic building blocks and will dig out more when clues are provided.
-All the text is written by me, citations have been given where due. There is no AI content here except maybe spell check and structuring it.
-When it came to coding examples I generated them using my personal Copilot plan (Thanks OpenAI). However I realized they were too cryptic. So I took help from Sumit Toshniwal. He is one of the AI Engineers working at Actimize on Agentic projects. First he helped me get a feel of younger generation of developers :). Then he helped me simplify the code examples according to the intended learning outcome. We have kept the code samples minimal and self contained because I am expecting experienced developers will fill in the necessary design blanks. We thank NICE Actimize for being the org where we could do all this as one of the part of the work.
+So my teaching style evolved into using lots of code first to drive in the new point of view. And then supplement that with details on the new tech and also commentary on where it has continuation, breakup, evolution and new beginnings. Over period of time my notes and call transcripts were long enough to motivate me into writing this. This text is very opinionated hence, it also assumes the student has prior understanding of basic building blocks and will dig out more when clues are provided.All the text is written by me, citations have been given where due.  
+When it came to coding examples I generated them using  Copilot  . However I realized they were too cryptic. So I took help from Sumit Toshniwal. He is one of the AI Engineers working at Actimize on Agentic projects. First he helped me get a feel of younger generation of developers :). Then he helped me simplify the code examples according to the intended learning outcome. We have kept the code samples minimal and self contained because I am expecting experienced developers will fill in the necessary design blanks. We thank NICE Actimize for being the org where we could do all this as one of the part of the work.
 
-This course is **dedicated to Prof. Andrew Ng** who is sharing AI related knowledge freely nurturing AI minds across the Globe.
+This repo is **dedicated to Prof. Andrew Ng** who is sharing AI related knowledge freely nurturing AI minds across the Globe.
 
 **Quick links:**
 - [Notes on Agentic AI](#notes-on-agentic-ai)
@@ -57,6 +52,7 @@ This course is **dedicated to Prof. Andrew Ng** who is sharing AI related knowle
     - [Safety and Guardrails](#safety-and-guardrails)
 - [Enterprise Suites and Protocols](#enterprise-suites-and-protocols)
   - [References](#references)
+  - [License](#license)
 
 **Running the code alongside the text**
 
@@ -84,26 +80,7 @@ The hard part of achieving the action, however, is still accomplished by tools a
 A lot of agentic AI's potential comes from the application of traditional design patterns facilitated by tools like LangChain or LangGraph. These frameworks allow tighter control over processing flow by introducing concepts like task graphs, memory, and tools.
 The final effect is a system that can plan and execute complex tasks with a good degree of certainty while offering adaptability for newer scenarios. We will revisit most of these concepts in the sections that follow.
 
-```mermaid
-graph LR
-    subgraph ERA1["⚙️ Rules era"]
-        RX["Regex / rule engine\ndeterministic, cheap, brittle"]
-    end
-    subgraph ERA2["📊 Statistical NLP era"]
-        NLP["Classifier pipeline\nintent → entities → template"]
-    end
-    subgraph ERA3["🤖 Agentic era"]
-        AG["LLM agent loop\nreason → act → observe"]
-    end
-    RX -->|"breaks on:\nnovel phrasing"| NLP
-    NLP -->|"breaks on:\nmulti-step tasks,\nopen-ended goals"| AG
-    AG -.->|"breaks on:\nnon-determinism —\nthe rest of this book"| AG
-
-    style RX fill:#94A3B8,stroke:#475569,color:#fff
-    style NLP fill:#F59E0B,stroke:#B45309,color:#fff
-    style AG fill:#10B981,stroke:#047857,color:#fff
-    linkStyle default stroke:#475569,stroke-width:2px
-```
+![Three eras left to right, rules then statistical NLP then agentic, each labelled with what it breaks on; capability rises across them while determinism falls](images/01-each-paradigm-shift-traded-control-for-capab.svg)
 *Figure: each paradigm shift traded control for capability — agents buy adaptability at the price of determinism, which is why the engineering disciplines later in this book exist*
 
 
@@ -135,20 +112,7 @@ graph TB
 ```
 *Figure: anatomy of an agent — LLM, tools, memory, and prompts interacting with the environment*
 
-```mermaid
-graph LR
-    L0["0️⃣ Core reasoning\nbare LLM"] --> L1["1️⃣ Connected\ntools + retrieval"]
-    L1 --> L2["2️⃣ Strategic\nplanning + memory"]
-    L2 --> L3["3️⃣ Multi-agent\ncoordination"]
-    L3 --> L4["4️⃣ Self-evolving\nlearns at runtime"]
-
-    style L0 fill:#E0F2FE,stroke:#0369A1,color:#0F172A,stroke-width:2px
-    style L1 fill:#DBEAFE,stroke:#1E40AF,color:#0F172A,stroke-width:2px
-    style L2 fill:#FEF3C7,stroke:#B45309,color:#0F172A,stroke-width:2px
-    style L3 fill:#FCE7F3,stroke:#BE185D,color:#0F172A,stroke-width:2px
-    style L4 fill:#D1FAE5,stroke:#047857,color:#0F172A,stroke-width:2px
-    linkStyle default stroke:#475569,stroke-width:2px
-```
+![Five ascending rungs, from core reasoning on a bare LLM up to a self-evolving agent that learns at runtime](images/03-agent-capability-ladder.svg)
 *Figure: agent capability ladder — scope to the lowest rung that solves the problem*
 
 
@@ -546,56 +510,7 @@ graph TD
 
 [RAG Comparison Paper, must read](https://arxiv.org/pdf/2312.10997)
 
-```mermaid
-graph TB
-    subgraph NAIVE["1 · Naive RAG"]
-        direction TB
-        NQ["Query"] --> NR["Retrieve top-k"]
-        NR --> NG["Generate"]
-    end
-
-    subgraph ADV["2 · Advanced RAG — optimise around the same core"]
-        direction TB
-        AQ["Query"] --> APRE["Pre-retrieval\nrewrite · expand · route\nbetter chunking + metadata"]
-        APRE --> AR["Retrieve"]
-        AR --> APOST["Post-retrieval\nrerank · compress · dedupe"]
-        APOST --> AG["Generate"]
-    end
-
-    subgraph MOD["3 · Modular RAG — swappable modules, non-linear flow"]
-        direction TB
-        MQ["Query"] --> MROUTE{"Route"}
-        MROUTE -->|"needs facts"| MSEARCH["Search module\nvector · keyword · SQL · KG"]
-        MROUTE -->|"already known"| MMEM["Memory module"]
-        MSEARCH --> MFUSE["Fusion / rerank"]
-        MMEM --> MFUSE
-        MFUSE --> MG["Generate"]
-        MG --> MCRIT{"Good enough?"}
-        MCRIT -->|"no — re-plan"| MROUTE
-        MCRIT -->|"yes"| MOUT["Answer"]
-    end
-
-    NAIVE -.->|"add optimisation stages"| ADV
-    ADV -.->|"decompose into modules,\nallow loops and branching"| MOD
-
-    style NQ fill:#94A3B8,stroke:#475569,color:#fff
-    style NR fill:#94A3B8,stroke:#475569,color:#fff
-    style NG fill:#94A3B8,stroke:#475569,color:#fff
-    style AQ fill:#3B82F6,stroke:#1E40AF,color:#fff
-    style APRE fill:#F59E0B,stroke:#B45309,color:#fff
-    style AR fill:#3B82F6,stroke:#1E40AF,color:#fff
-    style APOST fill:#F97316,stroke:#C2410C,color:#fff
-    style AG fill:#3B82F6,stroke:#1E40AF,color:#fff
-    style MQ fill:#8B5CF6,stroke:#6D28D9,color:#fff
-    style MROUTE fill:#EC4899,stroke:#BE185D,color:#fff
-    style MSEARCH fill:#14B8A6,stroke:#0F766E,color:#fff
-    style MMEM fill:#8B5CF6,stroke:#6D28D9,color:#fff
-    style MFUSE fill:#64748B,stroke:#334155,color:#fff
-    style MG fill:#EF4444,stroke:#B91C1C,color:#fff
-    style MCRIT fill:#EC4899,stroke:#BE185D,color:#fff
-    style MOUT fill:#06B6D4,stroke:#0E7490,color:#fff
-    linkStyle default stroke:#475569,stroke-width:2px
-```
+![Naive, advanced and modular RAG side by side; naive retrieves once, advanced adds pre- and post-retrieval stages, modular routes between modules and can loop](images/11-the-three-rag-paradigms.svg)
 *Figure: the three RAG paradigms — naive retrieves once and hopes; advanced keeps the same spine but optimises before and after retrieval; modular breaks the pipeline into swappable parts and lets the flow loop. Redrawn from the three-paradigm taxonomy in Gao et al., ["Retrieval-Augmented Generation for Large Language Models: A Survey"](https://arxiv.org/abs/2312.10997); the framing is theirs, this drawing is not a reproduction of their figure.*
 
 ```mermaid
@@ -623,20 +538,7 @@ graph TD
 *Figure: chunking strategies and the one-vs-multi-vector tradeoff*
 
 
-```mermaid
-graph LR
-    QU["🔍 Query"] --> BI["⚡ Bi-encoder\nretrieve top-100"]
-    CORPUS[("🗄️ Vector\nIndex")] --> BI
-    BI --> CE["🎯 Cross-encoder\nrerank to top-5"]
-    CE --> CTX["📋 Context\nfor LLM"]
-
-    style QU fill:#6366F1,stroke:#4338CA,color:#fff,stroke-width:3px
-    style BI fill:#3B82F6,stroke:#1E40AF,color:#fff,stroke-width:3px
-    style CORPUS fill:#8B5CF6,stroke:#6D28D9,color:#fff,stroke-width:2px
-    style CE fill:#F97316,stroke:#C2410C,color:#fff,stroke-width:3px
-    style CTX fill:#10B981,stroke:#047857,color:#fff,stroke-width:3px
-    linkStyle default stroke:#475569,stroke-width:2px
-```
+![A funnel: a bi-encoder recalls the top hundred candidates, a cross-encoder reranks them down to the top five that become the context](images/13-two-stage-retrieval.svg)
 *Figure: two-stage retrieval — fast bi-encoder recall, accurate cross-encoder rerank*
 
 
@@ -719,54 +621,13 @@ The fundamental operation of an agentic system follows a **controller-LLM-tool l
 
 This loop represents **ReAct** (Reason + Act), a mechanism of LLMs. Here, reasoning and action are tightly coupled, allowing the agent to iterate toward a solution. [ReAct](https://arxiv.org/pdf/2210.03629) [Reflection](https://arxiv.org/pdf/2303.11366).
 
-```mermaid
-graph TD
-    U["👤 User"] --> C["🎛️ Controller"]
-    C --> L["🧠 LLM"]
-    L -->|"decide"| T{"🔀 Tool\nNeeded?"}
-    T -->|"Yes"| X["🔧 Tool"]
-    X --> L
-    T -->|"No"| A["✅ Answer"]
-
-    style U fill:#6366F1,stroke:#4338CA,color:#fff,stroke-width:3px
-    style C fill:#3B82F6,stroke:#1E40AF,color:#fff,stroke-width:3px
-    style L fill:#8B5CF6,stroke:#6D28D9,color:#fff,stroke-width:3px
-    style T fill:#F59E0B,stroke:#B45309,color:#fff,stroke-width:3px
-    style X fill:#10B981,stroke:#047857,color:#fff,stroke-width:3px
-    style A fill:#06B6D4,stroke:#0E7490,color:#fff,stroke-width:3px
-
-    linkStyle default stroke:#475569,stroke-width:2px
-```
+![The agent loop: a four-step cycle of Observe, Reason, Decide and Act, with a dashed boundary separating the half your code owns from the half the model owns](images/agent-loop.svg)
 *Figure: minimal agent loop — controller, LLM, tool decision cycle*
 
 ReAct is a natural progression of the Chain of Thought / Tree of Thought approaches discovered by different researchers. The loop of task/thought, action, and observation/review is a self-correcting superpower available to agents/flows. For the *context of our guide*, please note that not all free models are shipped with thinking ability.
 
 
-```mermaid
-graph TB
-    subgraph Reflex["⚡ Reflex"]
-        R1["trigger"] --> R2["tool"] --> R3["result"]
-    end
-    subgraph ReAct["🔁 ReAct"]
-        RA1["reason"] --> RA2["act"] --> RA3["observe"] --> RA1
-    end
-    subgraph PE["📋 Planner–Executor"]
-        PE1["plan"] --> PE2["exec step 1"] --> PE3["exec step 2"] --> PE4["exec step N"]
-    end
-    subgraph CR["🔍 Reflection"]
-        CR1["draft"] --> CR2["critic"] --> CR3["refine"] --> CR2
-    end
-    subgraph DR["🌐 Deep Research"]
-        DR1["sub-question"] --> DR2["search"] --> DR3["synthesize"] --> DR1
-        DR3 --> DR4["report"]
-    end
-
-    style Reflex fill:#E0F2FE,stroke:#0369A1,color:#0F172A
-    style ReAct fill:#FEF3C7,stroke:#B45309,color:#0F172A
-    style PE fill:#DBEAFE,stroke:#1E40AF,color:#0F172A
-    style CR fill:#FCE7F3,stroke:#BE185D,color:#0F172A
-    style DR fill:#D1FAE5,stroke:#047857,color:#0F172A
-```
+![Five loop topologies side by side: reflex is a straight line, ReAct cycles, planner-executor is a chain, reflection loops through a critic, deep research loops then emits a report](images/16-five-agent-loop-shapes.svg)
 *Figure: five agent-loop shapes — trade reasoning depth, latency, and bounded cost*
 
 **TODO (expand here):**
@@ -793,34 +654,7 @@ graph LR
 *Figure: ReAct agent loop — plan, execute, observe, repeat*
 
 
-```mermaid
-graph TD
-    subgraph COT["💭 Chain-of-Thought"]
-        C1["step 1"] --> C2["step 2"] --> C3["answer"]
-    end
-    subgraph SC["🗳️ Self-consistency"]
-        S0["question"] --> S1["path A"]
-        S0 --> S2["path B"]
-        S0 --> S3["path C"]
-        S1 --> SV["majority\nvote"]
-        S2 --> SV
-        S3 --> SV
-    end
-    subgraph TOT["🌲 Tree-of-Thought"]
-        T0["root"] --> T1["branch 1"]
-        T0 --> T2["branch 2"]
-        T1 --> T1a["score+expand"]
-        T2 --> T2a["prune"]
-    end
-    subgraph REWOO["🗂️ ReWOO"]
-        W1["plan all\ntool calls"] --> W2["execute\n(parallel)"] --> W3["compose\nanswer"]
-    end
-
-    style COT fill:#FEF3C7,stroke:#B45309,color:#0F172A
-    style SC fill:#DBEAFE,stroke:#1E40AF,color:#0F172A
-    style TOT fill:#D1FAE5,stroke:#047857,color:#0F172A
-    style REWOO fill:#FCE7F3,stroke:#BE185D,color:#0F172A
-```
+![Four reasoning shapes: chain-of-thought as one path, self-consistency as a fan-out and vote, tree-of-thought as branch-score-prune, ReWOO as plan then parallel execution](images/18-reasoning-strategies.svg)
 *Figure: reasoning strategies — CoT (one path), self-consistency (vote over paths), ToT (search over branches), ReWOO (plan-then-execute)*
 
 ### Prompt Chaining
@@ -860,37 +694,7 @@ It also allows us to use traditional [Enterprise Integration Patterns](https://w
  I hope they don't reinvent ESB.
 The point to note is that for multi-agent systems or related patterns, one is relying on agentic frameworks wholely.
 
-```mermaid
-graph TB
-    subgraph SUP["👔 Supervisor"]
-        S0["Supervisor"] --> S1["Specialist A"]
-        S0 --> S2["Specialist B"]
-        S0 --> S3["Specialist C"]
-    end
-    subgraph HIE["🌳 Hierarchical"]
-        H0["Lead"] --> H1["Team lead 1"]
-        H0 --> H2["Team lead 2"]
-        H1 --> H3["Worker"]
-        H2 --> H4["Worker"]
-    end
-    subgraph NET["🕸️ Network"]
-        N1["Agent"] <--> N2["Agent"]
-        N2 <--> N3["Agent"]
-        N3 <--> N1
-    end
-    subgraph PIPE["🏭 Pipeline"]
-        P1["Extract"] --> P2["Transform"] --> P3["Write"]
-    end
-    subgraph AC["🔁 Actor–Critic"]
-        A1["Producer"] -->|draft| A2["Critic"]
-        A2 -->|fixes| A1
-    end
-
-    style S0 fill:#3B82F6,stroke:#1E40AF,color:#fff
-    style H0 fill:#3B82F6,stroke:#1E40AF,color:#fff
-    style A2 fill:#EC4899,stroke:#BE185D,color:#fff
-    linkStyle default stroke:#475569,stroke-width:2px
-```
+![Five multi-agent shapes: supervisor as a star, hierarchical as a tree, network as a mesh, pipeline as a chain, actor-critic as a two-way loop](images/20-five-coordination-topologies.svg)
 *Figure: five coordination topologies — where the arrows point is where the bottleneck, the cost, and the failure mode live*
 
 
@@ -929,57 +733,7 @@ It is a good read to get idea on application of agents in diffrent domains . Thi
 12-Factor application design came into practice with the microservices architecture gaining momentum. The central idea was to keep independent services with full autonomy and data context within a single service boundary. It was implied that these services would later contribute to larger functional outcomes via reuse. In similar fashion, Dexter Horthy et al. came up with a 12-factor recommendation for agentic AI: [12-Factor Agents](https://github.com/humanlayer/12-factor-agents/tree/main).
 
 
-```mermaid
-graph TB
-    subgraph FOUNDATION["🧱 FOUNDATION — Core LLM Interaction"]
-        F1["F1\nNatural Language\nto Tool Calls"]
-        F2["F2\nOwn Your\nPrompts"]
-        F3["F3\nOwn Your\nContext Window"]
-        F4["F4\nTools Are Just\nStructured Outputs"]
-    end
-
-    subgraph STATE["⚙️ STATE and CONTROL Layer"]
-        F5["F5\nUnify Execution State\nand Business State"]
-        F6["F6\nLaunch / Pause / Resume\nwith Simple APIs"]
-        F8["F8\nOwn Your\nControl Flow"]
-        F9["F9\nCompact Errors\ninto Context Window"]
-    end
-
-    subgraph SCALE["🚀 INTEGRATION and SCALE Layer"]
-        F7["F7\nContact Humans\nwith Tool Calls"]
-        F10["F10\nSmall, Focused\nAgents"]
-        F11["F11\nTrigger from\nAnywhere"]
-        F12["F12\nStateless\nReducer"]
-    end
-
-    F1 -->|"produces"| F4
-    F2 -->|"shapes"| F3
-    F3 -->|"receives"| F9
-    F4 -->|"drives"| F5
-    F5 -->|"enables"| F6
-    F5 -->|"enables"| F12
-    F6 -->|"supports"| F7
-    F8 -->|"scopes"| F10
-    F10 -->|"exposes"| F11
-    F12 -->|"simplifies"| F6
-
-    F1 -.->|"guided by"| F2
-    F8 -.->|"manages"| F9
-
-    classDef foundation fill:#3B82F6,stroke:#1E40AF,color:#fff,stroke-width:3px
-    classDef state fill:#F59E0B,stroke:#B45309,color:#fff,stroke-width:3px
-    classDef scale fill:#10B981,stroke:#047857,color:#fff,stroke-width:3px
-
-    class F1,F2,F3,F4 foundation
-    class F5,F6,F8,F9 state
-    class F7,F10,F11,F12 scale
-
-    style FOUNDATION fill:#DBEAFE,stroke:#3B82F6,stroke-width:3px
-    style STATE fill:#FEF3C7,stroke:#F59E0B,stroke-width:3px
-    style SCALE fill:#D1FAE5,stroke:#10B981,stroke-width:3px
-
-    linkStyle default stroke:#475569,stroke-width:2px
-```
+![Twelve factors in three bands, foundation, state and control, and integration and scale, with connectors showing how each factor depends on the others](images/22-12-factors-of-agentic-design.svg)
 *Figure: 12 factors of agentic design — foundation, state/control, and integration/scale layers*
 
 | # | Factor | Layer |
@@ -1300,6 +1054,16 @@ graph LR
     TR --> EVAL["🧪 Sampled into\neval set"]
     EVAL --> REG["Regression case for\nnext deploy"]
 
+    style REQ fill:#6366F1,stroke:#4338CA,color:#fff
+    style SP1 fill:#8B5CF6,stroke:#6D28D9,color:#fff
+    style SP2 fill:#8B5CF6,stroke:#6D28D9,color:#fff
+    style SP3 fill:#8B5CF6,stroke:#6D28D9,color:#fff
+    style RESP fill:#06B6D4,stroke:#0E7490,color:#fff
+    style TR fill:#14B8A6,stroke:#0F766E,color:#fff
+    style MET fill:#F59E0B,stroke:#B45309,color:#fff
+    style SLO fill:#EC4899,stroke:#BE185D,color:#fff
+    style EVAL fill:#F97316,stroke:#C2410C,color:#fff
+    style RUN fill:#F1F5F9,stroke:#64748B,stroke-width:2px
     style COL fill:#3B82F6,stroke:#1E40AF,color:#fff
     style ALERT fill:#EF4444,stroke:#B91C1C,color:#fff
     style REG fill:#10B981,stroke:#047857,color:#fff
@@ -1351,33 +1115,19 @@ Beyond retrieval precision, RAG quality must be evaluated end-to-end across retr
 
 **Practical evaluation strategy for this course**
 At full benchmark scale, evaluation requires infrastructure. A pragmatic starting point for engineers:
-1. **Module-level** — test each module script with deterministic stubs (see `evaluations/tests_modules/`).
-2. **Prompt regression** — lock expected output structure and run on each model or prompt change (see `evaluations/tests_prompts/`).
-3. **RAG retrieval quality** — spot-check top-k with cosine similarity thresholds (see `evaluations/tests_rag/`).
-4. **Agent behavior** — run canonical input → verify JSON structure and tool call sequence (see `evaluations/tests_agents/`).
+1. **Module-level** — test each module script with deterministic stubs (see [`code/tests/`](code/tests/)).
+2. **Prompt regression** — lock expected output structure and run on each model or prompt change.
+3. **RAG retrieval quality** — spot-check top-k with cosine similarity thresholds.
+4. **Agent behavior** — run canonical input → verify JSON structure and tool call sequence.
 5. **LLM-as-judge** — for open-ended answers, use a second LLM call with a grading prompt as a soft quality gate.
 
-This layered approach gives meaningful coverage without full benchmark infrastructure and is what the `evaluations/` folder in this repo is designed to support.
+This layered approach gives meaningful coverage without full benchmark infrastructure and is what the [`code/tests/`](code/tests/) folder in this repo is designed to support.
 
 **TODO (expand here):**
 - [ ] Human evaluation workflow (annotation queue, adjudication, inter-annotator agreement)
 - [ ] Exploratory evaluations (fuzzing/prompt mutation and unknown-failure discovery)
 
-```mermaid
-graph BT
-    L1["🔧 Layer 1: Unit Tests\nDeterministic tool inputs/outputs"] --> L2["📝 Layer 2: Prompt Regression\nLock output structure per model"]
-    L2 --> L3["🔍 Layer 3: RAG Quality\nTop-k cosine similarity checks"]
-    L3 --> L4["🤖 Layer 4: Agent Behavior\nJSON structure + tool call sequence"]
-    L4 --> L5["🧑‍⚖️ Layer 5: LLM-as-Judge\nSoft quality gate for open-ended"]
-
-    style L1 fill:#10B981,stroke:#047857,color:#fff,stroke-width:3px
-    style L2 fill:#3B82F6,stroke:#1E40AF,color:#fff,stroke-width:3px
-    style L3 fill:#F59E0B,stroke:#B45309,color:#fff,stroke-width:3px
-    style L4 fill:#8B5CF6,stroke:#6D28D9,color:#fff,stroke-width:3px
-    style L5 fill:#EF4444,stroke:#B91C1C,color:#fff,stroke-width:3px
-
-    linkStyle default stroke:#475569,stroke-width:2px
-```
+![A five-band pyramid, widest at module-level tests with deterministic stubs and narrowing to LLM-as-judge at the apex](images/27-evaluation-pyramid.svg)
 *Figure: evaluation pyramid — five-layer testing strategy from deterministic unit tests to LLM-as-judge*
 
 ### AI Ethics and Bias
@@ -1428,6 +1178,12 @@ graph LR
     end
     PC["♻️ Prefix cache hit\n(unchanged prompt head)"] -.->|skips most of prefill| KV
 
+    style P fill:#3B82F6,stroke:#1E40AF,color:#fff
+    style T1 fill:#06B6D4,stroke:#0E7490,color:#fff
+    style T2 fill:#06B6D4,stroke:#0E7490,color:#fff
+    style T3 fill:#06B6D4,stroke:#0E7490,color:#fff
+    style PREFILL fill:#FEF3C7,stroke:#B45309,stroke-width:2px
+    style DECODE fill:#D1FAE5,stroke:#047857,stroke-width:2px
     style KV fill:#8B5CF6,stroke:#6D28D9,color:#fff
     style PC fill:#10B981,stroke:#047857,color:#fff
     linkStyle default stroke:#475569,stroke-width:2px
@@ -1441,22 +1197,7 @@ Each agent step requires an LLM call, adding latency. Optimization:
 - Cache repeated computations
 - Use smaller, faster models for simple decisions
 
-```mermaid
-graph LR
-    REQ["📥 Request"] --> PC["♻️ Prefix cache\nreuse the unchanged\nprompt head"]
-    PC --> CB["📦 Continuous batching\nnew requests join the\nbatch mid-flight"]
-    CB --> SD["⏩ Speculative decoding\ndraft model guesses,\nbig model verifies"]
-    SD --> OUT["📤 Tokens stream out"]
-
-    PC -.->|cuts| TTFT["TTFT\ntime to first token"]
-    CB -.->|cuts| TAIL["p95/p99\ntail under load"]
-    SD -.->|cuts| TPT["per-token\nlatency"]
-
-    style PC fill:#3B82F6,stroke:#1E40AF,color:#fff
-    style CB fill:#F59E0B,stroke:#B45309,color:#fff
-    style SD fill:#10B981,stroke:#047857,color:#fff
-    linkStyle default stroke:#475569,stroke-width:2px
-```
+![A request passing through prefix caching, continuous batching and speculative decoding, each dropping to the latency metric it moves](images/30-the-three-serving-side-levers-and-which-late.svg)
 *Figure: the three serving-side levers and which latency metric each one actually moves — measure before and after; speculative decoding mis-tuned can go negative*
 
 
@@ -1496,22 +1237,7 @@ When it comes to production systems we might have to write elaborate code or pro
 - **Model-level guardrails:** Include safety instructions in prompts
 
 
-```mermaid
-graph TB
-    L7["7 · Agent Ecosystem\nmarketplace, third-party agents, supply chain"]
-    L6["6 · Security & Compliance\nidentity, policy, audit — wraps every layer"]
-    L5["5 · Evaluation & Observability\ntraces, drift, eval-set poisoning"]
-    L4["4 · Deployment Infrastructure\nruntime, network, secrets"]
-    L3["3 · Agent Frameworks\norchestrator bugs, tool registry tampering"]
-    L2["2 · Data Operations\nRAG corpus poisoning, memory injection"]
-    L1["1 · Foundation Models\njailbreaks, extraction, alignment gaps"]
-
-    L7 --> L6 --> L5 --> L4 --> L3 --> L2 --> L1
-
-    style L6 fill:#EF4444,stroke:#B91C1C,color:#fff
-    style L1 fill:#3B82F6,stroke:#1E40AF,color:#fff
-    linkStyle default stroke:#475569,stroke-width:2px
-```
+![Seven stacked layers from foundation models at the base to agent ecosystem at the top, with security and compliance wrapping every layer](images/31-maestro-s-seven-layers.svg)
 *Figure: MAESTRO's seven layers — threat-model each layer separately; an attack at any layer compromises everything above it*
 
 
@@ -1530,6 +1256,12 @@ graph LR
     end
     CITE --> ANS["✅ Answer"]
 
+    style DB fill:#8B5CF6,stroke:#6D28D9,color:#fff
+    style CTX fill:#F97316,stroke:#C2410C,color:#fff
+    style ANS fill:#06B6D4,stroke:#0E7490,color:#fff
+    style ING fill:#FEE2E2,stroke:#B91C1C,stroke-width:2px
+    style VS fill:#EDE9FE,stroke:#6D28D9,stroke-width:2px
+    style GEN fill:#D1FAE5,stroke:#047857,stroke-width:2px
     style DOC fill:#EF4444,stroke:#B91C1C,color:#fff
     style SAN fill:#F59E0B,stroke:#B45309,color:#fff
     style ACL fill:#3B82F6,stroke:#1E40AF,color:#fff
@@ -1581,12 +1313,12 @@ graph TB
     L1 --> L2 --> L3 --> L4 --> L5 --> L6
     L6 -.->|"feedback"| L1
 
-    style L1 fill:#FEF3C7,stroke:#B45309,color:#0F172A,stroke-width:2px
-    style L2 fill:#FFE4E6,stroke:#BE123C,color:#0F172A,stroke-width:2px
-    style L3 fill:#DBEAFE,stroke:#1E40AF,color:#0F172A,stroke-width:2px
-    style L4 fill:#EDE9FE,stroke:#6D28D9,color:#0F172A,stroke-width:2px
-    style L5 fill:#FCE7F3,stroke:#BE185D,color:#0F172A,stroke-width:2px
-    style L6 fill:#D1FAE5,stroke:#047857,color:#0F172A,stroke-width:2px
+    style L1 fill:#6366F1,stroke:#4338CA,color:#fff,stroke-width:2px
+    style L2 fill:#3B82F6,stroke:#1E40AF,color:#fff,stroke-width:2px
+    style L3 fill:#F59E0B,stroke:#B45309,color:#fff,stroke-width:2px
+    style L4 fill:#8B5CF6,stroke:#6D28D9,color:#fff,stroke-width:2px
+    style L5 fill:#EC4899,stroke:#BE185D,color:#fff,stroke-width:2px
+    style L6 fill:#10B981,stroke:#047857,color:#fff,stroke-width:2px
 ```
 *Figure: six-layer guardrail defence — each layer catches a different class of failure; defence in depth, not a single filter*
 
@@ -1628,32 +1360,7 @@ graph LR
 - Suites & orchestration: packaging agents as composable modules
 - Integration patterns: adapters for databases, queues, APIs, identity
 
-```mermaid
-graph TB
-    subgraph MCPbox["🔌 MCP — transactional, single round-trip"]
-        H["Host / LLM client"] -->|"tools/call"| S1["Resource server\n(filesystem)"]
-        H -->|"tools/call"| S2["Resource server\n(database)"]
-        H -->|"tools/call"| S3["Resource server\n(vector store)"]
-        S1 -->|"result"| H
-        S2 -->|"result"| H
-        S3 -->|"result"| H
-    end
-
-    subgraph A2Abox["🤝 A2A — task-oriented, long-running, discoverable"]
-        P["Planner agent"] -->|"discover via Agent Card"| Reg["Agent registry"]
-        Reg -->|"endpoint + skills + auth"| P
-        P -->|"task: summarize_landscape"| R["Research agent"]
-        R -.->|"streamed updates"| P
-        R -->|"artifact: report.md"| P
-    end
-
-    style MCPbox fill:#E0F2FE,stroke:#0369A1,color:#0F172A
-    style A2Abox fill:#FEF3C7,stroke:#B45309,color:#0F172A
-    style H fill:#3B82F6,stroke:#1E40AF,color:#fff,stroke-width:2px
-    style P fill:#6366F1,stroke:#4338CA,color:#fff,stroke-width:2px
-    style R fill:#10B981,stroke:#047857,color:#fff,stroke-width:2px
-    style Reg fill:#F59E0B,stroke:#B45309,color:#fff,stroke-width:2px
-```
+![MCP as a host calling resource servers in single round trips, beside A2A as a planner discovering an agent through a registry and delegating a long-running task](images/36-mcp-vs-a2a.svg)
 *Figure: MCP vs A2A — different shapes for different problems. MCP plugs an LLM into resources; A2A lets agents discover and delegate to each other.*
 
 

@@ -1,0 +1,12 @@
+graph LR
+    QU["🔍 Query"] --> BI["⚡ Bi-encoder\nretrieve top-100"]
+    CORPUS[("🗄️ Vector\nIndex")] --> BI
+    BI --> CE["🎯 Cross-encoder\nrerank to top-5"]
+    CE --> CTX["📋 Context\nfor LLM"]
+
+    style QU fill:#6366F1,stroke:#4338CA,color:#fff,stroke-width:3px
+    style BI fill:#3B82F6,stroke:#1E40AF,color:#fff,stroke-width:3px
+    style CORPUS fill:#8B5CF6,stroke:#6D28D9,color:#fff,stroke-width:2px
+    style CE fill:#F97316,stroke:#C2410C,color:#fff,stroke-width:3px
+    style CTX fill:#10B981,stroke:#047857,color:#fff,stroke-width:3px
+    linkStyle default stroke:#475569,stroke-width:2px

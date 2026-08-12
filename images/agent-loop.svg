@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 920 388" width="920" height="388"
+     role="img" aria-labelledby="title desc">
+  <title id="title">The agent loop, and the boundary running through it</title>
+  <desc id="desc">A four-step cycle — Observe, Reason, Decide, Act — drawn as a rectangle.
+  A dashed vertical divider separates the left half, your deterministic code, which owns Observe
+  and Act, from the right half, the probabilistic model, which owns Reason and Decide. The loop
+  crosses that divider exactly twice: an observation and prompt going right, and a tool call as
+  JSON coming back left. A user request enters at Observe; when Decide concludes no tool is
+  needed, an answer exits to the right.</desc>
+
+  <style>
+    :root {
+      --ink:   #334155;
+      --muted: #64748b;
+      --line:  #475569;
+      --frame: #cbd5e1;
+      --zone-code:  #eef2f7;
+      --zone-model: #f3effd;
+    }
+    }
+    .zone-code  { fill: var(--zone-code); }
+    .zone-model { fill: var(--zone-model); }
+    .frame      { stroke: var(--frame); fill: none; }
+    .divider    { stroke: var(--frame); stroke-width: 2; stroke-dasharray: 7 7; }
+    .edge       { stroke: var(--line); stroke-width: 2.5; fill: none; }
+    .node-label { font-weight: 650; font-size: 19px; fill: #fff; }
+    .node-sub   { font-size: 12.5px; fill: #fff; opacity: .88; }
+    .edge-label { font-size: 12.5px; fill: var(--muted); font-style: italic; }
+    .zone-label { font-size: 13px; font-weight: 650; fill: var(--muted);
+                  letter-spacing: .09em; text-transform: uppercase; }
+    .note       { font-size: 13px; fill: var(--muted); }
+    text        { font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto,
+                               Helvetica, Arial, sans-serif; }
+  </style>
+  <rect id="ground" x="0" y="96" width="920" height="388" fill="#ffffff"/>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="var(--line)"/>
+    </marker>
+    <!-- one rounded shape for both halves, so their inner edges meet flush -->
+    <clipPath id="frameClip">
+      <rect x="150" y="112" width="586" height="286" rx="18"/>
+    </clipPath>
+  </defs>
+
+  <!-- zone backgrounds, clipped to the frame so the divider has no seam -->
+  <g clip-path="url(#frameClip)">
+    <rect class="zone-code"  x="150" y="112" width="304" height="286"/>
+    <rect class="zone-model" x="454" y="112" width="282" height="286"/>
+  </g>
+  <rect class="frame" x="150" y="112" width="586" height="286" rx="18" stroke-width="1.5"/>
+
+  <!-- the boundary -->
+  <line class="divider" x1="454" y1="112" x2="454" y2="398"/>
+  <text class="zone-label" x="300" y="140" text-anchor="middle">your code</text>
+  <text class="zone-label" x="596" y="140" text-anchor="middle">the model</text>
+
+  <!-- ── the cycle: Observe → Reason → Decide → Act → Observe ── -->
+
+  <!-- top edge: crosses into the model -->
+  <line class="edge" x1="366" y1="205" x2="518" y2="205" marker-end="url(#arrow)"/>
+  <text class="edge-label" x="442" y="196" text-anchor="middle">observation + prompt</text>
+
+  <!-- right edge: down, inside the model -->
+  <line class="edge" x1="620" y1="245" x2="620" y2="298" marker-end="url(#arrow)"/>
+
+  <!-- bottom edge: crosses back out -->
+  <line class="edge" x1="518" y1="338" x2="366" y2="338" marker-end="url(#arrow)"/>
+  <text class="edge-label" x="442" y="360" text-anchor="middle">tool call, as JSON</text>
+
+  <!-- left edge: up, inside your code -->
+  <line class="edge" x1="265" y1="298" x2="265" y2="245" marker-end="url(#arrow)"/>
+  <text class="edge-label" x="253" y="275" text-anchor="end">result</text>
+
+  <!-- nodes -->
+  <g>
+    <rect x="165" y="167" width="200" height="76" rx="14"
+          fill="#3b82f6" stroke="#1e40af" stroke-width="2.5"/>
+    <text class="node-label" x="265" y="199" text-anchor="middle">Observe</text>
+    <text class="node-sub"   x="265" y="220" text-anchor="middle">new state, or the last result</text>
+  </g>
+  <g>
+    <rect x="520" y="167" width="200" height="76" rx="14"
+          fill="#8b5cf6" stroke="#6d28d9" stroke-width="2.5"/>
+    <text class="node-label" x="620" y="199" text-anchor="middle">Reason</text>
+    <text class="node-sub"   x="620" y="220" text-anchor="middle">what is known, what is missing</text>
+  </g>
+  <g>
+    <rect x="520" y="300" width="200" height="76" rx="14"
+          fill="#f59e0b" stroke="#b45309" stroke-width="2.5"/>
+    <text class="node-label" x="620" y="332" text-anchor="middle">Decide</text>
+    <text class="node-sub"   x="620" y="353" text-anchor="middle">emit one structured action</text>
+  </g>
+  <g>
+    <rect x="165" y="300" width="200" height="76" rx="14"
+          fill="#10b981" stroke="#047857" stroke-width="2.5"/>
+    <text class="node-label" x="265" y="332" text-anchor="middle">Act</text>
+    <text class="node-sub"   x="265" y="353" text-anchor="middle">run the tool, capture output</text>
+  </g>
+
+  <!-- entry -->
+  <g>
+    <rect x="22" y="180" width="108" height="50" rx="25"
+          fill="#6366f1" stroke="#4338ca" stroke-width="2.5"/>
+    <text class="node-label" x="76" y="211" text-anchor="middle">Request</text>
+  </g>
+  <line class="edge" x1="130" y1="205" x2="163" y2="205" marker-end="url(#arrow)"/>
+
+  <!-- exit -->
+  <line class="edge" x1="722" y1="338" x2="786" y2="338" marker-end="url(#arrow)"/>
+  <text class="edge-label" x="754" y="329" text-anchor="middle">done</text>
+  <g>
+    <rect x="788" y="313" width="108" height="50" rx="25"
+          fill="#06b6d4" stroke="#0e7490" stroke-width="2.5"/>
+    <text class="node-label" x="842" y="344" text-anchor="middle">Answer</text>
+  </g>
+</svg>

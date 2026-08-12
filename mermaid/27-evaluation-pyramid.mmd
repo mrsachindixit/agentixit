@@ -1,0 +1,13 @@
+graph BT
+    L1["🔧 Layer 1: Unit Tests\nDeterministic tool inputs/outputs"] --> L2["📝 Layer 2: Prompt Regression\nLock output structure per model"]
+    L2 --> L3["🔍 Layer 3: RAG Quality\nTop-k cosine similarity checks"]
+    L3 --> L4["🤖 Layer 4: Agent Behavior\nJSON structure + tool call sequence"]
+    L4 --> L5["🧑‍⚖️ Layer 5: LLM-as-Judge\nSoft quality gate for open-ended"]
+
+    style L1 fill:#10B981,stroke:#047857,color:#fff,stroke-width:3px
+    style L2 fill:#3B82F6,stroke:#1E40AF,color:#fff,stroke-width:3px
+    style L3 fill:#F59E0B,stroke:#B45309,color:#fff,stroke-width:3px
+    style L4 fill:#8B5CF6,stroke:#6D28D9,color:#fff,stroke-width:3px
+    style L5 fill:#EF4444,stroke:#B91C1C,color:#fff,stroke-width:3px
+
+    linkStyle default stroke:#475569,stroke-width:2px

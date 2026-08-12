@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 300" width="980" height="300"
+     role="img" aria-labelledby="t d">
+  <title id="t">Five coordination topologies</title>
+  <desc id="d">Supervisor fans out from one node to three specialists. Hierarchical adds a second
+  tier of team leads above workers. Network is a mesh where every agent talks to every other.
+  Pipeline is a straight chain. Actor-critic is two nodes passing work back and forth.</desc>
+  <style>
+    :root { --ink:#1f2937; --muted:#5b6b7f; --line:#475569; --panel:#f4f6fa; }
+    .ttl{font-size:14.5px;font-weight:700;fill:var(--ink)}
+    .sub{font-size:11.5px;fill:var(--muted)}
+    .nd {font-size:11px;fill:var(--ink)}
+    .edge{stroke:var(--line);stroke-width:1.9;fill:none}
+    .panel{fill:var(--panel)}
+    text{font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  </style>
+  <rect id="ground" x="0" y="0" width="980" height="300" fill="#ffffff"/>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+            orient="auto-start-reverse"><path d="M0 1L10 5L0 9z" fill="var(--line)"/></marker>
+    <marker id="b" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="6" markerHeight="6"
+            orient="auto-start-reverse"><path d="M10 1L0 5L10 9z" fill="var(--line)"/></marker>
+  </defs>
+
+  <!-- Supervisor -->
+  <rect class="panel" x="14" y="14" width="180" height="272" rx="14"/>
+  <text class="ttl" x="104" y="40" text-anchor="middle">Supervisor</text>
+  <text class="sub" x="104" y="58" text-anchor="middle">one decides, others do</text>
+  <circle cx="104" cy="112" r="22" fill="#3b82f6" stroke="#1e40af" stroke-width="2"/>
+  <text class="nd" x="104" y="116" text-anchor="middle" fill="#fff" font-size="10">sup</text>
+  <g fill="#dbeafe" stroke="#1e40af" stroke-width="1.8">
+    <circle cx="48" cy="212" r="19"/><circle cx="104" cy="212" r="19"/><circle cx="160" cy="212" r="19"/>
+  </g>
+  <text class="nd" x="48"  y="216" text-anchor="middle">A</text>
+  <text class="nd" x="104" y="216" text-anchor="middle">B</text>
+  <text class="nd" x="160" y="216" text-anchor="middle">C</text>
+  <line class="edge" x1="90"  y1="131" x2="57"  y2="194" marker-end="url(#a)"/>
+  <line class="edge" x1="104" y1="135" x2="104" y2="190" marker-end="url(#a)"/>
+  <line class="edge" x1="118" y1="131" x2="151" y2="194" marker-end="url(#a)"/>
+
+  <!-- Hierarchical -->
+  <rect class="panel" x="206" y="14" width="180" height="272" rx="14"/>
+  <text class="ttl" x="296" y="40" text-anchor="middle">Hierarchical</text>
+  <text class="sub" x="296" y="58" text-anchor="middle">tiers of delegation</text>
+  <circle cx="296" cy="94" r="21" fill="#3b82f6" stroke="#1e40af" stroke-width="2"/>
+  <text class="nd" x="296" y="98" text-anchor="middle" fill="#fff" font-size="10">lead</text>
+  <g fill="#dbeafe" stroke="#1e40af" stroke-width="1.8">
+    <circle cx="248" cy="170" r="18"/><circle cx="344" cy="170" r="18"/>
+  </g>
+  <text class="nd" x="248" y="174" text-anchor="middle" font-size="10">TL1</text>
+  <text class="nd" x="344" y="174" text-anchor="middle" font-size="10">TL2</text>
+  <g fill="#eef2f7" stroke="#64748b" stroke-width="1.8">
+    <circle cx="248" cy="238" r="17"/><circle cx="344" cy="238" r="17"/>
+  </g>
+  <text class="nd" x="248" y="242" text-anchor="middle" font-size="10">w</text>
+  <text class="nd" x="344" y="242" text-anchor="middle" font-size="10">w</text>
+  <line class="edge" x1="282" y1="110" x2="257" y2="153" marker-end="url(#a)"/>
+  <line class="edge" x1="310" y1="110" x2="335" y2="153" marker-end="url(#a)"/>
+  <line class="edge" x1="248" y1="189" x2="248" y2="219" marker-end="url(#a)"/>
+  <line class="edge" x1="344" y1="189" x2="344" y2="219" marker-end="url(#a)"/>
+
+  <!-- Network -->
+  <rect class="panel" x="398" y="14" width="180" height="272" rx="14"/>
+  <text class="ttl" x="488" y="40" text-anchor="middle">Network</text>
+  <text class="sub" x="488" y="58" text-anchor="middle">everyone talks to everyone</text>
+  <g fill="#ede9fe" stroke="#6d28d9" stroke-width="1.8">
+    <circle cx="488" cy="108" r="20"/><circle cx="434" cy="216" r="20"/><circle cx="542" cy="216" r="20"/>
+  </g>
+  <text class="nd" x="488" y="112" text-anchor="middle">1</text>
+  <text class="nd" x="434" y="220" text-anchor="middle">2</text>
+  <text class="nd" x="542" y="220" text-anchor="middle">3</text>
+  <line class="edge" x1="474" y1="126" x2="448" y2="198" marker-end="url(#a)" marker-start="url(#b)"/>
+  <line class="edge" x1="502" y1="126" x2="528" y2="198" marker-end="url(#a)" marker-start="url(#b)"/>
+  <line class="edge" x1="456" y1="216" x2="520" y2="216" marker-end="url(#a)" marker-start="url(#b)"/>
+
+  <!-- Pipeline -->
+  <rect class="panel" x="590" y="14" width="180" height="272" rx="14"/>
+  <text class="ttl" x="680" y="40" text-anchor="middle">Pipeline</text>
+  <text class="sub" x="680" y="58" text-anchor="middle">one direction only</text>
+  <g fill="#d1fae5" stroke="#047857" stroke-width="1.8">
+    <rect x="612" y="90"  width="136" height="34" rx="9"/>
+    <rect x="612" y="156" width="136" height="34" rx="9"/>
+    <rect x="612" y="222" width="136" height="34" rx="9"/>
+  </g>
+  <text class="nd" x="680" y="112" text-anchor="middle">Extract</text>
+  <text class="nd" x="680" y="178" text-anchor="middle">Transform</text>
+  <text class="nd" x="680" y="244" text-anchor="middle">Write</text>
+  <line class="edge" x1="680" y1="126" x2="680" y2="152" marker-end="url(#a)"/>
+  <line class="edge" x1="680" y1="192" x2="680" y2="218" marker-end="url(#a)"/>
+
+  <!-- Actor–Critic -->
+  <rect class="panel" x="782" y="14" width="184" height="272" rx="14"/>
+  <text class="ttl" x="874" y="40" text-anchor="middle">Actor–Critic</text>
+  <text class="sub" x="874" y="58" text-anchor="middle">two roles, one loop</text>
+  <rect x="806" y="108" width="136" height="38" rx="10" fill="#dbeafe" stroke="#1e40af" stroke-width="1.8"/>
+  <text class="nd" x="874" y="132" text-anchor="middle">Producer</text>
+  <rect x="806" y="200" width="136" height="38" rx="10" fill="#ec4899" stroke="#be185d" stroke-width="1.8"/>
+  <text class="nd" x="874" y="224" text-anchor="middle" fill="#fff">Critic</text>
+  <path class="edge" d="M 916 148 C 936 165 936 183 916 198" marker-end="url(#a)"/>
+  <path class="edge" d="M 832 198 C 812 183 812 165 832 148" marker-end="url(#a)"/>
+  <text class="nd" x="952" y="177" text-anchor="end" font-size="10.5" fill="var(--muted)">draft</text>
+  <text class="nd" x="800" y="177" text-anchor="start" font-size="10.5" fill="var(--muted)">fixes</text>
+</svg>

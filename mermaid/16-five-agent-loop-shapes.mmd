@@ -1,0 +1,23 @@
+graph TB
+    subgraph Reflex["⚡ Reflex"]
+        R1["trigger"] --> R2["tool"] --> R3["result"]
+    end
+    subgraph ReAct["🔁 ReAct"]
+        RA1["reason"] --> RA2["act"] --> RA3["observe"] --> RA1
+    end
+    subgraph PE["📋 Planner–Executor"]
+        PE1["plan"] --> PE2["exec step 1"] --> PE3["exec step 2"] --> PE4["exec step N"]
+    end
+    subgraph CR["🔍 Reflection"]
+        CR1["draft"] --> CR2["critic"] --> CR3["refine"] --> CR2
+    end
+    subgraph DR["🌐 Deep Research"]
+        DR1["sub-question"] --> DR2["search"] --> DR3["synthesize"] --> DR1
+        DR3 --> DR4["report"]
+    end
+
+    style Reflex fill:#E0F2FE,stroke:#0369A1,color:#0F172A
+    style ReAct fill:#FEF3C7,stroke:#B45309,color:#0F172A
+    style PE fill:#DBEAFE,stroke:#1E40AF,color:#0F172A
+    style CR fill:#FCE7F3,stroke:#BE185D,color:#0F172A
+    style DR fill:#D1FAE5,stroke:#047857,color:#0F172A

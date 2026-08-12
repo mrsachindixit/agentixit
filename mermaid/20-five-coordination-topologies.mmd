@@ -1,0 +1,29 @@
+graph TB
+    subgraph SUP["👔 Supervisor"]
+        S0["Supervisor"] --> S1["Specialist A"]
+        S0 --> S2["Specialist B"]
+        S0 --> S3["Specialist C"]
+    end
+    subgraph HIE["🌳 Hierarchical"]
+        H0["Lead"] --> H1["Team lead 1"]
+        H0 --> H2["Team lead 2"]
+        H1 --> H3["Worker"]
+        H2 --> H4["Worker"]
+    end
+    subgraph NET["🕸️ Network"]
+        N1["Agent"] <--> N2["Agent"]
+        N2 <--> N3["Agent"]
+        N3 <--> N1
+    end
+    subgraph PIPE["🏭 Pipeline"]
+        P1["Extract"] --> P2["Transform"] --> P3["Write"]
+    end
+    subgraph AC["🔁 Actor–Critic"]
+        A1["Producer"] -->|draft| A2["Critic"]
+        A2 -->|fixes| A1
+    end
+
+    style S0 fill:#3B82F6,stroke:#1E40AF,color:#fff
+    style H0 fill:#3B82F6,stroke:#1E40AF,color:#fff
+    style A2 fill:#EC4899,stroke:#BE185D,color:#fff
+    linkStyle default stroke:#475569,stroke-width:2px

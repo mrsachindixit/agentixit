@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 344" width="980" height="344"
+     role="img" aria-labelledby="t d">
+  <title id="t">Five agent-loop shapes</title>
+  <desc id="d">Five columns, each drawing a different loop topology. Reflex is a straight line.
+  ReAct cycles. Planner-Executor is a longer straight chain. Reflection cycles between critic and
+  refine. Deep Research cycles and also emits a report.</desc>
+  <style>
+    :root { --ink:#1f2937; --muted:#5b6b7f; --line:#475569; --panel:#f4f6fa; }
+    .ttl{font-size:14.5px;font-weight:700;fill:var(--ink)}
+    .sub{font-size:11.5px;fill:var(--muted)}
+    .nd {font-size:12.5px;fill:#0f172a}
+    .edge{stroke:var(--line);stroke-width:1.9;fill:none}
+    .panel{fill:var(--panel)}
+    text{font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  </style>
+  <rect id="ground" x="0" y="0" width="980" height="344" fill="#ffffff"/>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+            orient="auto-start-reverse"><path d="M0 1L10 5L0 9z" fill="var(--line)"/></marker>
+  </defs>
+
+  <!-- Reflex -->
+  <rect class="panel" x="16" y="14" width="176" height="312" rx="14"/>
+  <text class="ttl" x="104" y="40" text-anchor="middle">Reflex</text>
+  <text class="sub" x="104" y="58" text-anchor="middle">one shot, no loop</text>
+  <g>
+    <rect x="39" y="76"  width="130" height="34" rx="9" fill="#e0f2fe" stroke="#0369a1" stroke-width="1.8"/>
+    <text class="nd" x="104" y="98" text-anchor="middle">trigger</text>
+    <rect x="39" y="140" width="130" height="34" rx="9" fill="#e0f2fe" stroke="#0369a1" stroke-width="1.8"/>
+    <text class="nd" x="104" y="162" text-anchor="middle">tool</text>
+    <rect x="39" y="204" width="130" height="34" rx="9" fill="#e0f2fe" stroke="#0369a1" stroke-width="1.8"/>
+    <text class="nd" x="104" y="226" text-anchor="middle">result</text>
+    <line class="edge" x1="104" y1="112" x2="104" y2="136" marker-end="url(#a)"/>
+    <line class="edge" x1="104" y1="176" x2="104" y2="200" marker-end="url(#a)"/>
+  </g>
+
+  <!-- ReAct -->
+  <rect class="panel" x="208" y="14" width="176" height="312" rx="14"/>
+  <text class="ttl" x="296" y="40" text-anchor="middle">ReAct</text>
+  <text class="sub" x="296" y="58" text-anchor="middle">cycles until done</text>
+  <g>
+    <rect x="243" y="76"  width="118" height="34" rx="9" fill="#fef3c7" stroke="#b45309" stroke-width="1.8"/>
+    <text class="nd" x="302" y="98" text-anchor="middle">reason</text>
+    <rect x="243" y="140" width="118" height="34" rx="9" fill="#fef3c7" stroke="#b45309" stroke-width="1.8"/>
+    <text class="nd" x="302" y="162" text-anchor="middle">act</text>
+    <rect x="243" y="204" width="118" height="34" rx="9" fill="#fef3c7" stroke="#b45309" stroke-width="1.8"/>
+    <text class="nd" x="302" y="226" text-anchor="middle">observe</text>
+    <line class="edge" x1="302" y1="112" x2="302" y2="136" marker-end="url(#a)"/>
+    <line class="edge" x1="302" y1="176" x2="302" y2="200" marker-end="url(#a)"/>
+    <path class="edge" d="M 241 221 C 218 221 218 93 239 93" marker-end="url(#a)"/>
+  </g>
+
+  <!-- Planner–Executor -->
+  <rect class="panel" x="400" y="14" width="176" height="312" rx="14"/>
+  <text class="ttl" x="488" y="40" text-anchor="middle">Planner–Executor</text>
+  <text class="sub" x="488" y="58" text-anchor="middle">plan once, then run</text>
+  <g>
+    <rect x="423" y="76"  width="130" height="30" rx="9" fill="#dbeafe" stroke="#1e40af" stroke-width="1.8"/>
+    <text class="nd" x="488" y="96" text-anchor="middle">plan</text>
+    <rect x="423" y="132" width="130" height="30" rx="9" fill="#dbeafe" stroke="#1e40af" stroke-width="1.8"/>
+    <text class="nd" x="488" y="152" text-anchor="middle">exec step 1</text>
+    <rect x="423" y="188" width="130" height="30" rx="9" fill="#dbeafe" stroke="#1e40af" stroke-width="1.8"/>
+    <text class="nd" x="488" y="208" text-anchor="middle">exec step 2</text>
+    <rect x="423" y="244" width="130" height="30" rx="9" fill="#dbeafe" stroke="#1e40af" stroke-width="1.8"/>
+    <text class="nd" x="488" y="264" text-anchor="middle">exec step N</text>
+    <line class="edge" x1="488" y1="108" x2="488" y2="128" marker-end="url(#a)"/>
+    <line class="edge" x1="488" y1="164" x2="488" y2="184" marker-end="url(#a)"/>
+    <line class="edge" x1="488" y1="220" x2="488" y2="240" marker-end="url(#a)"/>
+  </g>
+
+  <!-- Reflection -->
+  <rect class="panel" x="592" y="14" width="176" height="312" rx="14"/>
+  <text class="ttl" x="680" y="40" text-anchor="middle">Reflection</text>
+  <text class="sub" x="680" y="58" text-anchor="middle">critic loop, not the whole task</text>
+  <g>
+    <rect x="627" y="76"  width="118" height="34" rx="9" fill="#fce7f3" stroke="#be185d" stroke-width="1.8"/>
+    <text class="nd" x="686" y="98" text-anchor="middle">draft</text>
+    <rect x="627" y="140" width="118" height="34" rx="9" fill="#fce7f3" stroke="#be185d" stroke-width="1.8"/>
+    <text class="nd" x="686" y="162" text-anchor="middle">critic</text>
+    <rect x="627" y="204" width="118" height="34" rx="9" fill="#fce7f3" stroke="#be185d" stroke-width="1.8"/>
+    <text class="nd" x="686" y="226" text-anchor="middle">refine</text>
+    <line class="edge" x1="686" y1="112" x2="686" y2="136" marker-end="url(#a)"/>
+    <line class="edge" x1="686" y1="176" x2="686" y2="200" marker-end="url(#a)"/>
+    <path class="edge" d="M 625 221 C 604 221 604 157 623 157" marker-end="url(#a)"/>
+  </g>
+
+  <!-- Deep Research -->
+  <rect class="panel" x="784" y="14" width="180" height="312" rx="14"/>
+  <text class="ttl" x="874" y="40" text-anchor="middle">Deep Research</text>
+  <text class="sub" x="874" y="58" text-anchor="middle">loops, then emits</text>
+  <g>
+    <rect x="817" y="76"  width="122" height="30" rx="9" fill="#d1fae5" stroke="#047857" stroke-width="1.8"/>
+    <text class="nd" x="878" y="96" text-anchor="middle">sub-question</text>
+    <rect x="817" y="132" width="122" height="30" rx="9" fill="#d1fae5" stroke="#047857" stroke-width="1.8"/>
+    <text class="nd" x="878" y="152" text-anchor="middle">search</text>
+    <rect x="817" y="188" width="122" height="30" rx="9" fill="#d1fae5" stroke="#047857" stroke-width="1.8"/>
+    <text class="nd" x="878" y="208" text-anchor="middle">synthesize</text>
+    <rect x="817" y="252" width="122" height="34" rx="9" fill="#10b981" stroke="#047857" stroke-width="1.8"/>
+    <text class="nd" x="878" y="274" text-anchor="middle" fill="#fff">report</text>
+    <line class="edge" x1="878" y1="108" x2="878" y2="128" marker-end="url(#a)"/>
+    <line class="edge" x1="878" y1="164" x2="878" y2="184" marker-end="url(#a)"/>
+    <line class="edge" x1="878" y1="220" x2="878" y2="248" marker-end="url(#a)"/>
+    <path class="edge" d="M 815 203 C 796 203 796 93 813 93" marker-end="url(#a)"/>
+  </g>
+</svg>

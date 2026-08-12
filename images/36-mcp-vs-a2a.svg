@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 396" width="960" height="396"
+     role="img" aria-labelledby="t d">
+  <title id="t">MCP and A2A, side by side</title>
+  <desc id="d">On the left, MCP: one host calls out to resource servers and each returns a result
+  in a single round trip. On the right, A2A: a planner agent discovers another agent through a
+  registry, hands it a task, receives streamed updates, and finally an artifact.</desc>
+  <style>
+    :root { --ink:#1f2937; --muted:#5b6b7f; --line:#475569; --panelA:#e8f4fd; --panelB:#fdf4e0; }
+    .ttl{font-size:15.5px;font-weight:700;fill:var(--ink)}
+    .sub{font-size:12px;fill:var(--muted)}
+    .nl{font-size:12.5px;font-weight:600;fill:#fff}
+    .ns{font-size:11px;fill:#fff;opacity:.9}
+    .el{font-size:11px;fill:var(--muted)}
+    .edge{stroke:var(--line);stroke-width:2;fill:none}
+    text{font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  </style>
+  <rect id="ground" x="0" y="0" width="960" height="396" fill="#ffffff"/>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+            orient="auto-start-reverse"><path d="M0 1L10 5L0 9z" fill="var(--line)"/></marker>
+  </defs>
+
+  <!-- MCP -->
+  <rect x="14" y="14" width="452" height="368" rx="16" fill="var(--panelA)"/>
+  <text class="ttl" x="240" y="46" text-anchor="middle">MCP</text>
+  <text class="sub" x="240" y="66" text-anchor="middle">transactional, one round trip per call</text>
+
+  <rect x="150" y="92" width="180" height="52" rx="12" fill="#3b82f6" stroke="#1e40af" stroke-width="2"/>
+  <text class="nl" x="240" y="123" text-anchor="middle">Host / LLM client</text>
+
+  <g fill="#64748b" stroke="#334155" stroke-width="2">
+    <rect x="40"  y="256" width="118" height="60" rx="11"/>
+    <rect x="181" y="256" width="118" height="60" rx="11"/>
+    <rect x="322" y="256" width="118" height="60" rx="11"/>
+  </g>
+  <text class="nl" x="99"  y="282" text-anchor="middle">Resource</text>
+  <text class="ns" x="99"  y="300" text-anchor="middle">filesystem</text>
+  <text class="nl" x="240" y="282" text-anchor="middle">Resource</text>
+  <text class="ns" x="240" y="300" text-anchor="middle">database</text>
+  <text class="nl" x="381" y="282" text-anchor="middle">Resource</text>
+  <text class="ns" x="381" y="300" text-anchor="middle">vector store</text>
+
+  <!-- call down, result back: paired arrows -->
+  <path class="edge" d="M 200 148 L 92 250" marker-end="url(#a)"/>
+  <path class="edge" d="M 118 250 L 222 148" marker-end="url(#a)"/>
+  <path class="edge" d="M 232 148 L 232 250" marker-end="url(#a)"/>
+  <path class="edge" d="M 252 250 L 252 148" marker-end="url(#a)"/>
+  <path class="edge" d="M 280 148 L 366 250" marker-end="url(#a)"/>
+  <path class="edge" d="M 392 250 L 300 148" marker-end="url(#a)"/>
+  <text class="el" x="150" y="196" text-anchor="middle">tools/call</text>
+  <text class="el" x="336" y="196" text-anchor="middle">result</text>
+  <text class="el" x="240" y="345" text-anchor="middle">the host holds the loop; servers just answer</text>
+
+  <!-- A2A -->
+  <rect x="494" y="14" width="452" height="368" rx="16" fill="var(--panelB)"/>
+  <text class="ttl" x="720" y="46" text-anchor="middle">A2A</text>
+  <text class="sub" x="720" y="66" text-anchor="middle">task-oriented, long-running, discoverable</text>
+
+  <rect x="520" y="100" width="150" height="52" rx="12" fill="#6366f1" stroke="#4338ca" stroke-width="2"/>
+  <text class="nl" x="595" y="131" text-anchor="middle">Planner agent</text>
+
+  <rect x="782" y="100" width="150" height="52" rx="12" fill="#f59e0b" stroke="#b45309" stroke-width="2"/>
+  <text class="nl" x="857" y="123" text-anchor="middle">Agent registry</text>
+  <text class="ns" x="857" y="140" text-anchor="middle">Agent Cards</text>
+
+  <rect x="646" y="272" width="180" height="56" rx="12" fill="#10b981" stroke="#047857" stroke-width="2"/>
+  <text class="nl" x="736" y="298" text-anchor="middle">Research agent</text>
+  <text class="ns" x="736" y="316" text-anchor="middle">its own tools and loop</text>
+
+  <path class="edge" d="M 672 116 L 778 116" marker-end="url(#a)"/>
+  <text class="el" x="725" y="108" text-anchor="middle">discover</text>
+  <path class="edge" d="M 778 140 L 672 140" marker-end="url(#a)"/>
+  <text class="el" x="725" y="158" text-anchor="middle">endpoint + skills + auth</text>
+
+  <path class="edge" d="M 578 156 L 668 268" marker-end="url(#a)"/>
+  <text class="el" x="562" y="220" text-anchor="start">task</text>
+  <path class="edge" d="M 706 268 L 616 156" marker-end="url(#a)" stroke-dasharray="5 4"/>
+  <text class="el" x="668" y="238" text-anchor="start">streamed updates</text>
+  <path class="edge" d="M 820 272 C 880 230 880 170 866 158" marker-end="url(#a)"/>
+  <text class="el" x="880" y="230" text-anchor="start">artifact</text>
+</svg>

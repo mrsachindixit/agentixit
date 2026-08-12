@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 330" width="900" height="330"
+     role="img" aria-labelledby="t d">
+  <title id="t">Three eras, and what each one broke on</title>
+  <desc id="d">Rules era, statistical NLP era, and agentic era, left to right. Each arrow between
+  them is labelled with what the previous approach broke on. Capability rises across the three;
+  determinism falls. The agentic era loops back on itself, breaking on non-determinism.</desc>
+  <style>
+    :root { --ink:#1f2937; --muted:#5b6b7f; --rule:#d7dee8; --line:#475569; }
+    .nl{font-size:14px;font-weight:650;fill:#fff}
+    .ns{font-size:11.5px;fill:#fff;opacity:.9}
+    .br{font-size:12px;fill:var(--muted)}
+    .ax{font-size:12.5px;font-weight:600;fill:var(--muted)}
+    .edge{stroke:var(--line);stroke-width:2.2;fill:none}
+    text{font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  </style>
+  <rect id="ground" x="0" y="0" width="900" height="330" fill="#ffffff"/>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5"
+            orient="auto-start-reverse"><path d="M0 1L10 5L0 9z" fill="var(--line)"/></marker>
+    <linearGradient id="cap" x1="0" x2="1"><stop offset="0" stop-color="#94a3b8"/><stop offset="1" stop-color="#10b981"/></linearGradient>
+    <linearGradient id="det" x1="0" x2="1"><stop offset="0" stop-color="#10b981"/><stop offset="1" stop-color="#94a3b8"/></linearGradient>
+  </defs>
+
+  <!-- capability, rising -->
+  <rect x="40" y="30" width="820" height="7" rx="3.5" fill="url(#cap)"/>
+  <text class="ax" x="40" y="22">capability</text>
+  <text class="ax" x="860" y="22" text-anchor="end">▸</text>
+
+  <!-- the three eras -->
+  <g>
+    <rect x="40" y="90" width="230" height="86" rx="13" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+    <text class="nl" x="155" y="121" text-anchor="middle">Rules era</text>
+    <text class="ns" x="155" y="141" text-anchor="middle">regex, rule engine</text>
+    <text class="ns" x="155" y="158" text-anchor="middle">deterministic, cheap, brittle</text>
+  </g>
+  <g>
+    <rect x="335" y="90" width="230" height="86" rx="13" fill="#f59e0b" stroke="#b45309" stroke-width="2"/>
+    <text class="nl" x="450" y="121" text-anchor="middle">Statistical NLP era</text>
+    <text class="ns" x="450" y="141" text-anchor="middle">classifier pipeline</text>
+    <text class="ns" x="450" y="158" text-anchor="middle">intent, entities, template</text>
+  </g>
+  <g>
+    <rect x="630" y="90" width="230" height="86" rx="13" fill="#10b981" stroke="#047857" stroke-width="2"/>
+    <text class="nl" x="745" y="121" text-anchor="middle">Agentic era</text>
+    <text class="ns" x="745" y="141" text-anchor="middle">LLM agent loop</text>
+    <text class="ns" x="745" y="158" text-anchor="middle">reason, act, observe</text>
+  </g>
+
+  <!-- what each broke on -->
+  <line class="edge" x1="272" y1="133" x2="331" y2="133" marker-end="url(#a)"/>
+  <text class="br" x="301" y="200" text-anchor="middle">breaks on</text>
+  <text class="br" x="301" y="216" text-anchor="middle">novel phrasing</text>
+
+  <line class="edge" x1="567" y1="133" x2="626" y2="133" marker-end="url(#a)"/>
+  <text class="br" x="596" y="200" text-anchor="middle">breaks on</text>
+  <text class="br" x="596" y="216" text-anchor="middle">multi-step tasks,</text>
+  <text class="br" x="596" y="232" text-anchor="middle">open-ended goals</text>
+
+  <!-- the agentic era loops back on itself -->
+  <path class="edge" d="M 860 133 C 892 133 892 210 745 210 C 660 210 660 182 700 178"
+        marker-end="url(#a)" stroke-dasharray="6 5"/>
+  <text class="br" x="800" y="248" text-anchor="middle">breaks on</text>
+  <text class="br" x="800" y="264" text-anchor="middle">non-determinism</text>
+
+  <!-- determinism, falling -->
+  <rect x="40" y="292" width="820" height="7" rx="3.5" fill="url(#det)"/>
+  <text class="ax" x="40" y="316">determinism</text>
+  <text class="ax" x="860" y="316" text-anchor="end">▾</text>
+</svg>

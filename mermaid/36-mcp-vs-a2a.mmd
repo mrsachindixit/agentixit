@@ -1,0 +1,24 @@
+graph TB
+    subgraph MCPbox["🔌 MCP — transactional, single round-trip"]
+        H["Host / LLM client"] -->|"tools/call"| S1["Resource server\n(filesystem)"]
+        H -->|"tools/call"| S2["Resource server\n(database)"]
+        H -->|"tools/call"| S3["Resource server\n(vector store)"]
+        S1 -->|"result"| H
+        S2 -->|"result"| H
+        S3 -->|"result"| H
+    end
+
+    subgraph A2Abox["🤝 A2A — task-oriented, long-running, discoverable"]
+        P["Planner agent"] -->|"discover via Agent Card"| Reg["Agent registry"]
+        Reg -->|"endpoint + skills + auth"| P
+        P -->|"task: summarize_landscape"| R["Research agent"]
+        R -.->|"streamed updates"| P
+        R -->|"artifact: report.md"| P
+    end
+
+    style MCPbox fill:#E0F2FE,stroke:#0369A1,color:#0F172A
+    style A2Abox fill:#FEF3C7,stroke:#B45309,color:#0F172A
+    style H fill:#3B82F6,stroke:#1E40AF,color:#fff,stroke-width:2px
+    style P fill:#6366F1,stroke:#4338CA,color:#fff,stroke-width:2px
+    style R fill:#10B981,stroke:#047857,color:#fff,stroke-width:2px
+    style Reg fill:#F59E0B,stroke:#B45309,color:#fff,stroke-width:2px

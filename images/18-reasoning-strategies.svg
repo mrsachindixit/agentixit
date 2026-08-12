@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 320" width="940" height="320"
+     role="img" aria-labelledby="t d">
+  <title id="t">Four reasoning strategies, by shape</title>
+  <desc id="d">Chain-of-thought is one path. Self-consistency fans out into several paths and takes
+  a majority vote. Tree-of-thought branches, then scores and expands one branch while pruning
+  another. ReWOO plans all tool calls up front, executes them in parallel, then composes.</desc>
+  <style>
+    :root { --ink:#1f2937; --muted:#5b6b7f; --line:#475569; --panel:#f4f6fa; }
+    .ttl{font-size:14.5px;font-weight:700;fill:var(--ink)}
+    .sub{font-size:11.5px;fill:var(--muted)}
+    .nd {font-size:12px;fill:#0f172a}
+    .edge{stroke:var(--line);stroke-width:1.8;fill:none}
+    .panel{fill:var(--panel)}
+    text{font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  </style>
+  <rect id="ground" x="0" y="0" width="940" height="320" fill="#ffffff"/>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+            orient="auto-start-reverse"><path d="M0 1L10 5L0 9z" fill="var(--line)"/></marker>
+  </defs>
+
+  <!-- Chain-of-Thought: one path -->
+  <rect class="panel" x="16" y="14" width="212" height="290" rx="14"/>
+  <text class="ttl" x="122" y="40" text-anchor="middle">Chain-of-Thought</text>
+  <text class="sub" x="122" y="58" text-anchor="middle">one path</text>
+  <g fill="#fef3c7" stroke="#b45309" stroke-width="1.8">
+    <rect x="57" y="82"  width="130" height="32" rx="9"/>
+    <rect x="57" y="146" width="130" height="32" rx="9"/>
+    <rect x="57" y="210" width="130" height="32" rx="9"/>
+  </g>
+  <text class="nd" x="122" y="103" text-anchor="middle">step 1</text>
+  <text class="nd" x="122" y="167" text-anchor="middle">step 2</text>
+  <text class="nd" x="122" y="231" text-anchor="middle">answer</text>
+  <line class="edge" x1="122" y1="116" x2="122" y2="142" marker-end="url(#a)"/>
+  <line class="edge" x1="122" y1="180" x2="122" y2="206" marker-end="url(#a)"/>
+
+  <!-- Self-consistency: fan out, vote -->
+  <rect class="panel" x="244" y="14" width="212" height="290" rx="14"/>
+  <text class="ttl" x="350" y="40" text-anchor="middle">Self-consistency</text>
+  <text class="sub" x="350" y="58" text-anchor="middle">vote over paths</text>
+  <rect x="290" y="82" width="120" height="30" rx="9" fill="#dbeafe" stroke="#1e40af" stroke-width="1.8"/>
+  <text class="nd" x="350" y="102" text-anchor="middle">question</text>
+  <g fill="#dbeafe" stroke="#1e40af" stroke-width="1.8">
+    <rect x="264" y="150" width="56" height="30" rx="9"/>
+    <rect x="322" y="150" width="56" height="30" rx="9"/>
+    <rect x="380" y="150" width="56" height="30" rx="9"/>
+  </g>
+  <text class="nd" x="292" y="170" text-anchor="middle" font-size="11">A</text>
+  <text class="nd" x="350" y="170" text-anchor="middle" font-size="11">B</text>
+  <text class="nd" x="408" y="170" text-anchor="middle" font-size="11">C</text>
+  <line class="edge" x1="336" y1="114" x2="296" y2="146" marker-end="url(#a)"/>
+  <line class="edge" x1="350" y1="114" x2="350" y2="146" marker-end="url(#a)"/>
+  <line class="edge" x1="364" y1="114" x2="404" y2="146" marker-end="url(#a)"/>
+  <rect x="284" y="216" width="132" height="34" rx="9" fill="#3b82f6" stroke="#1e40af" stroke-width="1.8"/>
+  <text class="nd" x="350" y="238" text-anchor="middle" fill="#fff">majority vote</text>
+  <line class="edge" x1="296" y1="184" x2="332" y2="212" marker-end="url(#a)"/>
+  <line class="edge" x1="350" y1="184" x2="350" y2="212" marker-end="url(#a)"/>
+  <line class="edge" x1="404" y1="184" x2="368" y2="212" marker-end="url(#a)"/>
+
+  <!-- Tree-of-Thought: branch, score, prune -->
+  <rect class="panel" x="472" y="14" width="212" height="290" rx="14"/>
+  <text class="ttl" x="578" y="40" text-anchor="middle">Tree-of-Thought</text>
+  <text class="sub" x="578" y="58" text-anchor="middle">search over branches</text>
+  <rect x="538" y="82" width="80" height="30" rx="9" fill="#d1fae5" stroke="#047857" stroke-width="1.8"/>
+  <text class="nd" x="578" y="102" text-anchor="middle">root</text>
+  <g fill="#d1fae5" stroke="#047857" stroke-width="1.8">
+    <rect x="492" y="150" width="86" height="30" rx="9"/>
+    <rect x="590" y="150" width="86" height="30" rx="9"/>
+  </g>
+  <text class="nd" x="535" y="170" text-anchor="middle" font-size="11">branch 1</text>
+  <text class="nd" x="633" y="170" text-anchor="middle" font-size="11">branch 2</text>
+  <line class="edge" x1="562" y1="114" x2="535" y2="146" marker-end="url(#a)"/>
+  <line class="edge" x1="594" y1="114" x2="633" y2="146" marker-end="url(#a)"/>
+  <rect x="488" y="216" width="94" height="34" rx="9" fill="#10b981" stroke="#047857" stroke-width="1.8"/>
+  <text class="nd" x="535" y="238" text-anchor="middle" fill="#fff" font-size="11">score + expand</text>
+  <rect x="590" y="216" width="86" height="34" rx="9" fill="none" stroke="#94a3b8"
+        stroke-width="1.8" stroke-dasharray="5 4"/>
+  <text class="nd" x="633" y="238" text-anchor="middle" fill="var(--muted)" font-size="11">prune</text>
+  <line class="edge" x1="535" y1="184" x2="535" y2="212" marker-end="url(#a)"/>
+  <line class="edge" x1="633" y1="184" x2="633" y2="212" marker-end="url(#a)" stroke-dasharray="5 4"/>
+
+  <!-- ReWOO: plan, parallel, compose -->
+  <rect class="panel" x="700" y="14" width="224" height="290" rx="14"/>
+  <text class="ttl" x="812" y="40" text-anchor="middle">ReWOO</text>
+  <text class="sub" x="812" y="58" text-anchor="middle">plan, then execute</text>
+  <rect x="742" y="82" width="140" height="32" rx="9" fill="#fce7f3" stroke="#be185d" stroke-width="1.8"/>
+  <text class="nd" x="812" y="103" text-anchor="middle">plan all tool calls</text>
+  <g fill="#fce7f3" stroke="#be185d" stroke-width="1.8">
+    <rect x="722" y="150" width="52" height="30" rx="9"/>
+    <rect x="786" y="150" width="52" height="30" rx="9"/>
+    <rect x="850" y="150" width="52" height="30" rx="9"/>
+  </g>
+  <text class="nd" x="812" y="200" text-anchor="middle" font-size="11" fill="var(--muted)">executed in parallel</text>
+  <line class="edge" x1="782" y1="116" x2="750" y2="146" marker-end="url(#a)"/>
+  <line class="edge" x1="812" y1="116" x2="812" y2="146" marker-end="url(#a)"/>
+  <line class="edge" x1="842" y1="116" x2="874" y2="146" marker-end="url(#a)"/>
+  <rect x="742" y="216" width="140" height="34" rx="9" fill="#ec4899" stroke="#be185d" stroke-width="1.8"/>
+  <text class="nd" x="812" y="238" text-anchor="middle" fill="#fff">compose answer</text>
+  <line class="edge" x1="750" y1="184" x2="790" y2="212" marker-end="url(#a)"/>
+  <line class="edge" x1="812" y1="184" x2="812" y2="212" marker-end="url(#a)"/>
+  <line class="edge" x1="874" y1="184" x2="834" y2="212" marker-end="url(#a)"/>
+</svg>

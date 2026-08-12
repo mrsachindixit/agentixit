@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" width="900" height="320"
+     role="img" aria-labelledby="t d">
+  <title id="t">Three serving-side levers, and the metric each one moves</title>
+  <desc id="d">A request passes through prefix caching, continuous batching and speculative
+  decoding before tokens stream out. Prefix caching cuts time to first token. Continuous batching
+  cuts p95 and p99 under load. Speculative decoding cuts per-token latency.</desc>
+  <style>
+    :root { --ink:#1f2937; --muted:#5b6b7f; --line:#475569; --card:#eef2f7; }
+    .nl{font-size:13.5px;font-weight:650;fill:#fff}
+    .ns{font-size:11.5px;fill:#fff;opacity:.9}
+    .mt{font-size:13px;font-weight:700;fill:var(--ink)}
+    .ms{font-size:11.5px;fill:var(--muted)}
+    .cut{font-size:11px;fill:var(--muted);font-style:italic}
+    .edge{stroke:var(--line);stroke-width:2.2;fill:none}
+    .card{fill:var(--card)}
+    text{font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  </style>
+  <rect id="ground" x="0" y="0" width="900" height="320" fill="#ffffff"/>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5"
+            orient="auto-start-reverse"><path d="M0 1L10 5L0 9z" fill="var(--line)"/></marker>
+  </defs>
+
+  <!-- the request path -->
+  <rect x="16" y="66" width="96" height="48" rx="12" fill="#6366f1" stroke="#4338ca" stroke-width="2"/>
+  <text class="nl" x="64" y="95" text-anchor="middle">Request</text>
+
+  <rect x="140" y="52" width="184" height="76" rx="12" fill="#3b82f6" stroke="#1e40af" stroke-width="2"/>
+  <text class="nl" x="232" y="80" text-anchor="middle">Prefix cache</text>
+  <text class="ns" x="232" y="99" text-anchor="middle">reuse the unchanged</text>
+  <text class="ns" x="232" y="115" text-anchor="middle">prompt head</text>
+
+  <rect x="352" y="52" width="184" height="76" rx="12" fill="#f59e0b" stroke="#b45309" stroke-width="2"/>
+  <text class="nl" x="444" y="80" text-anchor="middle">Continuous batching</text>
+  <text class="ns" x="444" y="99" text-anchor="middle">new requests join the</text>
+  <text class="ns" x="444" y="115" text-anchor="middle">batch mid-flight</text>
+
+  <rect x="564" y="52" width="184" height="76" rx="12" fill="#10b981" stroke="#047857" stroke-width="2"/>
+  <text class="nl" x="656" y="80" text-anchor="middle">Speculative decoding</text>
+  <text class="ns" x="656" y="99" text-anchor="middle">draft model guesses,</text>
+  <text class="ns" x="656" y="115" text-anchor="middle">big model verifies</text>
+
+  <rect x="776" y="66" width="108" height="48" rx="12" fill="#06b6d4" stroke="#0e7490" stroke-width="2"/>
+  <text class="nl" x="830" y="88" text-anchor="middle">Tokens</text>
+  <text class="ns" x="830" y="104" text-anchor="middle">stream out</text>
+
+  <line class="edge" x1="114" y1="90" x2="136" y2="90" marker-end="url(#a)"/>
+  <line class="edge" x1="326" y1="90" x2="348" y2="90" marker-end="url(#a)"/>
+  <line class="edge" x1="538" y1="90" x2="560" y2="90" marker-end="url(#a)"/>
+  <line class="edge" x1="750" y1="90" x2="772" y2="90" marker-end="url(#a)"/>
+
+  <!-- which metric each lever moves -->
+  <g stroke-dasharray="5 4">
+    <line class="edge" x1="232" y1="132" x2="232" y2="196"/>
+    <line class="edge" x1="444" y1="132" x2="444" y2="196"/>
+    <line class="edge" x1="656" y1="132" x2="656" y2="196"/>
+  </g>
+  <text class="cut" x="240" y="160">cuts</text>
+  <text class="cut" x="452" y="160">cuts</text>
+  <text class="cut" x="664" y="160">cuts</text>
+
+  <rect class="card" x="140" y="200" width="184" height="72" rx="12"/>
+  <text class="mt" x="232" y="228" text-anchor="middle">TTFT</text>
+  <text class="ms" x="232" y="249" text-anchor="middle">time to first token</text>
+
+  <rect class="card" x="352" y="200" width="184" height="72" rx="12"/>
+  <text class="mt" x="444" y="228" text-anchor="middle">p95 / p99</text>
+  <text class="ms" x="444" y="249" text-anchor="middle">tail under load</text>
+
+  <rect class="card" x="564" y="200" width="184" height="72" rx="12"/>
+  <text class="mt" x="656" y="228" text-anchor="middle">per-token latency</text>
+  <text class="ms" x="656" y="249" text-anchor="middle">time between tokens</text>
+</svg>

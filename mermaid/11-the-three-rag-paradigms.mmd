@@ -1,0 +1,48 @@
+graph TB
+    subgraph NAIVE["1 · Naive RAG"]
+        direction TB
+        NQ["Query"] --> NR["Retrieve top-k"]
+        NR --> NG["Generate"]
+    end
+
+    subgraph ADV["2 · Advanced RAG — optimise around the same core"]
+        direction TB
+        AQ["Query"] --> APRE["Pre-retrieval\nrewrite · expand · route\nbetter chunking + metadata"]
+        APRE --> AR["Retrieve"]
+        AR --> APOST["Post-retrieval\nrerank · compress · dedupe"]
+        APOST --> AG["Generate"]
+    end
+
+    subgraph MOD["3 · Modular RAG — swappable modules, non-linear flow"]
+        direction TB
+        MQ["Query"] --> MROUTE{"Route"}
+        MROUTE -->|"needs facts"| MSEARCH["Search module\nvector · keyword · SQL · KG"]
+        MROUTE -->|"already known"| MMEM["Memory module"]
+        MSEARCH --> MFUSE["Fusion / rerank"]
+        MMEM --> MFUSE
+        MFUSE --> MG["Generate"]
+        MG --> MCRIT{"Good enough?"}
+        MCRIT -->|"no — re-plan"| MROUTE
+        MCRIT -->|"yes"| MOUT["Answer"]
+    end
+
+    NAIVE -.->|"add optimisation stages"| ADV
+    ADV -.->|"decompose into modules,\nallow loops and branching"| MOD
+
+    style NQ fill:#94A3B8,stroke:#475569,color:#fff
+    style NR fill:#94A3B8,stroke:#475569,color:#fff
+    style NG fill:#94A3B8,stroke:#475569,color:#fff
+    style AQ fill:#3B82F6,stroke:#1E40AF,color:#fff
+    style APRE fill:#F59E0B,stroke:#B45309,color:#fff
+    style AR fill:#3B82F6,stroke:#1E40AF,color:#fff
+    style APOST fill:#F97316,stroke:#C2410C,color:#fff
+    style AG fill:#3B82F6,stroke:#1E40AF,color:#fff
+    style MQ fill:#8B5CF6,stroke:#6D28D9,color:#fff
+    style MROUTE fill:#EC4899,stroke:#BE185D,color:#fff
+    style MSEARCH fill:#14B8A6,stroke:#0F766E,color:#fff
+    style MMEM fill:#8B5CF6,stroke:#6D28D9,color:#fff
+    style MFUSE fill:#64748B,stroke:#334155,color:#fff
+    style MG fill:#EF4444,stroke:#B91C1C,color:#fff
+    style MCRIT fill:#EC4899,stroke:#BE185D,color:#fff
+    style MOUT fill:#06B6D4,stroke:#0E7490,color:#fff
+    linkStyle default stroke:#475569,stroke-width:2px

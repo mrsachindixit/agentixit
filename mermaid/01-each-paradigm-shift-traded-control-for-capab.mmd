@@ -1,0 +1,18 @@
+graph LR
+    subgraph ERA1["⚙️ Rules era"]
+        RX["Regex / rule engine\ndeterministic, cheap, brittle"]
+    end
+    subgraph ERA2["📊 Statistical NLP era"]
+        NLP["Classifier pipeline\nintent → entities → template"]
+    end
+    subgraph ERA3["🤖 Agentic era"]
+        AG["LLM agent loop\nreason → act → observe"]
+    end
+    RX -->|"breaks on:\nnovel phrasing"| NLP
+    NLP -->|"breaks on:\nmulti-step tasks,\nopen-ended goals"| AG
+    AG -.->|"breaks on:\nnon-determinism —\nthe rest of this book"| AG
+
+    style RX fill:#94A3B8,stroke:#475569,color:#fff
+    style NLP fill:#F59E0B,stroke:#B45309,color:#fff
+    style AG fill:#10B981,stroke:#047857,color:#fff
+    linkStyle default stroke:#475569,stroke-width:2px

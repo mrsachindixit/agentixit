@@ -1,0 +1,26 @@
+graph TD
+    subgraph COT["💭 Chain-of-Thought"]
+        C1["step 1"] --> C2["step 2"] --> C3["answer"]
+    end
+    subgraph SC["🗳️ Self-consistency"]
+        S0["question"] --> S1["path A"]
+        S0 --> S2["path B"]
+        S0 --> S3["path C"]
+        S1 --> SV["majority\nvote"]
+        S2 --> SV
+        S3 --> SV
+    end
+    subgraph TOT["🌲 Tree-of-Thought"]
+        T0["root"] --> T1["branch 1"]
+        T0 --> T2["branch 2"]
+        T1 --> T1a["score+expand"]
+        T2 --> T2a["prune"]
+    end
+    subgraph REWOO["🗂️ ReWOO"]
+        W1["plan all\ntool calls"] --> W2["execute\n(parallel)"] --> W3["compose\nanswer"]
+    end
+
+    style COT fill:#FEF3C7,stroke:#B45309,color:#0F172A
+    style SC fill:#DBEAFE,stroke:#1E40AF,color:#0F172A
+    style TOT fill:#D1FAE5,stroke:#047857,color:#0F172A
+    style REWOO fill:#FCE7F3,stroke:#BE185D,color:#0F172A

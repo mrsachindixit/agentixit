@@ -1,0 +1,14 @@
+graph TB
+    L7["7 · Agent Ecosystem\nmarketplace, third-party agents, supply chain"]
+    L6["6 · Security & Compliance\nidentity, policy, audit — wraps every layer"]
+    L5["5 · Evaluation & Observability\ntraces, drift, eval-set poisoning"]
+    L4["4 · Deployment Infrastructure\nruntime, network, secrets"]
+    L3["3 · Agent Frameworks\norchestrator bugs, tool registry tampering"]
+    L2["2 · Data Operations\nRAG corpus poisoning, memory injection"]
+    L1["1 · Foundation Models\njailbreaks, extraction, alignment gaps"]
+
+    L7 --> L6 --> L5 --> L4 --> L3 --> L2 --> L1
+
+    style L6 fill:#EF4444,stroke:#B91C1C,color:#fff
+    style L1 fill:#3B82F6,stroke:#1E40AF,color:#fff
+    linkStyle default stroke:#475569,stroke-width:2px

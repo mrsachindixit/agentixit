@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 300" width="880" height="300"
+     role="img" aria-labelledby="t d">
+  <title id="t">Two-stage retrieval, as a funnel</title>
+  <desc id="d">A query and a vector index feed a bi-encoder that retrieves the top hundred
+  candidates. A cross-encoder then reranks those down to the top five, which become the context
+  for the LLM. The funnel narrows to show the drop in volume at each stage.</desc>
+  <style>
+    :root { --ink:#1f2937; --muted:#5b6b7f; --line:#475569; }
+    .nl{font-size:14px;font-weight:650;fill:#fff}
+    .ns{font-size:11.5px;fill:#fff;opacity:.9}
+    .ct{font-size:22px;font-weight:700;fill:#fff}
+    .cs{font-size:11px;fill:#fff;opacity:.85}
+    .lb{font-size:12.5px;fill:var(--muted)}
+    .edge{stroke:var(--line);stroke-width:2.2;fill:none}
+    text{font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  </style>
+  <rect id="ground" x="0" y="0" width="880" height="300" fill="#ffffff"/>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5"
+            orient="auto-start-reverse"><path d="M0 1L10 5L0 9z" fill="var(--line)"/></marker>
+  </defs>
+
+  <!-- inputs -->
+  <rect x="24" y="86" width="130" height="52" rx="26" fill="#6366f1" stroke="#4338ca" stroke-width="2"/>
+  <text class="nl" x="89" y="118" text-anchor="middle">Query</text>
+
+  <rect x="24" y="168" width="130" height="52" rx="12" fill="#8b5cf6" stroke="#6d28d9" stroke-width="2"/>
+  <text class="nl" x="89" y="193" text-anchor="middle">Vector index</text>
+  <text class="ns" x="89" y="209" text-anchor="middle">the whole corpus</text>
+
+  <line class="edge" x1="156" y1="112" x2="212" y2="130" marker-end="url(#a)"/>
+  <line class="edge" x1="156" y1="194" x2="212" y2="176" marker-end="url(#a)"/>
+
+  <!-- stage 1: wide -->
+  <path d="M 216 62 L 452 62 L 452 244 L 216 244 Z" fill="#3b82f6" stroke="#1e40af" stroke-width="2"/>
+  <text class="nl" x="334" y="120" text-anchor="middle">Bi-encoder</text>
+  <text class="ns" x="334" y="139" text-anchor="middle">fast, approximate</text>
+  <text class="ct" x="334" y="182" text-anchor="middle">top 100</text>
+  <text class="cs" x="334" y="201" text-anchor="middle">recall</text>
+
+  <!-- the narrowing -->
+  <path d="M 452 62 L 560 118 L 560 188 L 452 244 Z" fill="#f97316" stroke="#c2410c" stroke-width="2"/>
+
+  <!-- stage 2: narrow -->
+  <path d="M 560 118 L 700 118 L 700 188 L 560 188 Z" fill="#f97316" stroke="#c2410c" stroke-width="2"/>
+  <text class="nl" x="632" y="146" text-anchor="middle">Cross-encoder</text>
+  <text class="ct" x="632" y="176" text-anchor="middle" font-size="18">top 5</text>
+  <text class="lb" x="632" y="212" text-anchor="middle">accurate, slower, rerank only</text>
+
+  <!-- output -->
+  <line class="edge" x1="702" y1="153" x2="746" y2="153" marker-end="url(#a)"/>
+  <rect x="750" y="127" width="112" height="52" rx="12" fill="#10b981" stroke="#047857" stroke-width="2"/>
+  <text class="nl" x="806" y="152" text-anchor="middle">Context</text>
+  <text class="ns" x="806" y="168" text-anchor="middle">for the LLM</text>
+</svg>

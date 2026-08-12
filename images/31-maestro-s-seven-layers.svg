@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1010 456" width="1010" height="456"
+     role="img" aria-labelledby="t d">
+  <title id="t">MAESTRO's seven layers</title>
+  <desc id="d">Seven layers stacked, foundation models at the base and agent ecosystem at the top.
+  Each carries its own threats. Security and compliance is marked as wrapping every layer. An
+  arrow up the left shows that a compromise at any layer reaches everything above it.</desc>
+  <style>
+    :root { --ink:#1f2937; --muted:#5b6b7f; --line:#94a3b8; --wrap:#ef4444; }
+    .lt{font-size:14px;font-weight:650;fill:var(--ink)}
+    .ls{font-size:12px;fill:var(--muted)}
+    .ln{font-size:13px;font-weight:750;fill:#fff}
+    .up{font-size:12px;fill:var(--muted);font-style:italic}
+    .wrapl{font-size:11.5px;font-weight:650;fill:var(--wrap)}
+    text{font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  </style>
+  <rect id="ground" x="0" y="0" width="1010" height="456" fill="#ffffff"/>
+  <defs>
+    <marker id="up" viewBox="0 0 10 10" refX="5" refY="9" markerWidth="6" markerHeight="6"
+            orient="auto"><path d="M5 0L9.5 10L0.5 10z" fill="var(--line)"/></marker>
+  </defs>
+
+  <!-- "compromise travels upward" -->
+  <line x1="30" y1="428" x2="30" y2="34" stroke="var(--line)" stroke-width="1.6" marker-end="url(#up)"/>
+  <text class="up" x="46" y="446">a compromise at any layer reaches everything above it</text>
+
+  <!-- layers, 7 at top down to 1 at the base -->
+  <g stroke-width="2">
+    <rect x="60" y="26"  width="700" height="52" rx="10" fill="#8b5cf6" stroke="#6d28d9"/>
+    <rect x="60" y="84"  width="700" height="52" rx="10" fill="#ef4444" stroke="#b91c1c"/>
+    <rect x="60" y="142" width="700" height="52" rx="10" fill="#ec4899" stroke="#be185d"/>
+    <rect x="60" y="200" width="700" height="52" rx="10" fill="#f59e0b" stroke="#b45309"/>
+    <rect x="60" y="258" width="700" height="52" rx="10" fill="#14b8a6" stroke="#0f766e"/>
+    <rect x="60" y="316" width="700" height="52" rx="10" fill="#10b981" stroke="#047857"/>
+    <rect x="60" y="374" width="700" height="52" rx="10" fill="#3b82f6" stroke="#1e40af"/>
+  </g>
+
+  <text class="ln" x="80" y="58">7</text>
+  <text class="ln" x="106" y="48">Agent Ecosystem</text>
+  <text class="ln" x="106" y="68" font-size="11.5" font-weight="400" opacity=".9">marketplace, third-party agents, supply chain</text>
+
+  <text class="ln" x="80" y="116">6</text>
+  <text class="ln" x="106" y="106">Security &amp; Compliance</text>
+  <text class="ln" x="106" y="126" font-size="11.5" font-weight="400" opacity=".9">identity, policy, audit</text>
+
+  <text class="ln" x="80" y="174">5</text>
+  <text class="ln" x="106" y="164">Evaluation &amp; Observability</text>
+  <text class="ln" x="106" y="184" font-size="11.5" font-weight="400" opacity=".9">traces, drift, eval-set poisoning</text>
+
+  <text class="ln" x="80" y="232">4</text>
+  <text class="ln" x="106" y="222">Deployment Infrastructure</text>
+  <text class="ln" x="106" y="242" font-size="11.5" font-weight="400" opacity=".9">runtime, network, secrets</text>
+
+  <text class="ln" x="80" y="290">3</text>
+  <text class="ln" x="106" y="280">Agent Frameworks</text>
+  <text class="ln" x="106" y="300" font-size="11.5" font-weight="400" opacity=".9">orchestrator bugs, tool registry tampering</text>
+
+  <text class="ln" x="80" y="348">2</text>
+  <text class="ln" x="106" y="338">Data Operations</text>
+  <text class="ln" x="106" y="358" font-size="11.5" font-weight="400" opacity=".9">RAG corpus poisoning, memory injection</text>
+
+  <text class="ln" x="80" y="406">1</text>
+  <text class="ln" x="106" y="396">Foundation Models</text>
+  <text class="ln" x="106" y="416" font-size="11.5" font-weight="400" opacity=".9">jailbreaks, extraction, alignment gaps</text>
+
+  <!-- layer 6 wraps the rest -->
+  <path d="M 774 110 C 800 110 800 26 826 26 L 826 426 C 800 426 800 110 774 110"
+        fill="none" stroke="var(--wrap)" stroke-width="2" stroke-dasharray="6 5"/>
+  <text class="wrapl" x="838" y="220">layer 6 wraps</text>
+  <text class="wrapl" x="838" y="236">every other layer</text>
+</svg>

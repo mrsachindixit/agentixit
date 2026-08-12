@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="960" height="520"
+     role="img" aria-labelledby="t d">
+  <title id="t">The three RAG paradigms, side by side</title>
+  <desc id="d">Naive RAG retrieves once and generates. Advanced RAG keeps the same spine but adds
+  a pre-retrieval and a post-retrieval stage. Modular RAG breaks the pipeline into swappable
+  parts with a router, a memory module and a loop back when the answer is not good enough.</desc>
+  <style>
+    :root { --ink:#1f2937; --muted:#5b6b7f; --line:#475569; --panel:#f3f5f9; }
+    .ttl{font-size:15px;font-weight:700;fill:var(--ink)}
+    .sub{font-size:11.5px;fill:var(--muted)}
+    .nl{font-size:12.5px;font-weight:600;fill:#fff}
+    .ns{font-size:10.5px;fill:#fff;opacity:.9}
+    .el{font-size:10.5px;fill:var(--muted)}
+    .edge{stroke:var(--line);stroke-width:1.9;fill:none}
+    .panel{fill:var(--panel)}
+    text{font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  </style>
+  <rect id="ground" x="0" y="0" width="960" height="520" fill="#ffffff"/>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+            orient="auto-start-reverse"><path d="M0 1L10 5L0 9z" fill="var(--line)"/></marker>
+  </defs>
+
+  <!-- 1 Naive -->
+  <rect class="panel" x="14" y="14" width="280" height="492" rx="15"/>
+  <text class="ttl" x="154" y="44" text-anchor="middle">1 · Naive</text>
+  <text class="sub" x="154" y="63" text-anchor="middle">retrieve once, then hope</text>
+  <g stroke-width="2">
+    <rect x="74" y="96"  width="160" height="44" rx="10" fill="#94a3b8" stroke="#475569"/>
+    <rect x="74" y="182" width="160" height="44" rx="10" fill="#94a3b8" stroke="#475569"/>
+    <rect x="74" y="268" width="160" height="44" rx="10" fill="#94a3b8" stroke="#475569"/>
+  </g>
+  <text class="nl" x="154" y="124" text-anchor="middle">Query</text>
+  <text class="nl" x="154" y="210" text-anchor="middle">Retrieve top-k</text>
+  <text class="nl" x="154" y="296" text-anchor="middle">Generate</text>
+  <line class="edge" x1="154" y1="142" x2="154" y2="178" marker-end="url(#a)"/>
+  <line class="edge" x1="154" y1="228" x2="154" y2="264" marker-end="url(#a)"/>
+
+  <!-- 2 Advanced -->
+  <rect class="panel" x="308" y="14" width="300" height="492" rx="15"/>
+  <text class="ttl" x="458" y="44" text-anchor="middle">2 · Advanced</text>
+  <text class="sub" x="458" y="63" text-anchor="middle">same spine, optimised at both ends</text>
+  <rect x="368" y="88" width="180" height="38" rx="10" fill="#3b82f6" stroke="#1e40af" stroke-width="2"/>
+  <text class="nl" x="458" y="112" text-anchor="middle">Query</text>
+  <rect x="348" y="150" width="220" height="52" rx="10" fill="#f59e0b" stroke="#b45309" stroke-width="2"/>
+  <text class="nl" x="458" y="172" text-anchor="middle">Pre-retrieval</text>
+  <text class="ns" x="458" y="190" text-anchor="middle">rewrite · expand · route</text>
+  <rect x="368" y="226" width="180" height="38" rx="10" fill="#3b82f6" stroke="#1e40af" stroke-width="2"/>
+  <text class="nl" x="458" y="250" text-anchor="middle">Retrieve</text>
+  <rect x="348" y="288" width="220" height="52" rx="10" fill="#f97316" stroke="#c2410c" stroke-width="2"/>
+  <text class="nl" x="458" y="310" text-anchor="middle">Post-retrieval</text>
+  <text class="ns" x="458" y="328" text-anchor="middle">rerank · compress · dedupe</text>
+  <rect x="368" y="364" width="180" height="38" rx="10" fill="#3b82f6" stroke="#1e40af" stroke-width="2"/>
+  <text class="nl" x="458" y="388" text-anchor="middle">Generate</text>
+  <line class="edge" x1="458" y1="128" x2="458" y2="146" marker-end="url(#a)"/>
+  <line class="edge" x1="458" y1="204" x2="458" y2="222" marker-end="url(#a)"/>
+  <line class="edge" x1="458" y1="266" x2="458" y2="284" marker-end="url(#a)"/>
+  <line class="edge" x1="458" y1="342" x2="458" y2="360" marker-end="url(#a)"/>
+
+  <!-- 3 Modular -->
+  <rect class="panel" x="622" y="14" width="324" height="492" rx="15"/>
+  <text class="ttl" x="784" y="44" text-anchor="middle">3 · Modular</text>
+  <text class="sub" x="784" y="63" text-anchor="middle">swappable parts, flow can loop</text>
+  <rect x="704" y="88" width="160" height="36" rx="10" fill="#8b5cf6" stroke="#6d28d9" stroke-width="2"/>
+  <text class="nl" x="784" y="111" text-anchor="middle">Query</text>
+  <path d="M 784 142 L 848 172 L 784 202 L 720 172 Z" fill="#ec4899" stroke="#be185d" stroke-width="2"/>
+  <text class="nl" x="784" y="177" text-anchor="middle">Route</text>
+  <rect x="638" y="228" width="132" height="48" rx="10" fill="#14b8a6" stroke="#0f766e" stroke-width="2"/>
+  <text class="nl" x="704" y="249" text-anchor="middle">Search</text>
+  <text class="ns" x="704" y="266" text-anchor="middle">vector · SQL · KG</text>
+  <rect x="796" y="228" width="132" height="48" rx="10" fill="#8b5cf6" stroke="#6d28d9" stroke-width="2"/>
+  <text class="nl" x="862" y="249" text-anchor="middle">Memory</text>
+  <text class="ns" x="862" y="266" text-anchor="middle">already known</text>
+  <rect x="704" y="302" width="160" height="36" rx="10" fill="#64748b" stroke="#334155" stroke-width="2"/>
+  <text class="nl" x="784" y="325" text-anchor="middle">Fusion / rerank</text>
+  <rect x="704" y="356" width="160" height="36" rx="10" fill="#ef4444" stroke="#b91c1c" stroke-width="2"/>
+  <text class="nl" x="784" y="379" text-anchor="middle">Generate</text>
+  <path d="M 784 406 L 856 434 L 784 462 L 712 434 Z" fill="#ec4899" stroke="#be185d" stroke-width="2"/>
+  <text class="nl" x="784" y="438" text-anchor="middle" font-size="11">good enough?</text>
+  <rect x="704" y="474" width="160" height="30" rx="10" fill="#06b6d4" stroke="#0e7490" stroke-width="2"/>
+  <text class="nl" x="784" y="494" text-anchor="middle">Answer</text>
+
+  <line class="edge" x1="784" y1="126" x2="784" y2="138" marker-end="url(#a)"/>
+  <line class="edge" x1="754" y1="188" x2="712" y2="224" marker-end="url(#a)"/>
+  <line class="edge" x1="814" y1="188" x2="856" y2="224" marker-end="url(#a)"/>
+  <line class="edge" x1="712" y1="278" x2="752" y2="298" marker-end="url(#a)"/>
+  <line class="edge" x1="856" y1="278" x2="816" y2="298" marker-end="url(#a)"/>
+  <line class="edge" x1="784" y1="340" x2="784" y2="352" marker-end="url(#a)"/>
+  <line class="edge" x1="784" y1="394" x2="784" y2="404" marker-end="url(#a)"/>
+  <line class="edge" x1="784" y1="464" x2="784" y2="470" marker-end="url(#a)"/>
+  <text class="el" x="798" y="470">yes</text>
+  <!-- not good enough: re-plan -->
+  <path class="edge" d="M 710 434 C 646 434 632 200 716 176" marker-end="url(#a)" stroke-dasharray="5 4"/>
+  <text class="el" x="636" y="360" text-anchor="middle">no,</text>
+  <text class="el" x="636" y="374" text-anchor="middle">re-plan</text>
+</svg>
