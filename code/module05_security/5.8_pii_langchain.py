@@ -66,10 +66,9 @@ def demo_pii_middleware():
         model=llm,
         tools=[],
         middleware=[
-            PIIMiddleware("email", strategy="redact", apply_to_input=True),
+            PIIMiddleware("email", strategy="redact", apply_to_input=True, apply_to_output=True),
             PIIMiddleware("credit_card", strategy="mask", apply_to_input=True),
             PIIMiddleware("api_key", detector=r"sk-[a-zA-Z0-9]{32,}", strategy="block", apply_to_input=True),
-            PIIMiddleware("email", strategy="redact", apply_to_output=True),
         ],
     )
 
