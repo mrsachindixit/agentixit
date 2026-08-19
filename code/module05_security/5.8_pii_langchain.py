@@ -1,8 +1,12 @@
 # PII Detection — LangChain (Reversible Anonymiser + PIIMiddleware)
 # pip install langchain-experimental langchain-ollama presidio-analyzer presidio-anonymizer
 
+import sys
+
 from langchain_ollama import ChatOllama
 from langchain_core.messages import HumanMessage
+
+sys.stdout.reconfigure(encoding="utf-8")
 
 
 # --- Reversible Anonymiser: anonymise → LLM → de-anonymise ---

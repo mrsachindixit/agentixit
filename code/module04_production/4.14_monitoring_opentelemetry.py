@@ -8,7 +8,7 @@ from opentelemetry.sdk.resources import Resource
 import time
 
 from langchain_ollama import ChatOllama
-from langchain.callbacks.base import BaseCallbackHandler
+from langchain_core.callbacks.base import BaseCallbackHandler
 
 
 # --- Setup: TracerProvider with console exporter (swap to OTLP for Jaeger/Grafana) ---
@@ -55,7 +55,7 @@ def traced_tool_call(tool_name: str, payload: dict) -> str:
 
 if __name__ == "__main__":
     # Every LLM call now emits an OTel span (visible in console, or Jaeger/Grafana via OTLP)
-    llm = ChatOllama(model="llama3.2", temperature=0.2, callbacks=[OTelLLMLogger()])
+    llm = ChatOllama(model="llama3.1:latest", temperature=0.2, callbacks=[OTelLLMLogger()])
 
     with tracer.start_as_current_span("user.request") as parent:
         parent.set_attribute("user.query", "What is an agent?")

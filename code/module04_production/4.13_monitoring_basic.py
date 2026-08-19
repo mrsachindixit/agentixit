@@ -5,7 +5,7 @@ import logging
 import time
 import uuid
 from langchain_ollama import ChatOllama
-from langchain.callbacks.base import BaseCallbackHandler
+from langchain_core.callbacks.base import BaseCallbackHandler
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
@@ -43,7 +43,7 @@ def log_tool_call(tool_name: str, payload: dict, result: str):
 
 
 if __name__ == "__main__":
-    llm = ChatOllama(model="llama3.2", temperature=0.2, callbacks=[SimpleLogger()])
+    llm = ChatOllama(model="llama3.1:latest", temperature=0.2, callbacks=[SimpleLogger()])
     resp = llm.invoke("In one line, what is an agent?")
     logging.info("Response: %s", resp.content)
 

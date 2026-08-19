@@ -3,7 +3,7 @@ import os
 import requests
 
 OLLAMA_BASE = os.getenv("OLLAMA_BASE", "http://localhost:11434")
-DEFAULT_CHAT_MODEL = os.getenv("OLLAMA_MODEL", "llama3.2")
+DEFAULT_CHAT_MODEL = os.getenv("OLLAMA_MODEL", "llama3.1:latest")
 DEFAULT_EMBED_MODEL = os.getenv("OLLAMA_EMBED_MODEL", "nomic-embed-text")
 
 def generate(prompt: str, model: str = DEFAULT_CHAT_MODEL, **options) -> str:

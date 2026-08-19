@@ -34,3 +34,5 @@ _book_analysis/
 **/examples-code/
 test_code/
 stoshniwal/
+test_env/
+**/*.out

@@ -30,3 +30,12 @@ python-dotenv
 # openai
 openai
 faiss-cpu
+
+opentelemetry-api
+opentelemetry-sdk
+
+presidio-analyzer
+presidio-anonymizer
+spacy
+langchain-experimental
+faker

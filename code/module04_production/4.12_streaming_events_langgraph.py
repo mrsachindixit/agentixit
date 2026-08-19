@@ -1,4 +1,5 @@
 import time
+from typing import TypedDict
 from langchain_ollama import ChatOllama
 from langgraph.graph import StateGraph, START, END
 
@@ -6,12 +7,18 @@ from langgraph.graph import StateGraph, START, END
 llm = ChatOllama(model="llama3.1:latest", base_url="http://localhost:11434", temperature=0)
 
 
-def plan_node(state: dict) -> dict:
+class QAState(TypedDict, total=False):
+    question: str
+    plan: str
+    answer: str
+
+
+def plan_node(state: QAState) -> dict:
     plan = llm.invoke(f"Outline 3 bullet steps to answer: {state['question']}").content
     return {"plan": plan}
 
 
-def answer_node(state: dict) -> dict:
+def answer_node(state: QAState) -> dict:
     answer = llm.invoke(
         f"Following this plan, answer the question concisely.\n"
         f"Plan:\n{state['plan']}\n\nQuestion: {state['question']}"
@@ -20,7 +27,7 @@ def answer_node(state: dict) -> dict:
 
 
 graph = (
-    StateGraph(dict)
+    StateGraph(QAState)
     .add_node("plan",   plan_node)
     .add_node("answer", answer_node)
     .add_edge(START, "plan")

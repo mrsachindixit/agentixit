@@ -1,7 +1,23 @@
 # PII Detection — Naive Regex (Baseline)
 
+import os
 import re
-from utils.ollama_client import chat
+
+import requests
+
+OLLAMA_BASE = os.getenv("OLLAMA_BASE", "http://localhost:11434")
+DEFAULT_CHAT_MODEL = os.getenv("OLLAMA_MODEL", "llama3.1:latest")
+
+
+def chat(messages, model: str = DEFAULT_CHAT_MODEL, **options) -> str:
+    url = f"{OLLAMA_BASE}/api/chat"
+    payload = {"model": model, "messages": messages, "stream": False}
+    if options:
+        payload["options"] = options
+    r = requests.post(url, json=payload, timeout=300)
+    r.raise_for_status()
+    data = r.json()
+    return data.get("message", {}).get("content", "")
 
 EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
 PHONE = re.compile(r"\+?\d[\d\-\s]{7,}\d")
