@@ -1,7 +1,7 @@
 # Notes on Agentic AI  
 
-This page is the text book style notes i have made on agentic ai .
-Additionally there is a full code repo  included.
+**Notes on Agentic AI** is a practical textbook-style guide for building production-ready AI agents.
+It pairs concept-first chapters with runnable, module-based code examples.
 
 ## 🤖 AgenticAI — Hands-On Code Companion
 Local First · Python · Frameworks
@@ -15,8 +15,6 @@ Local First · Python · Frameworks
 Build real AI agents from scratch: tool-calling, RAG, memory, multi-agent systems, and production hardening — all running locally with Ollama.
 
 👉📘 **Looking for code examples and how to run them? Start here:** [`Coding Tutorial`](code/README.md)
-
-🧪 It covers module-wise code samples in a try-it-yourself format, plus setup/run guidance (local Ollama recommended).
 
 ## 📚 Notes on Agentic AI — Textbook Companion
 Concept First · Code Mapped · Practitioner Friendly
