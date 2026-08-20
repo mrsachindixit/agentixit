@@ -18,6 +18,17 @@ Build real AI agents from scratch: tool-calling, RAG, memory, multi-agent system
 
 🧪 It covers module-wise code samples in a try-it-yourself format, plus setup/run guidance (local Ollama recommended).
 
+## 📚 Notes on Agentic AI — Textbook Companion
+Concept First · Code Mapped · Practitioner Friendly
+
+<p align="left">
+    <img src="https://img.shields.io/badge/Textbook-Deep%20Concepts-0ea5e9?style=for-the-badge" alt="Textbook" />
+    <img src="https://img.shields.io/badge/Chapters-Mapped%20to%20Code-22c55e?style=for-the-badge" alt="Code Mapped" />
+    <img src="https://img.shields.io/badge/Learning-Self%20Study%20Friendly-a855f7?style=for-the-badge" alt="Self Study" />
+</p>
+
+The content below is a structured textbook-style guide: concepts, diagrams, design patterns, and production trade-offs — with direct mapping to runnable modules.
+
 The text is [CC BY-NC-SA 4.0](LICENSE); the code is [MIT](code/LICENSE). See [License](#license) at the end.
 
 ## Overview
