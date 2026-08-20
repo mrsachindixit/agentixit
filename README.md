@@ -3,6 +3,17 @@
 This page is the text book style notes i have made on agentic ai .
 Additionally there is a full code repo  included.
 
+## 🤖 AgenticAI — Hands-On Code Companion
+Local First · Python · Frameworks
+
+<p align="left">
+    <img src="https://img.shields.io/badge/Local--First-Ollama-10b981?style=for-the-badge" alt="Local First" />
+    <img src="https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
+    <img src="https://img.shields.io/badge/Frameworks-LangChain%20%7C%20LangGraph%20%7C%20DSPy%20%7C%20LlamaIndex-8b5cf6?style=for-the-badge" alt="Frameworks" />
+</p>
+
+Build real AI agents from scratch: tool-calling, RAG, memory, multi-agent systems, and production hardening — all running locally with Ollama.
+
 👉📘 **Looking for code examples and how to run them? Start here:** [`Coding Tutorial`](code/README.md)
 
 🧪 It covers module-wise code samples in a try-it-yourself format, plus setup/run guidance (local Ollama recommended).
