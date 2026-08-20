@@ -1,8 +1,11 @@
 # Notes on Agentic AI  
 
 This page is the text book style notes i have made on agentic ai .
-Additionally there is a full code repo  included. Check the readme for whats inside the code modules :
-[`Coding Tutorial`](code/README.md) Here we teach developers diffrent concepts via inline ,try it your self manner.This repo recommendes hosting LLMs locally via ollma .  
+Additionally there is a full code repo  included.
+
+👉📘 **Looking for code examples and how to run them? Start here:** [`Coding Tutorial`](code/README.md)
+
+🧪 It covers module-wise code samples in a try-it-yourself format, plus setup/run guidance (local Ollama recommended).
 
 The text is [CC BY-NC-SA 4.0](LICENSE); the code is [MIT](code/LICENSE). See [License](#license) at the end.
 
@@ -1223,6 +1226,11 @@ Agents must be constrained to prevent harmful actions.
 and Detection Methods
 EVAN CROTHERS, NATHALIE JAPKOWICZ, and HERNA VIKTOR](https://arxiv.org/pdf/2210.07321)
 This NIST guide on taxonomy of attacks is a good read: [Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-2e2023.pdf)
+
+Prompt-injection references for deeper practical guidance:
+- [OWASP LLM Prompt Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html)
+- [OWASP GenAI LLM01: Prompt Injection](https://genai.owasp.org/llmrisk/llm01-prompt-injection/)
+- [Safetensors](https://github.com/safetensors/safetensors) — we will cover this in detail later in the book.
 
 
 **Guardrails**: Programmatic checks for preventing unsafe actions like PII leakage, prompt injection attacks, enforcing tool related safety measures, enforcing business process (effect of the tool/agent) related measures, preventing abusive or junk content in input or output.

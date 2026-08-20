@@ -12,11 +12,11 @@ This is the code half of the repo. The text lives in the root **[README.md](../R
 
 | Book chapter | Code |
 |---|---|
-| [Basics of LLMs, Prompts and Tool Calls](../README.md#basics-of-llms-prompts-and-tool-calls) | `module01_raw/`, `module02_basics/` |
-| [Foundation of Agentic AI](../README.md#foundation-of-agentic-ai) | `module01_raw/1.10_rag_basic/`, `module03_langchain/` |
-| [Agentic Execution and Patterns](../README.md#agentic-execution-and-patterns) | `module03_langchain/`, `module08_frameworks/` |
-| [Production Aspects](../README.md#production-aspects) | `module04_production/`, `module05_security/`, `module07_evaluation/` |
-| [Enterprise Suites and Protocols](../README.md#enterprise-suites-and-protocols) | `module06_enterprise/` |
+| [Basics of LLMs, Prompts and Tool Calls](../README.md#basics-of-llms-prompts-and-tool-calls) | [module01_raw/](module01_raw/), [module02_basics/](module02_basics/) |
+| [Foundation of Agentic AI](../README.md#foundation-of-agentic-ai) | [module01_raw/1.10_rag_basic/](module01_raw/1.10_rag_basic/), [module03_langchain/](module03_langchain/) |
+| [Agentic Execution and Patterns](../README.md#agentic-execution-and-patterns) | [module03_langchain/](module03_langchain/), [module08_frameworks/](module08_frameworks/) |
+| [Production Aspects](../README.md#production-aspects) | [module04_production/](module04_production/), [module05_security/](module05_security/), [module07_evaluation/](module07_evaluation/) |
+| [Enterprise Suites and Protocols](../README.md#enterprise-suites-and-protocols) | [module06_enterprise/](module06_enterprise/) |
 
 ---
 
@@ -55,20 +55,22 @@ Follow the modules in order — each one builds on the previous. The arc moves f
 
 | File | What it teaches |
 |---|---|
-| `1.1_hello_llm.py` | Your first LLM call — send a prompt, read a response |
-| `1.2_chat_io.py` | Interactive chat loop with streaming and turn history |
-| `1.3_tool_single.py` | Give the LLM one tool and let it decide when to use it |
-| `1.4_memory_sim.py` | Simulate short-term memory by managing the message list yourself |
-| `1.5_code_gen.py` | Prompt the LLM to write Python, then execute the output safely |
-| `1.6_regex_bot.py` | Deterministic response routing via regex — no LLM for intent |
-| `1.7_nlp_bot.py` | Lightweight NLP intent detection as a fallback before the LLM |
-| `1.8_tools_multi.py` | Multiple tools in one agent loop — LLM picks which to call |
-| `1.9_db_agent_sqlite.py` | Full agent that translates natural language to SQL and executes it |
-| `1.10_rag_basic/` | Retrieval-Augmented Generation from scratch: embed, store, retrieve, answer |
-| `1.11_ota_loop_from_scratch.py` | The bare Observe-Think-Act loop every agent reduces to — no framework |
-| `1.12_ralph_loop.py` | The Ralph Wiggum loop: dumbest agent that still works, terminated by real tests |
-| `1.13_rag_hybrid_bm25.py` | Hybrid retrieval: BM25 + dense + Reciprocal Rank Fusion + metadata filter |
-| `1.14_tool_failure_recovery.py` | Five tool failure modes and their recovery paths, including idempotent replay |
+| [1.1_hello_llm.py](module01_raw/1.1_hello_llm.py) | Your first LLM call — send a prompt, read a response |
+| [1.2_chat_io.py](module01_raw/1.2_chat_io.py) | Interactive chat loop with streaming and turn history |
+| [1.3_tool_single.py](module01_raw/1.3_tool_single.py) | Give the LLM one tool and let it decide when to use it |
+| [1.4_memory_sim.py](module01_raw/1.4_memory_sim.py) | Simulate short-term memory by managing the message list yourself |
+| [1.5_code_gen.py](module01_raw/1.5_code_gen.py) | Prompt the LLM to write Python, then execute the output safely |
+| [1.6_regex_bot.py](module01_raw/1.6_regex_bot.py) | Deterministic response routing via regex — no LLM for intent |
+| [1.7_nlp_bot.py](module01_raw/1.7_nlp_bot.py) | Lightweight NLP intent detection as a fallback before the LLM |
+| [1.8_tools_multi.py](module01_raw/1.8_tools_multi.py) | Multiple tools in one agent loop — LLM picks which to call |
+| [1.9_db_agent_sqlite.py](module01_raw/1.9_db_agent_sqlite.py) | Full agent that translates natural language to SQL and executes it |
+| [1.10_rag_basic/](module01_raw/1.10_rag_basic/) | Retrieval-Augmented Generation from scratch: embed, store, retrieve, answer |
+| [1.10_rag_basic/build_index.py](module01_raw/1.10_rag_basic/build_index.py) | Build embeddings and persist the local vector index for the RAG flow |
+| [1.10_rag_basic/query.py](module01_raw/1.10_rag_basic/query.py) | Query the local RAG index and synthesize grounded answers |
+| [1.11_ota_loop_from_scratch.py](module01_raw/1.11_ota_loop_from_scratch.py) | The bare Observe-Think-Act loop every agent reduces to — no framework |
+| [1.12_ralph_loop.py](module01_raw/1.12_ralph_loop.py) | The Ralph Wiggum loop: dumbest agent that still works, terminated by real tests |
+| [1.13_rag_hybrid_bm25.py](module01_raw/1.13_rag_hybrid_bm25.py) | Hybrid retrieval: BM25 + dense + Reciprocal Rank Fusion + metadata filter |
+| [1.14_tool_failure_recovery.py](module01_raw/1.14_tool_failure_recovery.py) | Five tool failure modes and their recovery paths, including idempotent replay |
 
 ---
 
@@ -77,14 +79,14 @@ Follow the modules in order — each one builds on the previous. The arc moves f
 
 | File | What it teaches |
 |---|---|
-| `2.1_chat_obj_llm.py` | `ChatOllama` object replaces raw `requests` — same call, cleaner interface |
-| `2.2_image_analysis.py` | Multi-modal input: pass an image to a vision-capable LLM |
-| `2.3_chat_obj_tool_single.py` | `model.bind_tools([...])` — single tool, same loop as `1.3` but framework-native |
-| `2.4_chat_obj_tool_multi.py` | Multiple tools bound to the model; LangChain handles the dispatch loop |
-| `2.7_cot_fewshot_self_consistency.py` | Zero-shot CoT, few-shot CoT, and self-consistency voting on the same problem |
-| `2.8_structured_output_response.py` | Enforce a Pydantic schema on the LLM **response** — three approaches, including retry-on-format-error |
-| `2.5_reasoning_models.py` | Standard model vs reasoning model on the same puzzle, side by side |
-| `2.6_responses_api.py` | Stateless Chat Completions vs the stateful Responses API |
+| [2.1_chat_obj_llm.py](module02_basics/2.1_chat_obj_llm.py) | `ChatOllama` object replaces raw `requests` — same call, cleaner interface |
+| [2.2_image_analysis.py](module02_basics/2.2_image_analysis.py) | Multi-modal input: pass an image to a vision-capable LLM |
+| [2.3_chat_obj_tool_single.py](module02_basics/2.3_chat_obj_tool_single.py) | `model.bind_tools([...])` — single tool, same loop as `1.3` but framework-native |
+| [2.4_chat_obj_tool_multi.py](module02_basics/2.4_chat_obj_tool_multi.py) | Multiple tools bound to the model; LangChain handles the dispatch loop |
+| [2.7_cot_fewshot_self_consistency.py](module02_basics/2.7_cot_fewshot_self_consistency.py) | Zero-shot CoT, few-shot CoT, and self-consistency voting on the same problem |
+| [2.8_structured_output_response.py](module02_basics/2.8_structured_output_response.py) | Enforce a Pydantic schema on the LLM **response** — three approaches, including retry-on-format-error |
+| [2.5_reasoning_models.py](module02_basics/2.5_reasoning_models.py) | Standard model vs reasoning model on the same puzzle, side by side |
+| [2.6_responses_api.py](module02_basics/2.6_responses_api.py) | Stateless Chat Completions vs the stateful Responses API |
 
 ---
 
@@ -93,32 +95,32 @@ Follow the modules in order — each one builds on the previous. The arc moves f
 
 | File | What it teaches |
 |---|---|
-| `3.1_tool_call.py` | LangChain `@tool` decorator and `.invoke()` — the declarative equivalent of `1.3` |
-| `3.2_agent_simple.py` | `create_react_agent` — hand the LLM a toolset and let the ReAct loop run |
-| `3.3_memory_checkpoint_langchain.py` | Persist conversation state with `MemorySaver` checkpoints |
-| `3.4_multi_agent.py` | Two agents collaborating: one plans, one executes |
-| `3.5_lg_basic.py` | First LangGraph: nodes, edges, and `StateGraph` — graphs replace imperative loops |
-| `3.6_agent_middleware_langchain.py` | Intercept agent steps with middleware: logging, auth, rate-limit |
-| `3.7_multi_tool_call.py` | LLM makes multiple tool calls in a single turn |
-| `3.8_agent_multi_tool.py` | Agent with a full tool registry; LangChain resolves calls automatically |
-| `3.9_agent_tools_seq_basic.py` | Force sequential tool execution — output of one feeds into the next |
-| `3.10_memory_checkpoint_langchain_1.py` | Persistent memory across sessions using thread IDs |
-| `3.11_multi_agent.py` | Supervisor pattern: one agent routes tasks to specialist sub-agents |
-| `3.12_rag_langchain.py` | Full RAG pipeline using LangChain retriever + chat chain |
-| `3.13_agent_tools_with_tool_seq.py` | Tools that themselves trigger further tool calls (tool chaining) |
-| `3.14_multi_tool_orchestration.py` | Parallel and conditional tool fan-out in a single agent run |
-| `3.15_langgraph_coordinator.py` | LangGraph coordinator node that routes to worker subgraphs |
-| `3.20_advanced_rag_query_rewrite_rerank.py` | Advanced RAG: query rewrite, rerank (heuristic), and grounded answer synthesis |
-| `3.21_rag_cross_encoder_rerank.py` | Two-stage retrieval: bi-encoder for recall + real cross-encoder for precision |
-| `3.22_rag_hyde_multiquery.py` | Query rewriting techniques: HyDE, multi-query expansion, decomposition, step-back |
-| `3.23_mixture_of_agents.py` | Mixture-of-Agents: parallel proposers + aggregator synthesises a robust answer |
-| `3.24_multi_agent_deadlock_safety.py` | Hop limits, cycle detection, watchdog — prevent multi-agent runaway |
-| `3.25_critic_refiner_loop.py` | Critic-refiner **loop** with rubric scores and an iteration budget (vs. one-shot review in `3.4`) |
-| `3.16_lg_pause_resume_hitl.py` | LangGraph `interrupt`: pause mid-graph for human approval, then resume |
-| `3.17_lg_functional_api.py` | The same graph written twice — StateGraph vs the functional `@task` API |
-| `3.18_deep_agents.py` | Deep agent with a durable plan file it can re-read across steps |
-| `3.19_agentic_rag.py` | RAG where the agent decides whether and what to retrieve |
-| `3.26_handoff_envelope_validation.py` | Validating inter-agent handoff envelopes before acting on them |
+| [3.1_tool_call.py](module03_langchain/3.1_tool_call.py) | LangChain `@tool` decorator and `.invoke()` — the declarative equivalent of `1.3` |
+| [3.2_agent_simple.py](module03_langchain/3.2_agent_simple.py) | `create_react_agent` — hand the LLM a toolset and let the ReAct loop run |
+| [3.3_memory_checkpoint_langchain.py](module03_langchain/3.3_memory_checkpoint_langchain.py) | Persist conversation state with `MemorySaver` checkpoints |
+| [3.4_multi_agent.py](module03_langchain/3.4_multi_agent.py) | Two agents collaborating: one plans, one executes |
+| [3.5_lg_basic.py](module03_langchain/3.5_lg_basic.py) | First LangGraph: nodes, edges, and `StateGraph` — graphs replace imperative loops |
+| [3.6_agent_middleware_langchain.py](module03_langchain/3.6_agent_middleware_langchain.py) | Intercept agent steps with middleware: logging, auth, rate-limit |
+| [3.7_multi_tool_call.py](module03_langchain/3.7_multi_tool_call.py) | LLM makes multiple tool calls in a single turn |
+| [3.8_agent_multi_tool.py](module03_langchain/3.8_agent_multi_tool.py) | Agent with a full tool registry; LangChain resolves calls automatically |
+| [3.9_agent_tools_seq_basic.py](module03_langchain/3.9_agent_tools_seq_basic.py) | Force sequential tool execution — output of one feeds into the next |
+| [3.10_memory_checkpoint_langchain_1.py](module03_langchain/3.10_memory_checkpoint_langchain_1.py) | Persistent memory across sessions using thread IDs |
+| [3.11_multi_agent.py](module03_langchain/3.11_multi_agent.py) | Supervisor pattern: one agent routes tasks to specialist sub-agents |
+| [3.12_rag_langchain.py](module03_langchain/3.12_rag_langchain.py) | Full RAG pipeline using LangChain retriever + chat chain |
+| [3.13_agent_tools_with_tool_seq.py](module03_langchain/3.13_agent_tools_with_tool_seq.py) | Tools that themselves trigger further tool calls (tool chaining) |
+| [3.14_multi_tool_orchestration.py](module03_langchain/3.14_multi_tool_orchestration.py) | Parallel and conditional tool fan-out in a single agent run |
+| [3.15_langgraph_coordinator.py](module03_langchain/3.15_langgraph_coordinator.py) | LangGraph coordinator node that routes to worker subgraphs |
+| [3.20_advanced_rag_query_rewrite_rerank.py](module03_langchain/3.20_advanced_rag_query_rewrite_rerank.py) | Advanced RAG: query rewrite, rerank (heuristic), and grounded answer synthesis |
+| [3.21_rag_cross_encoder_rerank.py](module03_langchain/3.21_rag_cross_encoder_rerank.py) | Two-stage retrieval: bi-encoder for recall + real cross-encoder for precision |
+| [3.22_rag_hyde_multiquery.py](module03_langchain/3.22_rag_hyde_multiquery.py) | Query rewriting techniques: HyDE, multi-query expansion, decomposition, step-back |
+| [3.23_mixture_of_agents.py](module03_langchain/3.23_mixture_of_agents.py) | Mixture-of-Agents: parallel proposers + aggregator synthesises a robust answer |
+| [3.24_multi_agent_deadlock_safety.py](module03_langchain/3.24_multi_agent_deadlock_safety.py) | Hop limits, cycle detection, watchdog — prevent multi-agent runaway |
+| [3.25_critic_refiner_loop.py](module03_langchain/3.25_critic_refiner_loop.py) | Critic-refiner **loop** with rubric scores and an iteration budget (vs. one-shot review in `3.4`) |
+| [3.16_lg_pause_resume_hitl.py](module03_langchain/3.16_lg_pause_resume_hitl.py) | LangGraph `interrupt`: pause mid-graph for human approval, then resume |
+| [3.17_lg_functional_api.py](module03_langchain/3.17_lg_functional_api.py) | The same graph written twice — StateGraph vs the functional `@task` API |
+| [3.18_deep_agents.py](module03_langchain/3.18_deep_agents.py) | Deep agent with a durable plan file it can re-read across steps |
+| [3.19_agentic_rag.py](module03_langchain/3.19_agentic_rag.py) | RAG where the agent decides whether and what to retrieve |
+| [3.26_handoff_envelope_validation.py](module03_langchain/3.26_handoff_envelope_validation.py) | Validating inter-agent handoff envelopes before acting on them |
 
 ---
 
@@ -127,20 +129,20 @@ Follow the modules in order — each one builds on the previous. The arc moves f
 
 | File | Category | What it teaches |
 |---|---|---|
-| `4.1_prompt_structure_and_params.py` | Prompting | System/user prompt structuring and LLM parameter tuning for performance |
-| `4.2_prompt_perf_basics.py` | Prompting | Prompt focus, role design, and memory cleanup effects on latency/tokens |
-| `4.3_output_format_perf_impact.py` | Prompting | Output formatting impact on latency, size, and parseability |
-| `4.4_prompt_caching_anthropic.py` | Prompting | Prompt caching with cache-on/cache-off comparison and usage metrics |
-| `4.5_context_compaction.py` | Context & Cost | Summarize old history and keep recent turns to shrink context window |
-| `4.6_token_budget_controls.py` | Context & Cost | Input budget policy with deterministic truncation and output reserve |
-| `4.7_request_dedup_coalescing.py` | Context & Cost | Coalesce identical in-flight requests to avoid duplicate model work |
-| `4.8_cost_attribution_tenant.py` | Context & Cost | Per-tenant / per-feature cost attribution and chargeback aggregation |
-| `4.9_parallel_tools_timeout.py` | Latency & Resilience | Parallel tool fan-out with timeout and partial-result handling |
-| `4.10_timeout_fallback_ladder.py` | Latency & Resilience | Timeout + fallback + degraded response strategy |
-| `4.11_multi_llm_performance_routing.py` | Latency & Resilience | Complexity-based routing: fast vs deep model selection and latency comparison |
-| `4.12_streaming_events_langgraph.py` | Latency & Resilience | LangGraph state-event streaming, token streaming, and cancellation |
-| `4.13_monitoring_basic.py` | Observability | Structured logging of every LLM call: latency, tokens, outcome |
-| `4.14_monitoring_opentelemetry.py` | Observability | OpenTelemetry traces and spans — agent calls become distributed traces |
+| [4.1_prompt_structure_and_params.py](module04_production/4.1_prompt_structure_and_params.py) | Prompting | System/user prompt structuring and LLM parameter tuning for performance |
+| [4.2_prompt_perf_basics.py](module04_production/4.2_prompt_perf_basics.py) | Prompting | Prompt focus, role design, and memory cleanup effects on latency/tokens |
+| [4.3_output_format_perf_impact.py](module04_production/4.3_output_format_perf_impact.py) | Prompting | Output formatting impact on latency, size, and parseability |
+| [4.4_prompt_caching_anthropic.py](module04_production/4.4_prompt_caching_anthropic.py) | Prompting | Prompt caching with cache-on/cache-off comparison and usage metrics |
+| [4.5_context_compaction.py](module04_production/4.5_context_compaction.py) | Context & Cost | Summarize old history and keep recent turns to shrink context window |
+| [4.6_token_budget_controls.py](module04_production/4.6_token_budget_controls.py) | Context & Cost | Input budget policy with deterministic truncation and output reserve |
+| [4.7_request_dedup_coalescing.py](module04_production/4.7_request_dedup_coalescing.py) | Context & Cost | Coalesce identical in-flight requests to avoid duplicate model work |
+| [4.8_cost_attribution_tenant.py](module04_production/4.8_cost_attribution_tenant.py) | Context & Cost | Per-tenant / per-feature cost attribution and chargeback aggregation |
+| [4.9_parallel_tools_timeout.py](module04_production/4.9_parallel_tools_timeout.py) | Latency & Resilience | Parallel tool fan-out with timeout and partial-result handling |
+| [4.10_timeout_fallback_ladder.py](module04_production/4.10_timeout_fallback_ladder.py) | Latency & Resilience | Timeout + fallback + degraded response strategy |
+| [4.11_multi_llm_performance_routing.py](module04_production/4.11_multi_llm_performance_routing.py) | Latency & Resilience | Complexity-based routing: fast vs deep model selection and latency comparison |
+| [4.12_streaming_events_langgraph.py](module04_production/4.12_streaming_events_langgraph.py) | Latency & Resilience | LangGraph state-event streaming, token streaming, and cancellation |
+| [4.13_monitoring_basic.py](module04_production/4.13_monitoring_basic.py) | Observability | Structured logging of every LLM call: latency, tokens, outcome |
+| [4.14_monitoring_opentelemetry.py](module04_production/4.14_monitoring_opentelemetry.py) | Observability | OpenTelemetry traces and spans — agent calls become distributed traces |
 
 ---
 
@@ -149,16 +151,16 @@ Follow the modules in order — each one builds on the previous. The arc moves f
 
 | File | Category | What it teaches |
 |---|---|---|
-| `5.1_security_attacks_diy.py` | Attacks | DIY attack lab: fire injection / exfiltration / SQL+tool-abuse at a live agent and watch the guard |
-| `5.2_security_basic.py` | Defences | Input validation and prompt injection defence without a library |
-| `5.3_multi_llm_security_crosscheck.py` | Defences | Two-model safety pattern: generator model + guard/reviewer model |
-| `5.4_tool_auth_basic.py` | Authorization | Basic tool authorization via scopes (allow/deny behavior) |
-| `5.5_mcp_tool_auth_basic.py` | Authorization | MCP-style tool authorization pattern with scope checks |
-| `5.6_pii_basic.py` | Data Protection | Detect and redact PII with regex before data reaches the LLM |
-| `5.7_pii_presidio.py` | Data Protection | Production PII detection with Microsoft Presidio NER |
-| `5.8_pii_langchain.py` | Data Protection | Presidio wired into a LangChain chain as a preprocessing step |
-| `5.9_bias_guardrails.py` | Safety & Policy | Detect biased or harmful outputs and block or flag the response |
-| `5.10_agentic_12_factors.py` | Reliability | The 12 factors of a production agent — theory + a quick self-check |
+| [5.1_security_attacks_diy.py](module05_security/5.1_security_attacks_diy.py) | Attacks | DIY attack lab: fire injection / exfiltration / SQL+tool-abuse at a live agent and watch the guard |
+| [5.2_security_basic.py](module05_security/5.2_security_basic.py) | Defences | Input validation and prompt injection defence without a library |
+| [5.3_multi_llm_security_crosscheck.py](module05_security/5.3_multi_llm_security_crosscheck.py) | Defences | Two-model safety pattern: generator model + guard/reviewer model |
+| [5.4_tool_auth_basic.py](module05_security/5.4_tool_auth_basic.py) | Authorization | Basic tool authorization via scopes (allow/deny behavior) |
+| [5.5_mcp_tool_auth_basic.py](module05_security/5.5_mcp_tool_auth_basic.py) | Authorization | MCP-style tool authorization pattern with scope checks |
+| [5.6_pii_basic.py](module05_security/5.6_pii_basic.py) | Data Protection | Detect and redact PII with regex before data reaches the LLM |
+| [5.7_pii_presidio.py](module05_security/5.7_pii_presidio.py) | Data Protection | Production PII detection with Microsoft Presidio NER |
+| [5.8_pii_langchain.py](module05_security/5.8_pii_langchain.py) | Data Protection | Presidio wired into a LangChain chain as a preprocessing step |
+| [5.9_bias_guardrails.py](module05_security/5.9_bias_guardrails.py) | Safety & Policy | Detect biased or harmful outputs and block or flag the response |
+| [5.10_agentic_12_factors.py](module05_security/5.10_agentic_12_factors.py) | Reliability | The 12 factors of a production agent — theory + a quick self-check |
 
 ---
 
@@ -169,14 +171,14 @@ Follow the modules in order — each one builds on the previous. The arc moves f
 
 | File | What it teaches |
 |---|---|
-| `6.1_mcp_server.py` | Build an MCP server from scratch using FastAPI — understand the envelope protocol |
-| `6.2_mcp_client.py` | HTTP client that calls the `6.1` server's tools and reads its resources |
-| `6.3_mcp_sdk_server.py` | Same server rebuilt with the official `mcp` SDK: `@mcp.tool`, `@mcp.resource`, `@mcp.prompt`, and a real LLM call via `Context` |
-| `6.4_mcp_sdk_client.py` | Async `ClientSession` that invokes tools, reads resources, and fetches prompts from `6.3` |
-| `6.5_a2a_demo.py` | Agent-to-Agent in one file: two Ollama-backed agents passing messages to each other |
-| `6.6_a2a_server.py` | A2A server — registers agents, routes messages, maintains inboxes |
-| `6.7_a2a_client.py` | A2A client — registers, sends messages, polls inbox |
-| `6.4_mcp_sdk_client_langchain_adapter.py` | Reaching an MCP server through the LangChain MCP adapter |
+| [6.1_mcp_server.py](module06_enterprise/6.1_mcp_server.py) | Build an MCP server from scratch using FastAPI — understand the envelope protocol |
+| [6.2_mcp_client.py](module06_enterprise/6.2_mcp_client.py) | HTTP client that calls the `6.1` server's tools and reads its resources |
+| [6.3_mcp_sdk_server.py](module06_enterprise/6.3_mcp_sdk_server.py) | Same server rebuilt with the official `mcp` SDK: `@mcp.tool`, `@mcp.resource`, `@mcp.prompt`, and a real LLM call via `Context` |
+| [6.4_mcp_sdk_client.py](module06_enterprise/6.4_mcp_sdk_client.py) | Async `ClientSession` that invokes tools, reads resources, and fetches prompts from `6.3` |
+| [6.5_a2a_demo.py](module06_enterprise/6.5_a2a_demo.py) | Agent-to-Agent in one file: two Ollama-backed agents passing messages to each other |
+| [6.6_a2a_server.py](module06_enterprise/6.6_a2a_server.py) | A2A server — registers agents, routes messages, maintains inboxes |
+| [6.7_a2a_client.py](module06_enterprise/6.7_a2a_client.py) | A2A client — registers, sends messages, polls inbox |
+| [6.4_mcp_sdk_client_langchain_adapter.py](module06_enterprise/6.4_mcp_sdk_client_langchain_adapter.py) | Reaching an MCP server through the LangChain MCP adapter |
 
 ---
 
@@ -185,23 +187,24 @@ Follow the modules in order — each one builds on the previous. The arc moves f
 
 | File | What it teaches |
 |---|---|
-| `7.0_eval_metrics_basics.py` | Core eval metrics: exact match, groundedness proxy, latency/cost signals |
-| `7.1_eval_golden_dataset.py` | Golden dataset with clean, dirty, bias, and edge cases — must-include/must-not-include scoring |
-| `7.2_eval_prompt_regression.py` | Prompt regression checks and format drift detection |
-| `7.3_eval_llm_judge_rubric.py` | Rubric-based judging pattern (relevance/correctness/clarity) |
-| `7.4_eval_agent_trajectory.py` | Agent path evaluation: tool choice, step budget, success |
-| `7.5_eval_safety_attacks.py` | Safety evals for attack blocking behavior |
-| `7.6_eval_rag_groundedness.py` | Groundedness checks using retrieved-context overlap |
-| `7.7_eval_cost_latency_tradeoff.py` | Two trade-offs side by side: accuracy-per-second (latency) and accuracy-per-cost |
-| `7.8_eval_ci_gate.py` | Release gating with thresholds for quality/safety/latency |
-| `7.9_eval_report_card.py` | Consolidated eval report and action-oriented summary |
-| `7.10_eval_planning_quality.py` | Planning eval: step coverage, dependency validity, and order quality |
-| `7.11_eval_replanning_recovery.py` | Replanning eval: failure recovery via retry/fallback/degraded modes |
-| `7.12_eval_multi_agent_handoff.py` | Multi-agent eval: delegation correctness, loop control, and termination |
-| `7.13_eval_multi_llm_jury.py` | Multi-LLM eval panel: dual-judge scoring with agreement/disagreement signal |
-| `7.14_eval_advanced_rag.py` | Advanced RAG eval: baseline vs improved grounding outcomes |
-| `7.15_eval_factfulness.py` | Factfulness eval: supported-claim ratio under context constraints |
-| `7.16_eval_react_multi_agent.py` | ReAct discipline eval in a multi-agent run: reason-before-act, valid delegation, termination |
+| [7.0_eval_metrics_basics.py](module07_evaluation/7.0_eval_metrics_basics.py) | Core eval metrics: exact match, groundedness proxy, latency/cost signals |
+| [7.1_eval_golden_dataset.py](module07_evaluation/7.1_eval_golden_dataset.py) | Golden dataset with clean, dirty, bias, and edge cases — must-include/must-not-include scoring |
+| [7.2_eval_prompt_regression.py](module07_evaluation/7.2_eval_prompt_regression.py) | Prompt regression checks and format drift detection |
+| [7.3_eval_llm_judge_rubric.py](module07_evaluation/7.3_eval_llm_judge_rubric.py) | Rubric-based judging pattern (relevance/correctness/clarity) |
+| [7.4_eval_agent_trajectory.py](module07_evaluation/7.4_eval_agent_trajectory.py) | Agent path evaluation: tool choice, step budget, success |
+| [7.5_eval_safety_attacks.py](module07_evaluation/7.5_eval_safety_attacks.py) | Safety evals for attack blocking behavior |
+| [7.6_eval_rag_groundedness.py](module07_evaluation/7.6_eval_rag_groundedness.py) | Groundedness checks using retrieved-context overlap |
+| [7.7_eval_cost_latency_tradeoff.py](module07_evaluation/7.7_eval_cost_latency_tradeoff.py) | Two trade-offs side by side: accuracy-per-second (latency) and accuracy-per-cost |
+| [7.8_eval_ci_gate.py](module07_evaluation/7.8_eval_ci_gate.py) | Release gating with thresholds for quality/safety/latency |
+| [7.9_eval_report_card.py](module07_evaluation/7.9_eval_report_card.py) | Consolidated eval report and action-oriented summary |
+| [7.10_eval_planning_quality.py](module07_evaluation/7.10_eval_planning_quality.py) | Planning eval: step coverage, dependency validity, and order quality |
+| [7.11_eval_replanning_recovery.py](module07_evaluation/7.11_eval_replanning_recovery.py) | Replanning eval: failure recovery via retry/fallback/degraded modes |
+| [7.12_eval_multi_agent_handoff.py](module07_evaluation/7.12_eval_multi_agent_handoff.py) | Multi-agent eval: delegation correctness, loop control, and termination |
+| [7.13_eval_multi_llm_jury.py](module07_evaluation/7.13_eval_multi_llm_jury.py) | Multi-LLM eval panel: dual-judge scoring with agreement/disagreement signal |
+| [7.14_eval_advanced_rag.py](module07_evaluation/7.14_eval_advanced_rag.py) | Advanced RAG eval: baseline vs improved grounding outcomes |
+| [7.15_eval_factfulness.py](module07_evaluation/7.15_eval_factfulness.py) | Factfulness eval: supported-claim ratio under context constraints |
+| [7.16_eval_react_multi_agent.py](module07_evaluation/7.16_eval_react_multi_agent.py) | ReAct discipline eval in a multi-agent run: reason-before-act, valid delegation, termination |
+| [7_eval_thinking_trace.py](module07_evaluation/7_eval_thinking_trace.py) | Evaluate visible thinking traces for structure, consistency, and policy-safe reasoning summaries |
 
 ---
 
@@ -210,10 +213,11 @@ Follow the modules in order — each one builds on the previous. The arc moves f
 
 | File | What it teaches |
 |---|---|
-| `8.1_llamaindex_rag.py` | LlamaIndex RAG with Ollama embeddings — compare with `1.10` and `3.12` |
-| `8.2_dspy_optimized_agent.py` | DSPy: declare signatures and let `BootstrapFewShot` optimise prompts automatically |
-| `8.3_embabel_goal_agent.java` | Embabel (Java/Spring): `@Action` + `@Goal` — declarative planning, framework picks execution order |
-| `8.4_langchain_js_tool_call.mjs` | LangChain in JavaScript — same tool-call pattern as `3.1`, different runtime |
+| [8.1_llamaindex_rag.py](module08_frameworks/8.1_llamaindex_rag.py) | LlamaIndex RAG with Ollama embeddings — compare with `1.10` and `3.12` |
+| [8.2_dspy_optimized_agent.py](module08_frameworks/8.2_dspy_optimized_agent.py) | DSPy: declare signatures and let `BootstrapFewShot` optimise prompts automatically |
+| [8.3_embabel_goal_agent.java](module08_frameworks/8.3_embabel_goal_agent.java) | Embabel (Java/Spring): `@Action` + `@Goal` — declarative planning, framework picks execution order |
+| [EmbabelDemoApplication.java](module08_frameworks/EmbabelDemoApplication.java) | Spring Boot entrypoint for running the Embabel demo application |
+| [8.4_langchain_js_tool_call.mjs](module08_frameworks/8.4_langchain_js_tool_call.mjs) | LangChain in JavaScript — same tool-call pattern as `3.1`, different runtime |
 
 
 
