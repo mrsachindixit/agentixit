@@ -12,7 +12,6 @@ It pairs concept-first chapters with runnable, module-based code examples.
 </p>
 
 Build real AI agents from scratch: tool-calling, RAG, memory, multi-agent systems, and production hardening — all running locally with Ollama.
-
 👉📘 **Start here: [`Coding Tutorial`](code/README.md)**
 
 ## 📚 Notes on Agentic AI — Textbook Companion
