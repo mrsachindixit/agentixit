@@ -14,7 +14,7 @@ Local First · Python · Frameworks
 
 Build real AI agents from scratch: tool-calling, RAG, memory, multi-agent systems, and production hardening — all running locally with Ollama.
 
-👉📘 **Looking for code examples and how to run them? Start here:** [`Coding Tutorial`](code/README.md)
+👉📘 **Start here: [`Coding Tutorial`](code/README.md)**
 
 ## 📚 Notes on Agentic AI — Textbook Companion
 Concept First · Code Mapped · Practitioner Friendly
@@ -29,53 +29,53 @@ The content below is a structured textbook-style guide: concepts, diagrams, desi
 
 The text is [CC BY-NC-SA 4.0](LICENSE); the code is [MIT](code/LICENSE). See [License](#license) at the end.
 
+**Quick links:**
+- [About](#about)
+    - [Overview](#overview)
+- [Basics of LLMs, Prompts and Tool Calls](#basics-of-llms-prompts-and-tool-calls)
+    - [What is an Agent?](#what-is-an-agent)
+        - [Language Model (LLM)](#language-model-llm)
+            - [Prompt Engineering](#prompt-engineering)
+            - [Tool Calling (Function Calling)](#tool-calling-function-calling)
+- [Foundation of Agentic AI](#foundation-of-agentic-ai)
+        - [Retrieval-Augmented Generation (RAG)](#retrieval-augmented-generation-rag)
+        - [Advanced RAG](#advanced-rag)
+- [Agentic Execution and Patterns](#agentic-execution-and-patterns)
+        - [An Agent](#an-agent)
+        - [The Agent Loop](#the-agent-loop)
+        - [Prompt Chaining](#prompt-chaining)
+        - [Multi-Agent Patterns](#multi-agent-patterns)
+        - [12 Factors of Agentic Design](#12-factors-of-agentic-design)
+        - [Memory](#memory)
+        - [Deep Agents](#deep-agents)
+        - [LangChain](#langchain)
+        - [LangGraph](#langgraph)
+        - [DSPy, Embabel, and LlamaIndex](#dspy-embabel-and-llamaindex)
+            - [Why these three matter](#why-these-three-matter)
+            - [LlamaIndex](#llamaindex)
+            - [DSPy](#dspy)
+            - [Embabel](#embabel)
+            - [How students should compare them](#how-students-should-compare-them)
+- [Production Aspects](#production-aspects)
+        - [Post-training (out of scope)](#post-training-out-of-scope)
+        - [Challenges and Limitations](#challenges-and-limitations)
+        - [Hallucinations and Factfulness](#hallucinations-and-factfulness)
+        - [Agent Benchmarks and Evaluation](#agent-benchmarks-and-evaluation)
+        - [AI Ethics and Bias](#ai-ethics-and-bias)
+        - [Context Window Limits](#context-window-limits)
+        - [Latency](#latency)
+        - [Cost and Resources Utilization](#cost-and-resources-utilization)
+        - [Safety and Guardrails](#safety-and-guardrails)
+- [Enterprise Suites and Protocols](#enterprise-suites-and-protocols)
+    - [References](#references)
+    - [License](#license)
+
 ## Overview
 I started teaching engineers about agentic AI. Over the period I realized that teaching practicing programmers about any new Framework has to be mindful of their prior learning. At times the wisdom gained so far feeds into the new framework and technology paradigm. At times the prior learnings hamper their ability to see nuances and retain curiosity about the new kid.
 So my teaching style evolved into using lots of code first to drive in the new point of view. And then supplement that with details on the new tech and also commentary on where it has continuation, breakup, evolution and new beginnings. Over period of time my notes and call transcripts were long enough to motivate me into writing this. This text is very opinionated hence, it also assumes the student has prior understanding of basic building blocks and will dig out more when clues are provided.All the text is written by me, citations have been given where due.  
 When it came to coding examples I generated them using  Copilot  . However I realized they were too cryptic. So I took help from Sumit Toshniwal. He is one of the AI Engineers working at Actimize on Agentic projects. First he helped me get a feel of younger generation of developers :). Then he helped me simplify the code examples according to the intended learning outcome. We have kept the code samples minimal and self contained because I am expecting experienced developers will fill in the necessary design blanks. We thank NICE Actimize for being the org where we could do all this as one of the part of the work.
 
 This repo is **dedicated to Prof. Andrew Ng** who is sharing AI related knowledge freely nurturing AI minds across the Globe.
-
-**Quick links:**
-- [Notes on Agentic AI](#notes-on-agentic-ai)
-  - [Overview](#overview)
-- [Basics of LLMs, Prompts and Tool Calls](#basics-of-llms-prompts-and-tool-calls)
-  - [What is an Agent?](#what-is-an-agent)
-    - [Language Model (LLM)](#language-model-llm)
-      - [Prompt Engineering](#prompt-engineering)
-      - [Tool Calling (Function Calling)](#tool-calling-function-calling)
-- [Foundation of Agentic AI](#foundation-of-agentic-ai)
-    - [Retrieval-Augmented Generation (RAG)](#retrieval-augmented-generation-rag)
-    - [Advanced RAG](#advanced-rag)
-- [Agentic Execution and Patterns](#agentic-execution-and-patterns)
-    - [An Agent](#an-agent)
-    - [The Agent Loop](#the-agent-loop)
-    - [Prompt Chaining](#prompt-chaining)
-    - [Multi-Agent Patterns](#multi-agent-patterns)
-    - [12 Factors of Agentic Design](#12-factors-of-agentic-design)
-    - [Memory](#memory)
-    - [Deep Agents](#deep-agents)
-    - [LangChain](#langchain)
-    - [LangGraph](#langgraph)
-    - [DSPy, Embabel, and LlamaIndex](#dspy-embabel-and-llamaindex)
-      - [Why these three matter](#why-these-three-matter)
-      - [LlamaIndex](#llamaindex)
-      - [DSPy](#dspy)
-      - [Embabel](#embabel)
-      - [How students should compare them](#how-students-should-compare-them)
-- [Production Aspects](#production-aspects)
-    - [Post-training (out of scope)](#post-training-out-of-scope)
-    - [Challenges and Limitations](#challenges-and-limitations)
-    - [Hallucinations and Factfulness](#hallucinations-and-factfulness)
-    - [Agent Benchmarks and Evaluation](#agent-benchmarks-and-evaluation)
-    - [AI Ethics and Bias](#ai-ethics-and-bias)
-    - [Context Window Limits](#context-window-limits)
-    - [Latency](#latency)
-    - [Cost and Resources Utilization](#cost-and-resources-utilization)
-    - [Safety and Guardrails](#safety-and-guardrails)
-- [Enterprise Suites and Protocols](#enterprise-suites-and-protocols)
-  - [References](#references)
-  - [License](#license)
 
 **Running the code alongside the text**
 
