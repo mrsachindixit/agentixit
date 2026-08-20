@@ -4,7 +4,6 @@ This is a practical textbook-style guide for building production-ready AI agents
 It pairs concept-first chapters with runnable, module-based code examples.
 
 ## 🤖 AgenticAI — Hands-On Code Companion
-Local First · Python · Frameworks
 
 <p align="left">
     <img src="https://img.shields.io/badge/Local--First-Ollama-10b981?style=for-the-badge" alt="Local First" />
@@ -17,7 +16,6 @@ Build real AI agents from scratch: tool-calling, RAG, memory, multi-agent system
 👉📘 **Start here: [`Coding Tutorial`](code/README.md)**
 
 ## 📚 Notes on Agentic AI — Textbook Companion
-Concept First · Code Mapped · Practitioner Friendly
 
 <p align="left">
     <img src="https://img.shields.io/badge/Textbook-Deep%20Concepts-0ea5e9?style=for-the-badge" alt="Textbook" />
