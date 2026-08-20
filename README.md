@@ -1,6 +1,6 @@
-# Notes on Agentic AI  
+# About  
 
-**Notes on Agentic AI** is a practical textbook-style guide for building production-ready AI agents.
+This is a practical textbook-style guide for building production-ready AI agents.
 It pairs concept-first chapters with runnable, module-based code examples.
 
 ## 🤖 AgenticAI — Hands-On Code Companion
