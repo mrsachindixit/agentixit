@@ -66,13 +66,17 @@ The text is [CC BY-NC-SA 4.0](LICENSE); the code is [MIT](code/LICENSE). See [Li
     - [Cost and Resources Utilization](#cost-and-resources-utilization)
     - [Safety and Guardrails](#safety-and-guardrails)
 - [Enterprise Suites and Protocols](#enterprise-suites-and-protocols)
+    - [MCP (Model Context Protocol)](#mcp-model-context-protocol)
+    - [MCP — Server or Client](#mcp--server-or-client)
+      - [MCP — auth](#mcp--auth)
+    - [A2A and Other Enterprise Concerns](#a2a-and-other-enterprise-concerns)
   - [References](#references)
   - [License](#license)
 
 ## Overview
 I started teaching engineers about agentic AI. Over the period I realized that teaching practicing programmers about any new Framework has to be mindful of their prior learning. At times the wisdom gained so far feeds into the new framework and technology paradigm. At times the prior learnings hamper their ability to see nuances and retain curiosity about the new kid.
-So my teaching style evolved into using lots of code first to drive in the new point of view. And then supplement that with details on the new tech and also commentary on where it has continuation, breakup, evolution and new beginnings. Over period of time my notes and call transcripts were long enough to motivate me into writing this. This text is very opinionated hence, it also assumes the student has prior understanding of basic building blocks and will dig out more when clues are provided.All the text is written by me, citations have been given where due.  
-When it came to coding examples I generated them using  Copilot  . However I realized they were too cryptic. So I took help from Sumit Toshniwal. He is one of the AI Engineers working at Actimize on Agentic projects. First he helped me get a feel of younger generation of developers :). Then he helped me simplify the code examples according to the intended learning outcome. We have kept the code samples minimal and self contained because I am expecting experienced developers will fill in the necessary design blanks. We thank NICE Actimize for being the org where we could do all this as one of the part of the work.
+So my teaching style evolved into using lots of code first to drive in the new point of view. And then supplement that with details on the new tech and also commentary on where it has continuation, breakup, evolution and new beginnings. Over period of time my notes and call transcripts were long enough to motivate me into writing this. This text is very opinionated hence, it also assumes the student has prior understanding of basic building blocks and will dig out more when clues are provided. All the text is written by me, citations have been given where due.  
+When it came to coding examples I generated them using Copilot. However I realized they were too cryptic. So I took help from Sumit Toshniwal. He is one of the AI Engineers working at Actimize on Agentic projects. First he helped me get a feel of younger generation of developers :). Then he helped me simplify the code examples according to the intended learning outcome. We have kept the code samples minimal and self contained because I am expecting experienced developers will fill in the necessary design blanks. We thank NICE Actimize for being the org where we could do all this as one of the part of the work.
 
 This repo is **dedicated to Prof. Andrew Ng** who is sharing AI related knowledge freely nurturing AI minds across the Globe.
 
@@ -81,7 +85,7 @@ This repo is **dedicated to Prof. Andrew Ng** who is sharing AI related knowledg
 | Section of this text | Code to run |
 |---|---|
 | [Basics of LLMs, Prompts and Tool Calls](#basics-of-llms-prompts-and-tool-calls) | [`code/module01_raw/`](code/module01_raw/), [`code/module02_basics/`](code/module02_basics/) |
-| [Foundation of Agentic AI](#foundation-of-agentic-ai) | [`code/module01_raw/1.10_rag_basic/`](code/module01_raw/1.10_rag_basic/), [`code/module03_langchain/`](code/module03_langchain/) |
+| [Foundation of Agentic AI](#foundation-of-agentic-ai) | [`code/module01_raw/`](code/module01_raw/), [`code/module03_langchain/`](code/module03_langchain/) |
 | [Agentic Execution and Patterns](#agentic-execution-and-patterns) | [`code/module03_langchain/`](code/module03_langchain/), [`code/module08_frameworks/`](code/module08_frameworks/) |
 | [Production Aspects](#production-aspects) | [`code/module04_production/`](code/module04_production/), [`code/module05_security/`](code/module05_security/), [`code/module07_evaluation/`](code/module07_evaluation/) |
 | [Enterprise Suites and Protocols](#enterprise-suites-and-protocols) | [`code/module06_enterprise/`](code/module06_enterprise/) |
@@ -338,7 +342,8 @@ def get_weather(city):
 ```
 
 **TODO (expand here):**
-- [ ] Worked recovery trace (one printed Observe→Reason→Decide→Act→Reflect cycle from [`code/module01_raw/1.11_ota_loop_from_scratch.py`](code/module01_raw/1.11_ota_loop_from_scratch.py) with deliberate fault injection)
+- [ ] Worked recovery trace (one printed Observe→Reason→Decide→Act→Reflect cycle with deliberate fault injection)
+
 ---
 
 # Foundation of Agentic AI
@@ -1134,17 +1139,7 @@ Beyond retrieval precision, RAG quality must be evaluated end-to-end across retr
 - [PromptBench](https://arxiv.org/abs/2306.04528) — adversarial prompt robustness across LLM families.
 - [NIST AI RMF](https://www.nist.gov/system/files/documents/2023/01/26/AI_RMF_1.0.pdf) — Artificial Intelligence Risk Management Framework: organizational guide for governing AI risk.
 - [OWASP Top 10 for LLMs](https://owasp.org/www-project-top-10-for-large-language-model-applications/) — concrete attack taxonomy (prompt injection, insecure output handling, training data poisoning, etc.) that should map directly to your guardrail design.
-
-**Practical evaluation strategy for this course**
-At full benchmark scale, evaluation requires infrastructure. A pragmatic starting point for engineers:
-1. **Module-level** — test each module script with deterministic stubs (see [`code/tests/`](code/tests/)).
-2. **Prompt regression** — lock expected output structure and run on each model or prompt change.
-3. **RAG retrieval quality** — spot-check top-k with cosine similarity thresholds.
-4. **Agent behavior** — run canonical input → verify JSON structure and tool call sequence.
-5. **LLM-as-judge** — for open-ended answers, use a second LLM call with a grading prompt as a soft quality gate.
-
-This layered approach gives meaningful coverage without full benchmark infrastructure and is what the [`code/tests/`](code/tests/) folder in this repo is designed to support.
-
+ 
 **TODO (expand here):**
 - [ ] Human evaluation workflow (annotation queue, adjudication, inter-annotator agreement)
 - [ ] Exploratory evaluations (fuzzing/prompt mutation and unknown-failure discovery)
@@ -1378,43 +1373,228 @@ graph LR
 
 # Enterprise Suites and Protocols
 
-**Goal:** Design agents that interact across teams and systems with governance.
+Creating agents and hosting them into production means that you need to handle lots of enterprise aspects. This includes security, performance, cost monitoring and integrations. This section details most of these aspects.
 
-**Key concepts:**
-- MCP (Model Context Protocol): structured protocol for task passing
-- A2A (Agent‑to‑Agent): message formats enabling agent delegation
-- Governance & compliance: audit logs, policy enforcement, data protection
-- Suites & orchestration: packaging agents as composable modules
-- Integration patterns: adapters for databases, queues, APIs, identity
+### MCP (Model Context Protocol)
+
+**Why it came into being**
+
+By now you know how to create an agent that does its work via tools or via other agents. However, in any given domain we need to also consume services from other/external vendors. The natural approach here might be to define a tool and call the API provided by the vendor. This works for some time, until the list of such external integrations goes up and for each such integration we need to write boilerplate code for invocation, object mapping, retries and auth. Could this be standardized? Before we get into the standardization part, you have to first understand why this MCP came into being. Because MCP is made out to be that whole natural evolution of things in the agentic world, we need to understand its right nature.
+
+In the initial days of ChatGPT people saw it as a tool you can chat with and get answers as text or media. This was a classic question-answer positioning. That led developers to wonder if they could write Python code that can take local data from an application and marry that with LLM processing, and then take that output and use it in one's application. This is the moment where people said that AI has become agentic. Remember that LLMs themselves do not have any idea of what is your calling application or what is the downstream application consuming its output. One had to write some sort of code for this orchestration. This is what LangChain does on our behalf, and the whole agentic piece starts working. This solved a big problem for enterprises around building solutions with and around LLM capabilities.
+
+At the same time this left an open question in the non-enterprise, individual consumer space. LLMs had to be seen as something more than Q and A chatbots. At this juncture a lot of LLM companies built desktop applications; Perplexity, Claude Desktop and so on. Some of them also created IDEs aimed at programmers to allow them to write code using LLMs.
+
+There was also a need for all of these consumer end applications to integrate with a wide variety of APIs, say Gmail, Jira, weather service and what not. This could have become a point-to-point integration mess for everyone. So Anthropic came up with a protocol standardizing the discovery, invocation, delivery and security part for tool-style APIs for agents, called the Model Context Protocol. This also meant we moved up the ladder from a plain API signature to invocation/catalog/remoting mechanics. This has a clear parallel in an earlier generation, where SOAP moved objects across servers as invocable remote objects exposed as web services. (BTW, when people say SOAP and REST, they are actually incomparable. The paradigm of SOAP is remote object invocation. Paradigm of REST is just a resource endpoint.) MCP in essence is a sophisticated remoting protocol for tools.
+
+However, this articulation has two repercussions.
+1. MCP has immense benefit if you're creating desktop apps. A neat server to discover all of those and invoke them. This also meant that whenever the call happens, the desktop app has to dynamically figure out the API signature and do the invocation, which will burn extra tokens on the user's behalf.
+2. When it comes to enterprise grade workflow agents, we have to remember that the whole responsibility of doing request-response calls, parsing, and retry/auth/error is upon the developer or the framework you use. As such, consuming APIs via MCP for enterprise workflows helps you with 1) a standardized way to call, and 2) a service catalog of tools that the rest of the industry publishes into as well. While there is a flavor of remoting, MCP isn't pure remoting — for good reasons, though.
+
+If you use GitHub Copilot or Claude Code and have ever asked them something that needed the AWS or Azure documentation, you have already been on the client side of an MCP call without noticing it.
+
+```mermaid
+graph TB
+    AGENT["🤖 Your agent"] --> SEL{"🧠 LLM picks the tool\nfrom name + description + schema"}
+    SEL -->|"⛔ unchanged by MCP — selection\nworks exactly as it did for local tools"| CLIENT["🔌 MCP client\nbuilds the envelope · URL · metadata"]
+    CAT["🗂️ Catalog\nlist-tools · list-prompts · list-resources"]
+    CLIENT <-->|"discovery"| CAT
+    CLIENT -->|"✅ the standardized wire —\nthis is what MCP actually gives you"| SERVER["📦 MCP server\n@mcp.tool · @mcp.resource · @mcp.prompt"]
+    SERVER --> WORK["⚙️ Still somebody's job\nrequest-response · parsing · retries · auth"]
+    WORK --> TARGET["🎯 Vendor API · database · files"]
+
+    WORK -.-> DESK["🖥️ Desktop app\nthe vendor writes it,\nthe end user burns the tokens"]
+    WORK -.-> ENT["🏢 Enterprise workflow\nyou write it,\nyou burn the tokens"]
+
+    style AGENT fill:#6366F1,stroke:#4338CA,color:#fff,stroke-width:3px
+    style SEL fill:#F59E0B,stroke:#B45309,color:#fff,stroke-width:3px
+    style CLIENT fill:#3B82F6,stroke:#1E40AF,color:#fff,stroke-width:3px
+    style CAT fill:#14B8A6,stroke:#0F766E,color:#fff,stroke-width:3px
+    style SERVER fill:#8B5CF6,stroke:#6D28D9,color:#fff,stroke-width:3px
+    style WORK fill:#EF4444,stroke:#B91C1C,color:#fff,stroke-width:3px
+    style TARGET fill:#10B981,stroke:#047857,color:#fff,stroke-width:3px
+    style DESK fill:#D1FAE5,stroke:#047857,stroke-width:2px
+    style ENT fill:#FEE2E2,stroke:#B91C1C,stroke-width:2px
+    linkStyle default stroke:#475569,stroke-width:2px
+```
+*Figure: one call traced end to end — MCP standardizes the middle of this picture and nothing else. Tool selection above it is untouched, and the request-response, parsing, retry and auth below it do not disappear; they move to whoever wrote the server. That is why the same protocol is a gift to a desktop app and merely a convenience to an enterprise workflow.*
+
+### MCP — Server or Client
+
+For developers there are two ways to work with MCP.
+1. Consuming tools via MCP, and
+2. Exposing your tools/prompts/files on the MCP server side.
+
+As per current specifications MCP defines the following server primitives:
+1. **Resources**: Ability to serve/consume resources like files or your API responses. On the server side there is a Python decorator to do this — `@mcp.resource`.
+2. **Tools**: These are tools as understood in agentic terminology. We can decorate tools on a server as MCP tools with `@mcp.tool` and then consume them via an MCP client in our agents/scripts/applications.
+3. **Prompts**: As part of the MCP server, you can also expose some predefined prompts with `@mcp.prompt` so that an MCP server can be executed in that way.
+
+The spec also defines client primitives, which run in the opposite direction — here the server is the one asking:
+1. **Sampling**: the server asks your client to run an LLM completion on its behalf. Worth pausing on — this means the server borrows your model and your token budget.
+2. **Elicitation**: the server asks the end user for more input in the middle of a call, either as a structured form or by sending them out of band to a URL.
+3. **Roots**: the client tells the server which directories or URIs it is permitted to look at.
+
+The spec specifies two transports. **stdio**, where the client launches the server as a local subprocess and the two exchange JSON-RPC messages over standard input and output, and **Streamable HTTP**, where the client posts to an endpoint over the network. Desktop applications wiring up a local connector typically use stdio; anything hosted for agents to reach across a network uses Streamable HTTP, which is what the code below does. An older HTTP+SSE transport from an earlier revision of the spec still exists in the wild but is deprecated and should not be used in new work.
+
+```mermaid
+graph LR
+    subgraph LOCAL["🖥️ stdio — same machine"]
+        C1["🔌 MCP client"] -->|"spawns as child process"| S1["📦 MCP server"]
+        C1 <-.->|"JSON-RPC over stdin / stdout"| S1
+    end
+
+    subgraph REMOTE["🌐 Streamable HTTP — over the network"]
+        C2["🔌 MCP client"] -->|"POST to an endpoint"| S2["📦 MCP server\nhosted, shared, reachable"]
+    end
+
+    OLD["⚠️ HTTP+SSE\nearlier revision of the spec — deprecated"]
+
+    style C1 fill:#3B82F6,stroke:#1E40AF,color:#fff,stroke-width:3px
+    style S1 fill:#8B5CF6,stroke:#6D28D9,color:#fff,stroke-width:3px
+    style C2 fill:#3B82F6,stroke:#1E40AF,color:#fff,stroke-width:3px
+    style S2 fill:#8B5CF6,stroke:#6D28D9,color:#fff,stroke-width:3px
+    style OLD fill:#FEE2E2,stroke:#B91C1C,stroke-width:2px
+    style LOCAL fill:#EEF2FF,stroke:#4338CA,stroke-width:2px
+    style REMOTE fill:#ECFDF5,stroke:#047857,stroke-width:2px
+    linkStyle default stroke:#475569,stroke-width:2px
+```
+*Figure: the two transports — the same protocol, two very different deployment stories. stdio is a local subprocess on your own machine; Streamable HTTP is a service somebody hosts. That distinction is the desktop-versus-enterprise split from the previous section, now visible at the wire level.*
+
+```mermaid
+graph LR
+    subgraph CONSUME["🔽 Consuming — the client side"]
+        APP["🤖 Agent · script · application"] --> FW["🔌 MCP client\nabstracted by LangChain and friends —\nyou no longer hand-build envelopes"]
+    end
+
+    FW <==>|"1️⃣ discover"| CATALOG["🗂️ Service catalog\nlist-tools · list-prompts · list-resources"]
+    FW ==>|"2️⃣ invoke"| PRIMS
+
+    subgraph PRIMS["🔼 Exposing — the server side"]
+        T["🔧 @mcp.tool\na plain function,\ndecorated"]
+        R["📄 @mcp.resource\nfiles, API responses"]
+        P["📝 @mcp.prompt\npredefined prompts"]
+    end
+
+    T --> BOX
+    R --> BOX
+    P --> BOX
+    BOX["⬛ Black box to the client\nthe server's own work — which may itself\ncall an LLM. Only its author knows."]
+
+    style APP fill:#6366F1,stroke:#4338CA,color:#fff,stroke-width:3px
+    style FW fill:#3B82F6,stroke:#1E40AF,color:#fff,stroke-width:3px
+    style CATALOG fill:#14B8A6,stroke:#0F766E,color:#fff,stroke-width:3px
+    style T fill:#10B981,stroke:#047857,color:#fff,stroke-width:3px
+    style R fill:#F59E0B,stroke:#B45309,color:#fff,stroke-width:3px
+    style P fill:#EC4899,stroke:#BE185D,color:#fff,stroke-width:3px
+    style BOX fill:#334155,stroke:#0F172A,color:#fff,stroke-width:3px
+    style CONSUME fill:#EEF2FF,stroke:#4338CA,stroke-width:2px
+    style PRIMS fill:#F5F3FF,stroke:#6D28D9,stroke-width:2px
+    linkStyle default stroke:#475569,stroke-width:2px
+```
+*Figure: the two sides and the three primitives — discover, then invoke. Note the black box: what a server does behind its decorator is opaque to you, and it may well be running an LLM of its own.*
+
+All three annotations sitting side by side in one server look like this. Note that the plain functions are unchanged — the decorator is the only thing that makes them discoverable and invocable over MCP.
+
+```python
+mcp = FastMCP("server-name", stateless_http=True, json_response=True)
+
+@mcp.tool()
+def tool_name(arg: str) -> str:
+    ...
+
+@mcp.resource("scheme://collection")
+def list_items() -> str:
+    ...
+
+@mcp.resource("scheme://collection/{item_id}")
+def item_detail(item_id: str) -> str:
+    ...
+
+@mcp.prompt()
+def prompt_name(arg: str) -> str:
+    return f"Do the thing for {arg} and summarize it in one sentence."
+
+if __name__ == "__main__":
+    mcp.run(transport="streamable-http")
+```
+
+Two details worth noticing. A resource is addressed by a URI rather than by a function name, and that URI can carry a template — `scheme://collection/{item_id}` binds the path segment to the function argument, which is how one decorated function serves a whole family of resources. And a prompt returns the instruction text; it does not execute it. The client fetches it and decides what to do with it.
+
+As part of its spec MCP also gives you the facility to list the tools on a given MCP server. This invocation returns all the available tools. This is a kind of discovery mechanism for the remote tools! The list-tools, list-prompts and list-resources calls help the creator of tools add a layer on top of existing work and expose it as MCP. For consumers/clients, the catalog makes tools discoverable so that you can then pick the tools you need and supply them to the LLM in your call. Do remember, though, that once you connect several MCP servers the discovery itself can get confusing — capabilities overlap, names collide, and handing the model everything you discovered is a reliable way to bloat the context and degrade tool selection.
+
+One needs to also note that the tools and prompts on the server side can also have an LLM involved in what they do, but it is presumed to be a black box for everyone except the developer/author who owns the server/tool. By now there are frameworks like FastMCP that help us decorate our existing work and expose it as MCP. And the agent frameworks like LangChain have evolved to abstract the client side of MCP invocation. This also means that the raw details like envelope-url-metadata need not be handled by developers of agents any longer. For the most part, writing MCP servers/clients is going to feel like how we wrote and consumed web services in the Spring/Node.js ecosystem.
+
+The client side is the mirror image: open a session, ask what is there, then call it. Every primitive has one call to list it and one call to use it.
+
+```python
+async with streamable_http_client(SERVER) as (read, write, _):
+    async with ClientSession(read, write) as session:
+        await session.initialize()          # handshake
+
+        # discover — what does this server offer?
+        tools     = await session.list_tools()
+        resources = await session.list_resources()
+        prompts   = await session.list_prompts()
+
+        # invoke — one call per primitive
+        result  = await session.call_tool("tool_name", {"arg": "value"})
+        content = await session.read_resource("scheme://resource/path")
+        prompt  = await session.get_prompt("prompt_name", {"arg": "value"})
+```
+
+The discovery result is not just for printing — it is what you hand to the LLM. Each tool arrives carrying the `name`, `description` and `inputSchema` that the server declared, which is exactly the tool-definition JSON we wrote by hand earlier, now fetched over the wire instead of typed into your source. Reshape it into your provider's format and the rest of the agent loop is unchanged.
+
+Which is the point worth ending on: the mechanics of tool selection have not changed because of MCP. You still put a tool set in front of the model, and it still matches the incoming intent against names and descriptions exactly as it did for the local tools we wrote by hand. MCP has no opinion on that. Its opinion is on the cataloging and the remoting.
+
+#### MCP — auth
+
+Nothing about authentication changes conceptually when you move to MCP; if you know how to attach auth to a web service call, you know most of this already. What changes is that the call no longer goes straight to the tool. A wrapper sits in front of it, resolves the caller's token, compares the scope they were granted against the scope the tool requires, and only then lets the invocation through.
+
+```mermaid
+graph LR
+    AGENT["🤖 Agent wants to call a tool"] --> WRAP{"🛡️ Wrapper\nthe call does not go straight through"}
+    WRAP -->|"1️⃣ resolve"| TOK["🎫 Caller's token\nwho is asking, and what were they granted"]
+    TOK --> CMP{"2️⃣ granted scope\nvs scope the tool requires"}
+    CMP -->|"✅ covered"| CALL["🔌 MCP call proceeds"]
+    CMP -->|"⛔ not covered"| DENY["🚫 Denied\nbefore the server is ever contacted"]
+    CALL --> SERVER["📦 MCP server"]
+
+    style AGENT fill:#6366F1,stroke:#4338CA,color:#fff,stroke-width:3px
+    style WRAP fill:#F59E0B,stroke:#B45309,color:#fff,stroke-width:3px
+    style TOK fill:#14B8A6,stroke:#0F766E,color:#fff,stroke-width:3px
+    style CMP fill:#F59E0B,stroke:#B45309,color:#fff,stroke-width:3px
+    style CALL fill:#3B82F6,stroke:#1E40AF,color:#fff,stroke-width:3px
+    style DENY fill:#EF4444,stroke:#B91C1C,color:#fff,stroke-width:3px
+    style SERVER fill:#8B5CF6,stroke:#6D28D9,color:#fff,stroke-width:3px
+    linkStyle default stroke:#475569,stroke-width:2px
+```
+*Figure: the wrapper pattern — the scope check happens on your side of the wire, before the server is contacted at all.*
+
+The auth mechanics, however, are the least MCP-specific of the security questions here. The ones that genuinely arrive with the protocol are listed below; they belong alongside [Safety and Guardrails](#safety-and-guardrails).
+
+**TODO (expand here):**
+- [ ] Token resolution and scope checking in the wrapper — where the policy lives, and what a denied call should return to the model
+- [ ] Tool rug-pull: a server can change a tool's description or schema after you approved it, so what you trusted at install time is not necessarily what runs later
+- [ ] Prompt injection through the back door: with MCP the untrusted text arrives in tool results and resource content, not in user input, so input sanitization alone does not cover it
+- [ ] Confused deputy: a server that proxies onward to another API can be talked into spending its own credentials on the caller's behalf
+- [ ] Trusting the server itself — what running a third-party MCP server actually grants it, and what an audit of one should look for
+
+### A2A and Other Enterprise Concerns
+
+MCP plugs an agent into tools, data and prompts. A2A (Agent-to-Agent) answers a different question — how one agent discovers another agent and hands over a whole task rather than a single call. They are complementary rather than competing, and the shapes are quite different: MCP is a round trip to a resource, A2A is a delegation that may run long and report back.
 
 ![MCP as a host calling resource servers in single round trips, beside A2A as a planner discovering an agent through a registry and delegating a long-running task](images/36-mcp-vs-a2a.svg)
 *Figure: MCP vs A2A — different shapes for different problems. MCP plugs an LLM into resources; A2A lets agents discover and delegate to each other.*
 
+**TODO (expand here):**
+- [ ] A2A: agent cards, registry-based discovery, and delegating long-running tasks
+- [ ] Governance and compliance: audit logs, policy enforcement, data protection
+- [ ] Suites and orchestration: packaging agents as composable modules
+- [ ] Integration patterns: adapters for databases, queues, APIs, identity
 
-**Example flow:**
-
-```mermaid
-graph LR
-    Client["👤 Client"] -->|"Request"| MCP["🌐 MCP\nEndpoint"]
-    MCP -->|"Delegate"| Planner["📋 Planner\nAgent"]
-    Planner -->|"Task"| Researcher["🔍 Researcher\nAgent"]
-    Researcher -->|"Data"| Executor["⚡ Executor\nAgent"]
-    Executor -->|"Result"| MCP
-    MCP -->|"Response"| Client
-
-    style Client fill:#6366F1,stroke:#4338CA,color:#fff,stroke-width:3px
-    style MCP fill:#EF4444,stroke:#B91C1C,color:#fff,stroke-width:3px
-    style Planner fill:#3B82F6,stroke:#1E40AF,color:#fff,stroke-width:3px
-    style Researcher fill:#F59E0B,stroke:#B45309,color:#fff,stroke-width:3px
-    style Executor fill:#10B981,stroke:#047857,color:#fff,stroke-width:3px
-
-    linkStyle default stroke:#475569,stroke-width:2px
-```
-*Figure: enterprise agent orchestration via MCP — client, planner, researcher, executor*
-
- 
 ---
----
+
 ## References
 - [DSpy](https://dspy.ai/)
 - [Ollama](https://ollama.ai) — local LLM runtime
@@ -1427,7 +1607,6 @@ graph LR
 - [12-Factor Agents — HumanLayer](https://github.com/humanlayer/12-factor-agents/tree/main)
 - [12-Factor Apps (original inspiration)](https://12factor.net/)
 - [Building Effective Agents — Anthropic](https://www.anthropic.com/engineering/building-effective-agents#agents)
----
 
 ---
 
