@@ -67,8 +67,8 @@ The text is [CC BY-NC-SA 4.0](LICENSE); the code is [MIT](code/LICENSE). See [Li
     - [Safety and Guardrails](#safety-and-guardrails)
 - [Enterprise Suites and Protocols](#enterprise-suites-and-protocols)
     - [MCP (Model Context Protocol)](#mcp-model-context-protocol)
-    - [MCP — Server or Client](#mcp--server-or-client)
-      - [MCP — auth](#mcp--auth)
+    - [MCP Server or Client](#mcp-server-or-client)
+      - [MCP Auth](#mcp-auth)
     - [A2A and Other Enterprise Concerns](#a2a-and-other-enterprise-concerns)
   - [References](#references)
   - [License](#license)
@@ -1389,17 +1389,17 @@ There was also a need for all of these consumer end applications to integrate wi
 
 However, this articulation has two repercussions.
 1. MCP has immense benefit if you're creating desktop apps. A neat server to discover all of those and invoke them. This also meant that whenever the call happens, the desktop app has to dynamically figure out the API signature and do the invocation, which will burn extra tokens on the user's behalf.
-2. When it comes to enterprise grade workflow agents, we have to remember that the whole responsibility of doing request-response calls, parsing, and retry/auth/error is upon the developer or the framework you use. As such, consuming APIs via MCP for enterprise workflows helps you with 1) a standardized way to call, and 2) a service catalog of tools that the rest of the industry publishes into as well. While there is a flavor of remoting, MCP isn't pure remoting — for good reasons, though.
+2. When it comes to enterprise grade workflow agents, we have to remember that the whole responsibility of doing request-response calls, parsing, and retry/auth/error is upon the developer or the framework you use. As such, consuming APIs via MCP for enterprise workflows helps you with 1) a standardized way to call, and 2) a service catalog of tools that the rest of the industry publishes into as well. While there is a flavor of remoting, MCP isn't pure remoting, for good reasons, though.
 
 If you use GitHub Copilot or Claude Code and have ever asked them something that needed the AWS or Azure documentation, you have already been on the client side of an MCP call without noticing it.
 
 ```mermaid
 graph TB
     AGENT["🤖 Your agent"] --> SEL{"🧠 LLM picks the tool\nfrom name + description + schema"}
-    SEL -->|"⛔ unchanged by MCP — selection\nworks exactly as it did for local tools"| CLIENT["🔌 MCP client\nbuilds the envelope · URL · metadata"]
+    SEL -->|"⛔ unchanged by MCP: selection\nworks exactly as it did for local tools"| CLIENT["🔌 MCP client\nbuilds the envelope · URL · metadata"]
     CAT["🗂️ Catalog\nlist-tools · list-prompts · list-resources"]
     CLIENT <-->|"discovery"| CAT
-    CLIENT -->|"✅ the standardized wire —\nthis is what MCP actually gives you"| SERVER["📦 MCP server\n@mcp.tool · @mcp.resource · @mcp.prompt"]
+    CLIENT -->|"✅ the standardized wire:\nthis is what MCP actually gives you"| SERVER["📦 MCP server\n@mcp.tool · @mcp.resource · @mcp.prompt"]
     SERVER --> WORK["⚙️ Still somebody's job\nrequest-response · parsing · retries · auth"]
     WORK --> TARGET["🎯 Vendor API · database · files"]
 
@@ -1417,21 +1417,21 @@ graph TB
     style ENT fill:#FEE2E2,stroke:#B91C1C,stroke-width:2px
     linkStyle default stroke:#475569,stroke-width:2px
 ```
-*Figure: one call traced end to end — MCP standardizes the middle of this picture and nothing else. Tool selection above it is untouched, and the request-response, parsing, retry and auth below it do not disappear; they move to whoever wrote the server. That is why the same protocol is a gift to a desktop app and merely a convenience to an enterprise workflow.*
+*Figure: one call traced end to end. MCP standardizes the middle of this picture and nothing else. Tool selection above it is untouched, and the request-response, parsing, retry and auth below it do not disappear; they move to whoever wrote the server. That is why the same protocol is a gift to a desktop app and merely a convenience to an enterprise workflow.*
 
-### MCP — Server or Client
+### MCP Server or Client
 
 For developers there are two ways to work with MCP.
 1. Consuming tools via MCP, and
 2. Exposing your tools/prompts/files on the MCP server side.
 
 As per current specifications MCP defines the following server primitives:
-1. **Resources**: Ability to serve/consume resources like files or your API responses. On the server side there is a Python decorator to do this — `@mcp.resource`.
+1. **Resources**: Ability to serve/consume resources like files or your API responses. On the server side there is a Python decorator to do this, `@mcp.resource`.
 2. **Tools**: These are tools as understood in agentic terminology. We can decorate tools on a server as MCP tools with `@mcp.tool` and then consume them via an MCP client in our agents/scripts/applications.
 3. **Prompts**: As part of the MCP server, you can also expose some predefined prompts with `@mcp.prompt` so that an MCP server can be executed in that way.
 
-The spec also defines client primitives, which run in the opposite direction — here the server is the one asking:
-1. **Sampling**: the server asks your client to run an LLM completion on its behalf. Worth pausing on — this means the server borrows your model and your token budget.
+The spec also defines client primitives, which run in the opposite direction. Here the server is the one asking:
+1. **Sampling**: the server asks your client to run an LLM completion on its behalf. Worth pausing on, because this means the server borrows your model and your token budget.
 2. **Elicitation**: the server asks the end user for more input in the middle of a call, either as a structured form or by sending them out of band to a URL.
 3. **Roots**: the client tells the server which directories or URIs it is permitted to look at.
 
@@ -1439,16 +1439,16 @@ The spec specifies two transports. **stdio**, where the client launches the serv
 
 ```mermaid
 graph LR
-    subgraph LOCAL["🖥️ stdio — same machine"]
+    subgraph LOCAL["🖥️ stdio: same machine"]
         C1["🔌 MCP client"] -->|"spawns as child process"| S1["📦 MCP server"]
         C1 <-.->|"JSON-RPC over stdin / stdout"| S1
     end
 
-    subgraph REMOTE["🌐 Streamable HTTP — over the network"]
+    subgraph REMOTE["🌐 Streamable HTTP: over the network"]
         C2["🔌 MCP client"] -->|"POST to an endpoint"| S2["📦 MCP server\nhosted, shared, reachable"]
     end
 
-    OLD["⚠️ HTTP+SSE\nearlier revision of the spec — deprecated"]
+    OLD["⚠️ HTTP+SSE\nearlier revision of the spec, deprecated"]
 
     style C1 fill:#3B82F6,stroke:#1E40AF,color:#fff,stroke-width:3px
     style S1 fill:#8B5CF6,stroke:#6D28D9,color:#fff,stroke-width:3px
@@ -1459,18 +1459,18 @@ graph LR
     style REMOTE fill:#ECFDF5,stroke:#047857,stroke-width:2px
     linkStyle default stroke:#475569,stroke-width:2px
 ```
-*Figure: the two transports — the same protocol, two very different deployment stories. stdio is a local subprocess on your own machine; Streamable HTTP is a service somebody hosts. That distinction is the desktop-versus-enterprise split from the previous section, now visible at the wire level.*
+*Figure: the two transports. The same protocol, two very different deployment stories. stdio is a local subprocess on your own machine; Streamable HTTP is a service somebody hosts. That distinction is the desktop-versus-enterprise split from the previous section, now visible at the wire level.*
 
 ```mermaid
 graph LR
-    subgraph CONSUME["🔽 Consuming — the client side"]
-        APP["🤖 Agent · script · application"] --> FW["🔌 MCP client\nabstracted by LangChain and friends —\nyou no longer hand-build envelopes"]
+    subgraph CONSUME["🔽 Consuming: the client side"]
+        APP["🤖 Agent · script · application"] --> FW["🔌 MCP client\nabstracted by LangChain and friends,\nyou no longer hand-build envelopes"]
     end
 
     FW <==>|"1️⃣ discover"| CATALOG["🗂️ Service catalog\nlist-tools · list-prompts · list-resources"]
     FW ==>|"2️⃣ invoke"| PRIMS
 
-    subgraph PRIMS["🔼 Exposing — the server side"]
+    subgraph PRIMS["🔼 Exposing: the server side"]
         T["🔧 @mcp.tool\na plain function,\ndecorated"]
         R["📄 @mcp.resource\nfiles, API responses"]
         P["📝 @mcp.prompt\npredefined prompts"]
@@ -1479,7 +1479,7 @@ graph LR
     T --> BOX
     R --> BOX
     P --> BOX
-    BOX["⬛ Black box to the client\nthe server's own work — which may itself\ncall an LLM. Only its author knows."]
+    BOX["⬛ Black box to the client\nthe server's own work, which may itself\ncall an LLM. Only its author knows."]
 
     style APP fill:#6366F1,stroke:#4338CA,color:#fff,stroke-width:3px
     style FW fill:#3B82F6,stroke:#1E40AF,color:#fff,stroke-width:3px
@@ -1492,9 +1492,9 @@ graph LR
     style PRIMS fill:#F5F3FF,stroke:#6D28D9,stroke-width:2px
     linkStyle default stroke:#475569,stroke-width:2px
 ```
-*Figure: the two sides and the three primitives — discover, then invoke. Note the black box: what a server does behind its decorator is opaque to you, and it may well be running an LLM of its own.*
+*Figure: the two sides and the three primitives. Discover, then invoke. Note the black box: what a server does behind its decorator is opaque to you, and it may well be running an LLM of its own.*
 
-All three annotations sitting side by side in one server look like this. Note that the plain functions are unchanged — the decorator is the only thing that makes them discoverable and invocable over MCP.
+All three annotations sitting side by side in one server look like this. Note that the plain functions are unchanged; the decorator is the only thing that makes them discoverable and invocable over MCP.
 
 ```python
 mcp = FastMCP("server-name", stateless_http=True, json_response=True)
@@ -1519,9 +1519,9 @@ if __name__ == "__main__":
     mcp.run(transport="streamable-http")
 ```
 
-Two details worth noticing. A resource is addressed by a URI rather than by a function name, and that URI can carry a template — `scheme://collection/{item_id}` binds the path segment to the function argument, which is how one decorated function serves a whole family of resources. And a prompt returns the instruction text; it does not execute it. The client fetches it and decides what to do with it.
+Two details worth noticing. A resource is addressed by a URI rather than by a function name, and that URI can carry a template. `scheme://collection/{item_id}` binds the path segment to the function argument, which is how one decorated function serves a whole family of resources. And a prompt returns the instruction text; it does not execute it. The client fetches it and decides what to do with it.
 
-As part of its spec MCP also gives you the facility to list the tools on a given MCP server. This invocation returns all the available tools. This is a kind of discovery mechanism for the remote tools! The list-tools, list-prompts and list-resources calls help the creator of tools add a layer on top of existing work and expose it as MCP. For consumers/clients, the catalog makes tools discoverable so that you can then pick the tools you need and supply them to the LLM in your call. Do remember, though, that once you connect several MCP servers the discovery itself can get confusing — capabilities overlap, names collide, and handing the model everything you discovered is a reliable way to bloat the context and degrade tool selection.
+As part of its spec MCP also gives you the facility to list the tools on a given MCP server. This invocation returns all the available tools. This is a kind of discovery mechanism for the remote tools! The list-tools, list-prompts and list-resources calls help the creator of tools add a layer on top of existing work and expose it as MCP. For consumers/clients, the catalog makes tools discoverable so that you can then pick the tools you need and supply them to the LLM in your call. Do remember, though, that once you connect several MCP servers the discovery itself can get confusing. Capabilities overlap, names collide, and handing the model everything you discovered is a reliable way to bloat the context and degrade tool selection.
 
 One needs to also note that the tools and prompts on the server side can also have an LLM involved in what they do, but it is presumed to be a black box for everyone except the developer/author who owns the server/tool. By now there are frameworks like FastMCP that help us decorate our existing work and expose it as MCP. And the agent frameworks like LangChain have evolved to abstract the client side of MCP invocation. This also means that the raw details like envelope-url-metadata need not be handled by developers of agents any longer. For the most part, writing MCP servers/clients is going to feel like how we wrote and consumed web services in the Spring/Node.js ecosystem.
 
@@ -1532,30 +1532,29 @@ async with streamable_http_client(SERVER) as (read, write, _):
     async with ClientSession(read, write) as session:
         await session.initialize()          # handshake
 
-        # discover — what does this server offer?
+        # discover: what does this server offer?
         tools     = await session.list_tools()
         resources = await session.list_resources()
         prompts   = await session.list_prompts()
 
-        # invoke — one call per primitive
+        # invoke: one call per primitive
         result  = await session.call_tool("tool_name", {"arg": "value"})
         content = await session.read_resource("scheme://resource/path")
         prompt  = await session.get_prompt("prompt_name", {"arg": "value"})
 ```
 
-The discovery result is not just for printing — it is what you hand to the LLM. Each tool arrives carrying the `name`, `description` and `inputSchema` that the server declared, which is exactly the tool-definition JSON we wrote by hand earlier, now fetched over the wire instead of typed into your source. Reshape it into your provider's format and the rest of the agent loop is unchanged.
+The discovery result is not just for printing. It is what you hand to the LLM. Each tool arrives carrying the `name`, `description` and `inputSchema` that the server declared, which is exactly the tool-definition JSON we wrote by hand earlier, now fetched over the wire instead of typed into your source. Reshape it into your provider's format and the rest of the agent loop is unchanged.
 
 Which is the point worth ending on: the mechanics of tool selection have not changed because of MCP. You still put a tool set in front of the model, and it still matches the incoming intent against names and descriptions exactly as it did for the local tools we wrote by hand. MCP has no opinion on that. Its opinion is on the cataloging and the remoting.
 
-#### MCP — auth
+#### MCP Auth
 
 Nothing about authentication changes conceptually when you move to MCP; if you know how to attach auth to a web service call, you know most of this already. What changes is that the call no longer goes straight to the tool. A wrapper sits in front of it, resolves the caller's token, compares the scope they were granted against the scope the tool requires, and only then lets the invocation through.
 
 ```mermaid
 graph LR
     AGENT["🤖 Agent wants to call a tool"] --> WRAP{"🛡️ Wrapper\nthe call does not go straight through"}
-    WRAP -->|"1️⃣ resolve"| TOK["🎫 Caller's token\nwho is asking, and what were they granted"]
-    TOK --> CMP{"2️⃣ granted scope\nvs scope the tool requires"}
+    WRAP -->|"1️⃣ resolve"| TOK["🎫 Caller's token\nwho is asking, and what were they granted"]    TOK --> CMP{"2️⃣ granted scope\nvs scope the tool requires"}
     CMP -->|"✅ covered"| CALL["🔌 MCP call proceeds"]
     CMP -->|"⛔ not covered"| DENY["🚫 Denied\nbefore the server is ever contacted"]
     CALL --> SERVER["📦 MCP server"]
@@ -1569,23 +1568,23 @@ graph LR
     style SERVER fill:#8B5CF6,stroke:#6D28D9,color:#fff,stroke-width:3px
     linkStyle default stroke:#475569,stroke-width:2px
 ```
-*Figure: the wrapper pattern — the scope check happens on your side of the wire, before the server is contacted at all.*
+*Figure: the wrapper pattern. The scope check happens on your side of the wire, before the server is contacted at all.*
 
 The auth mechanics, however, are the least MCP-specific of the security questions here. The ones that genuinely arrive with the protocol are listed below; they belong alongside [Safety and Guardrails](#safety-and-guardrails).
 
 **TODO (expand here):**
-- [ ] Token resolution and scope checking in the wrapper — where the policy lives, and what a denied call should return to the model
+- [ ] Token resolution and scope checking in the wrapper: where the policy lives, and what a denied call should return to the model
 - [ ] Tool rug-pull: a server can change a tool's description or schema after you approved it, so what you trusted at install time is not necessarily what runs later
 - [ ] Prompt injection through the back door: with MCP the untrusted text arrives in tool results and resource content, not in user input, so input sanitization alone does not cover it
 - [ ] Confused deputy: a server that proxies onward to another API can be talked into spending its own credentials on the caller's behalf
-- [ ] Trusting the server itself — what running a third-party MCP server actually grants it, and what an audit of one should look for
+- [ ] Trusting the server itself: what running a third-party MCP server actually grants it, and what an audit of one should look for
 
 ### A2A and Other Enterprise Concerns
 
-MCP plugs an agent into tools, data and prompts. A2A (Agent-to-Agent) answers a different question — how one agent discovers another agent and hands over a whole task rather than a single call. They are complementary rather than competing, and the shapes are quite different: MCP is a round trip to a resource, A2A is a delegation that may run long and report back.
+MCP plugs an agent into tools, data and prompts. A2A (Agent-to-Agent) answers a different question: how one agent discovers another agent and hands over a whole task rather than a single call. They are complementary rather than competing, and the shapes are quite different. MCP is a round trip to a resource, A2A is a delegation that may run long and report back.
 
 ![MCP as a host calling resource servers in single round trips, beside A2A as a planner discovering an agent through a registry and delegating a long-running task](images/36-mcp-vs-a2a.svg)
-*Figure: MCP vs A2A — different shapes for different problems. MCP plugs an LLM into resources; A2A lets agents discover and delegate to each other.*
+*Figure: MCP vs A2A. Different shapes for different problems. MCP plugs an LLM into resources; A2A lets agents discover and delegate to each other.*
 
 **TODO (expand here):**
 - [ ] A2A: agent cards, registry-based discovery, and delegating long-running tasks
